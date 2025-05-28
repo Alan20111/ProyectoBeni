@@ -498,7 +498,7 @@ public class Ventana extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void moreComponents(){
-        DukeInicio=new ImageIcon(Objects.requireNonNull(getClass().getResource("/ProyectoBeni/Duke.png")));
+        DukeInicio=new ImageIcon(Objects.requireNonNull(getClass().getResource("/inicioarchivos/Duke.png")));
         Image image = DukeInicio.getImage();
         Image duke = image.getScaledInstance(60,100,Image.SCALE_SMOOTH);
         DukeInicio = new ImageIcon(duke);

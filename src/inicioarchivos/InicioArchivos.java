@@ -4,6 +4,9 @@ public class InicioArchivos
 {
     public static void main(String[] args)
     {
+        Ventana v_ventana = new Ventana();
+        v_ventana.setVisible(true);
+        
         Scanner sc=new Scanner(System.in);
         Archivos obArch;
         byte opc=0;
