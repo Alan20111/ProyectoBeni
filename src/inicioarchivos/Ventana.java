@@ -225,38 +225,16 @@ public class Ventana extends javax.swing.JFrame {
         pnlATabla.setEnabled(false);
         pnlATabla.setLayout(new java.awt.BorderLayout(10, 10));
 
-        jTAlumnos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "No. Control", "Nombre", "Semestre", "Creditos", "Acción"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Byte.class, java.lang.Byte.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        jTAlumnos.setModel(jTAlumnos.getModel());
         jTAlumnos.setColumnSelectionAllowed(true);
         jScrollPane2.setViewportView(jTAlumnos);
         jTAlumnos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         if (jTAlumnos.getColumnModel().getColumnCount() > 0) {
-            jTAlumnos.getColumnModel().getColumn(0).setResizable(false);
-            jTAlumnos.getColumnModel().getColumn(1).setResizable(false);
-            jTAlumnos.getColumnModel().getColumn(2).setResizable(false);
-            jTAlumnos.getColumnModel().getColumn(3).setResizable(false);
-            jTAlumnos.getColumnModel().getColumn(4).setResizable(false);
+            jTAlumnos.getColumnModel().getColumn(0).setHeaderValue("No. Control");
+            jTAlumnos.getColumnModel().getColumn(1).setHeaderValue("Nombre");
+            jTAlumnos.getColumnModel().getColumn(2).setHeaderValue("Semestre");
+            jTAlumnos.getColumnModel().getColumn(3).setHeaderValue("Creditos");
+            jTAlumnos.getColumnModel().getColumn(4).setHeaderValue("Acción");
         }
 
         pnlATabla.add(jScrollPane2, java.awt.BorderLayout.CENTER);
@@ -716,22 +694,19 @@ public class Ventana extends javax.swing.JFrame {
                 b = txtCNombre.getText().isEmpty(),
                 c = txtCSemestre.getText().isEmpty();
         if (!b & !c & !a) {
-            obArch.altas(obArch.canal,
-                    txtCNoCtrl.getText(),
-                    txtCNombre.getText(),
-                    Byte.parseByte(txtCSemestre.getText()));
+            obArch.altas(obArch.canal);
             
             /*text = String.format("%8s | %-40s | %2d", txtCNoCtrl.getText(), txtCNombre.getText(), Integer.valueOf(txtCSemestre.getText())) + "\n";*/
-            JOptionPane.showMessageDialog(null, "Almuno Agregado", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Almuno Agregado", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             txtCNoCtrl.setText(null);
             txtCNombre.setText(null);
             txtCSemestre.setText(null);
             btnCAgregar.setEnabled(true);
         } else {
             if (a & b & c) {
-                JOptionPane.showMessageDialog(null, "Ingrese un alumno", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(rootPane, "Ingrese un alumno", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "Faltan datos por agregar", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(rootPane, "Faltan datos por agregar", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_AgregarAlumno
