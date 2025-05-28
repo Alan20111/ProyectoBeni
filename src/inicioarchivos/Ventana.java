@@ -23,6 +23,7 @@ public class Ventana extends javax.swing.JFrame {
 
     public Ventana() {
         this.addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent p_evt) {
                 m_preCerrar();
             }
@@ -105,9 +106,6 @@ public class Ventana extends javax.swing.JFrame {
         BNoCtrl = new javax.swing.JPanel();
         lblBNoCtrl = new javax.swing.JLabel();
         txtBNoCtrl = new javax.swing.JTextField();
-        BNombre = new javax.swing.JPanel();
-        lblBNombre = new javax.swing.JLabel();
-        txtBNombre = new javax.swing.JTextField();
         btnCAgregar3 = new javax.swing.JButton();
         pnlMaterias = new javax.swing.JPanel();
         pnlMTitulo = new javax.swing.JPanel();
@@ -152,7 +150,6 @@ public class Ventana extends javax.swing.JFrame {
         filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
         pnlCreditos = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        btnSalir = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menInicio = new javax.swing.JMenu();
         menAlumno = new javax.swing.JMenu();
@@ -341,20 +338,14 @@ public class Ventana extends javax.swing.JFrame {
         BNoCtrl.add(lblBNoCtrl, java.awt.BorderLayout.NORTH);
 
         txtBNoCtrl.setColumns(8);
+        txtBNoCtrl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBNoCtrlActionPerformed(evt);
+            }
+        });
         BNoCtrl.add(txtBNoCtrl, java.awt.BorderLayout.CENTER);
 
         pnlBuscarAData.add(BNoCtrl);
-
-        BNombre.setLayout(new java.awt.BorderLayout());
-
-        lblBNombre.setText("Nombre:");
-        lblBNombre.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        BNombre.add(lblBNombre, java.awt.BorderLayout.NORTH);
-
-        txtBNombre.setColumns(35);
-        BNombre.add(txtBNombre, java.awt.BorderLayout.CENTER);
-
-        pnlBuscarAData.add(BNombre);
 
         pnlBuscar.add(pnlBuscarAData);
 
@@ -583,14 +574,6 @@ public class Ventana extends javax.swing.JFrame {
         jLabel5.setText("®NULL NULL NULL Sahur");
         pnlCreditos.add(jLabel5);
 
-        btnSalir.setText("Salir");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salir(evt);
-            }
-        });
-        pnlCreditos.add(btnSalir);
-
         getContentPane().add(pnlCreditos, java.awt.BorderLayout.SOUTH);
 
         menInicio.setText("Inicio");
@@ -719,10 +702,6 @@ public class Ventana extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_AgregarMateria
 
-    private void salir(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salir
-        dispose();
-    }//GEN-LAST:event_salir
-
     private void AgregarAlumno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarAlumno
         boolean a = txtCNoCtrl.getText().isEmpty(),
                 b = txtCNombre.getText().isEmpty(),
@@ -733,7 +712,7 @@ public class Ventana extends javax.swing.JFrame {
                     txtCNombre.getText(),
                     Byte.parseByte(txtCSemestre.getText()));
             System.out.print(String.format("%8s | %-40s | %2d", txtCNoCtrl.getText(), txtCNombre.getText(), Integer.valueOf(txtCSemestre.getText())) + "\n");
-            
+
             txtCNoCtrl.setText(null);
             txtCNombre.setText(null);
             txtCSemestre.setText(null);
@@ -754,10 +733,25 @@ public class Ventana extends javax.swing.JFrame {
     private void btnNReporteAgregarMateria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNReporteAgregarMateria
         // TODO add your handling code here:
     }//GEN-LAST:event_btnNReporteAgregarMateria
-
+    Alumno obAlumno = new Alumno();
     private void BuscarAlumno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarAlumno
-        // TODO add your handling code here:
+       
+        boolean a = txtBNoCtrl.getText().isEmpty();
+        if (!a) {
+           int n = obAlumnos.busqueda(obAlumnos.canal, txtBNoCtrl.getText());
+           ArchivoAlumnos obAlumnosHijo = (ArchivoAlumnos) obAlumnos;
+           obAlumnosHijo.leerReg(obAlumnos.canal,n,obAlumno);
+            System.out.println(obAlumno.nom+" "+obAlumno.nroCtrl);//Alumno
+            txtBNoCtrl.setText(null);
+            btnCAgregar.setEnabled(true);
+        } else {
+                JOptionPane.showMessageDialog(null, "Ingrese un alumno", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_BuscarAlumno
+
+    private void txtBNoCtrlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBNoCtrlActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBNoCtrlActionPerformed
 
     /**
      * @param args the command line arguments
@@ -799,7 +793,6 @@ public class Ventana extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BNoCtrl;
-    private javax.swing.JPanel BNombre;
     private javax.swing.JPanel CNoCrtl;
     private javax.swing.JPanel CNoCrtl1;
     private javax.swing.JPanel CNombre;
@@ -824,7 +817,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton btnCAgregar2;
     private javax.swing.JButton btnCAgregar3;
     private javax.swing.JButton btnNReporte;
-    javax.swing.JButton btnSalir;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler8;
     private javax.swing.Box.Filler filler9;
@@ -849,7 +841,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTable jTable3;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblBNoCtrl;
-    private javax.swing.JLabel lblBNombre;
     private javax.swing.JMenu menAlumno;
     private javax.swing.JMenu menInicio;
     private javax.swing.JMenu menInscribir;
@@ -885,7 +876,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbtBuscar;
     private javax.swing.JRadioButton rbtCrear;
     private javax.swing.JTextField txtBNoCtrl;
-    private javax.swing.JTextField txtBNombre;
     private javax.swing.JTextField txtCClave;
     private javax.swing.JTextField txtCCreditos;
     private javax.swing.JTextField txtCNoCtrl;

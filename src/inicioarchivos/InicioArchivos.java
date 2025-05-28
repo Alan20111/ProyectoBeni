@@ -4,9 +4,9 @@ import java.util.*;
 
 public class InicioArchivos {
 
-    public static Archivos obAlumnos = new ArchivoAlumnos();;
-    public static Archivos obMaterias = new ArchivoMaterias();;
-    public static Archivos obInscripciones = new ArchivoInscripciones();;
+    public static Archivos obAlumnos = new ArchivoAlumnos();
+    public static Archivos obMaterias = new ArchivoMaterias();
+    public static Archivos obInscripciones = new ArchivoInscripciones();
 
     public static void main(String[] args) {
         obAlumnos.inicioMen();
