@@ -1,4 +1,4 @@
-package proyecto.Final;
+package ProyectoBeni;
 /** @author Leo*/
 
 import java.util.*;
