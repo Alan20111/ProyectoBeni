@@ -1,6 +1,7 @@
 package inicioarchivos;
 import java.io.*;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 public class ArchivoAlumnos extends Archivos {
     Alumno al = new Alumno();
     Scanner sc = new Scanner(System.in);
@@ -17,14 +18,14 @@ public class ArchivoAlumnos extends Archivos {
     }
 
     @Override
-    public void altas(RandomAccessFile canal) {
-        System.out.println("Seguimiento de altas");
+    public void altas(RandomAccessFile canal, String noCtrl, String nom, byte sem) {
         try {
-            al.capturar();
+            al.capturar(noCtrl, nom, sem);
             int reg = (int) canal.length() / tr;
             grabarReg(canal, reg, al);
+            JOptionPane.showMessageDialog(null, "Almuno Agregado", "Notificación", JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException e) {
-            System.out.println("Error en el archivo");
+            JOptionPane.showMessageDialog(null, "Almuno no Agregado", "Notificación", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -76,14 +77,14 @@ public class ArchivoAlumnos extends Archivos {
     }
 
     @Override
-    public int modificaciones(RandomAccessFile canal) {
+    public int modificaciones(RandomAccessFile canal, String noCtrl, String nom, byte sem) {
         System.out.println("Ingrese el numero de control del alumno a modificar");
         String rem = sc.nextLine();
         int n = busqueda(canal, rem);
         if (n == -1) {
             return -1;
         }
-        al.capturar();
+        al.capturar(noCtrl, nom, sem);
         grabarReg(canal, n, al);
         return 0;
     }

@@ -37,7 +37,7 @@ public class ArchivoInscripciones extends Archivos {
             opc = sc.nextByte();
             switch (opc) {
                 case 1:
-                    altas(canal);
+                    altas(canal, noCtrl, nom, sem);
                     break;
                 case 2:
                     reporte(canal);
@@ -46,7 +46,7 @@ public class ArchivoInscripciones extends Archivos {
         } while (opc != 3);
     }
 
-    public void altas(RandomAccessFile canal) {
+    public void altas(RandomAccessFile canal, String a, String b, byte c) {
         try {
             int n;
             char opc = 0, sel = 0;
@@ -130,7 +130,7 @@ public class ArchivoInscripciones extends Archivos {
         }
     }
 
-    public int modificaciones(RandomAccessFile canal) {
+    public int modificaciones(RandomAccessFile canal, String noCtrl, String nom, byte sem) {
         return 1;
     }
 
