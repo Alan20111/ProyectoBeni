@@ -45,13 +45,13 @@ public class Ventana extends javax.swing.JFrame {
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         rbtCrear = new javax.swing.JRadioButton();
         rbtBuscar = new javax.swing.JRadioButton();
-        pnlAPrincipal = new javax.swing.JPanel();
-        Tabla = new javax.swing.JPanel();
+        pnlAMain = new javax.swing.JPanel();
+        pnlATabla = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        Paneles = new javax.swing.JPanel();
+        pnlAOpciones = new javax.swing.JPanel();
         pnlCrearA = new javax.swing.JPanel();
         pnlCrearAData = new javax.swing.JPanel();
         CNoCrtl = new javax.swing.JPanel();
@@ -74,11 +74,10 @@ public class Ventana extends javax.swing.JFrame {
         pnlMaterias = new javax.swing.JPanel();
         pnlMTitulo = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        pnlMPrincipal = new javax.swing.JPanel();
-        TablaMat = new javax.swing.JPanel();
+        pnlMMain = new javax.swing.JPanel();
+        pnlMTabla = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        Opciones1 = new javax.swing.JPanel();
         pnlCrearM = new javax.swing.JPanel();
         pnlCrearMData = new javax.swing.JPanel();
         CNoCrtl1 = new javax.swing.JPanel();
@@ -92,6 +91,25 @@ public class Ventana extends javax.swing.JFrame {
         txtCCreditos = new javax.swing.JTextField();
         btnCAgregar1 = new javax.swing.JButton();
         pnlInscribir = new javax.swing.JPanel();
+        pnlNMain = new javax.swing.JPanel();
+        pnlNTitulo = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        pnlNOpciones = new javax.swing.JPanel();
+        pnlCrearM1 = new javax.swing.JPanel();
+        pnlCrearMData1 = new javax.swing.JPanel();
+        INoCrtl = new javax.swing.JPanel();
+        LINoCtrl = new javax.swing.JLabel();
+        txtINoCtrl = new javax.swing.JTextField();
+        IMateria = new javax.swing.JPanel();
+        LINombreM = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        btnCAgregar2 = new javax.swing.JButton();
+        pnlNMain1 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        btnCAgregar3 = new javax.swing.JButton();
+        pnlNTablaReporte = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
         filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
         filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
         jPanel1 = new javax.swing.JPanel();
@@ -199,10 +217,10 @@ public class Ventana extends javax.swing.JFrame {
 
         pnlAlumno.add(pnlATitulo, java.awt.BorderLayout.NORTH);
 
-        pnlAPrincipal.setLayout(new java.awt.BorderLayout(10, 10));
+        pnlAMain.setLayout(new java.awt.BorderLayout(10, 10));
 
-        Tabla.setEnabled(false);
-        Tabla.setLayout(new java.awt.BorderLayout(10, 10));
+        pnlATabla.setEnabled(false);
+        pnlATabla.setLayout(new java.awt.BorderLayout(10, 10));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -238,17 +256,17 @@ public class Ventana extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        Tabla.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+        pnlATabla.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        Tabla.add(jScrollPane1, java.awt.BorderLayout.SOUTH);
+        pnlATabla.add(jScrollPane1, java.awt.BorderLayout.SOUTH);
 
-        pnlAPrincipal.add(Tabla, java.awt.BorderLayout.CENTER);
+        pnlAMain.add(pnlATabla, java.awt.BorderLayout.CENTER);
 
-        Paneles.setLayout(new java.awt.CardLayout());
+        pnlAOpciones.setLayout(new java.awt.CardLayout());
 
         pnlCrearA.setAlignmentX(0.0F);
         pnlCrearA.setLayout(new javax.swing.BoxLayout(pnlCrearA, javax.swing.BoxLayout.LINE_AXIS));
@@ -299,7 +317,7 @@ public class Ventana extends javax.swing.JFrame {
         });
         pnlCrearA.add(btnCAgregar);
 
-        Paneles.add(pnlCrearA, "card2");
+        pnlAOpciones.add(pnlCrearA, "card2");
 
         pnlBuscar.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
@@ -325,11 +343,11 @@ public class Ventana extends javax.swing.JFrame {
 
         pnlBuscar.add(BNombre);
 
-        Paneles.add(pnlBuscar, "card3");
+        pnlAOpciones.add(pnlBuscar, "card3");
 
-        pnlAPrincipal.add(Paneles, java.awt.BorderLayout.NORTH);
+        pnlAMain.add(pnlAOpciones, java.awt.BorderLayout.NORTH);
 
-        pnlAlumno.add(pnlAPrincipal, java.awt.BorderLayout.CENTER);
+        pnlAlumno.add(pnlAMain, java.awt.BorderLayout.CENTER);
 
         pnlTODO.add(pnlAlumno, "card3");
 
@@ -343,10 +361,10 @@ public class Ventana extends javax.swing.JFrame {
 
         pnlMaterias.add(pnlMTitulo, java.awt.BorderLayout.NORTH);
 
-        pnlMPrincipal.setLayout(new java.awt.BorderLayout(5, 5));
+        pnlMMain.setLayout(new java.awt.BorderLayout(5, 5));
 
-        TablaMat.setEnabled(false);
-        TablaMat.setLayout(new java.awt.BorderLayout());
+        pnlMTabla.setEnabled(false);
+        pnlMTabla.setLayout(new java.awt.BorderLayout());
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -381,11 +399,9 @@ public class Ventana extends javax.swing.JFrame {
             jTable2.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        TablaMat.add(jScrollPane3, java.awt.BorderLayout.CENTER);
+        pnlMTabla.add(jScrollPane3, java.awt.BorderLayout.CENTER);
 
-        pnlMPrincipal.add(TablaMat, java.awt.BorderLayout.CENTER);
-
-        Opciones1.setLayout(new java.awt.CardLayout());
+        pnlMMain.add(pnlMTabla, java.awt.BorderLayout.CENTER);
 
         pnlCrearM.setLayout(new javax.swing.BoxLayout(pnlCrearM, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -434,13 +450,103 @@ public class Ventana extends javax.swing.JFrame {
         });
         pnlCrearM.add(btnCAgregar1);
 
-        Opciones1.add(pnlCrearM, "card2");
+        pnlMMain.add(pnlCrearM, java.awt.BorderLayout.NORTH);
 
-        pnlMPrincipal.add(Opciones1, java.awt.BorderLayout.NORTH);
-
-        pnlMaterias.add(pnlMPrincipal, java.awt.BorderLayout.CENTER);
+        pnlMaterias.add(pnlMMain, java.awt.BorderLayout.CENTER);
 
         pnlTODO.add(pnlMaterias, "card4");
+
+        pnlInscribir.setLayout(new java.awt.BorderLayout(10, 10));
+
+        pnlNMain.setLayout(new javax.swing.BoxLayout(pnlNMain, javax.swing.BoxLayout.PAGE_AXIS));
+
+        pnlNTitulo.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel6.setText("Inscribir Alumnos");
+        pnlNTitulo.add(jLabel6);
+
+        pnlNMain.add(pnlNTitulo);
+
+        pnlNOpciones.setLayout(new java.awt.BorderLayout());
+
+        pnlCrearM1.setLayout(new javax.swing.BoxLayout(pnlCrearM1, javax.swing.BoxLayout.LINE_AXIS));
+
+        pnlCrearMData1.setAlignmentY(1.0F);
+        pnlCrearMData1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        INoCrtl.setLayout(new java.awt.BorderLayout());
+
+        LINoCtrl.setText("No. Control");
+        LINoCtrl.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        INoCrtl.add(LINoCtrl, java.awt.BorderLayout.NORTH);
+
+        txtINoCtrl.setColumns(8);
+        INoCrtl.add(txtINoCtrl, java.awt.BorderLayout.CENTER);
+
+        pnlCrearMData1.add(INoCrtl);
+
+        IMateria.setLayout(new java.awt.BorderLayout());
+
+        LINombreM.setText("Nombre de la Materia:");
+        IMateria.add(LINombreM, java.awt.BorderLayout.NORTH);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fundamentos en Programación", "Programación Orientada a Objetos", " " }));
+        IMateria.add(jComboBox1, java.awt.BorderLayout.PAGE_END);
+
+        pnlCrearMData1.add(IMateria);
+
+        pnlCrearM1.add(pnlCrearMData1);
+
+        btnCAgregar2.setText("Inscribir");
+        btnCAgregar2.setAlignmentY(1.0F);
+        btnCAgregar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCAgregar2AgregarMateria(evt);
+            }
+        });
+        pnlCrearM1.add(btnCAgregar2);
+
+        pnlNOpciones.add(pnlCrearM1, java.awt.BorderLayout.NORTH);
+
+        pnlNMain.add(pnlNOpciones);
+
+        pnlInscribir.add(pnlNMain, java.awt.BorderLayout.NORTH);
+
+        pnlNMain1.setLayout(new java.awt.BorderLayout(10, 10));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel7.setText("Generar Reporte");
+        jLabel7.setAlignmentY(1.0F);
+        pnlNMain1.add(jLabel7, java.awt.BorderLayout.NORTH);
+
+        btnCAgregar3.setText("Inscribir");
+        btnCAgregar3.setAlignmentY(1.0F);
+        btnCAgregar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCAgregar3AgregarMateria(evt);
+            }
+        });
+        pnlNMain1.add(btnCAgregar3, java.awt.BorderLayout.SOUTH);
+
+        pnlNTablaReporte.setLayout(new java.awt.BorderLayout());
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable3);
+
+        pnlNTablaReporte.add(jScrollPane4, java.awt.BorderLayout.CENTER);
+
+        pnlNMain1.add(pnlNTablaReporte, java.awt.BorderLayout.CENTER);
+
+        pnlInscribir.add(pnlNMain1, java.awt.BorderLayout.CENTER);
+
         pnlTODO.add(pnlInscribir, "card5");
 
         getContentPane().add(pnlTODO, java.awt.BorderLayout.CENTER);
@@ -554,7 +660,7 @@ public class Ventana extends javax.swing.JFrame {
     private void InicioMMateria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioMMateria
 
         CardLayout = (CardLayout) pnlTODO.getLayout();
-        CardLayout.show(pnlTODO, "card3");
+        CardLayout.show(pnlTODO, "card4");
     }//GEN-LAST:event_InicioMMateria
 
     private void InicioMInscribir(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioMInscribir
@@ -623,6 +729,14 @@ public class Ventana extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_AgregarAlumno
 
+    private void btnCAgregar2AgregarMateria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCAgregar2AgregarMateria
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCAgregar2AgregarMateria
+
+    private void btnCAgregar3AgregarMateria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCAgregar3AgregarMateria
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCAgregar3AgregarMateria
+
     /**
      * @param args the command line arguments
      */
@@ -671,20 +785,22 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel CSemestre;
     private javax.swing.JPanel CSemestre1;
     private javax.swing.JLabel Duke;
+    private javax.swing.JPanel IMateria;
+    private javax.swing.JPanel INoCrtl;
     private javax.swing.JLabel LCClave;
     private javax.swing.JLabel LCCreditos;
     private javax.swing.JLabel LCNoCtrl;
     private javax.swing.JLabel LCNombre;
     private javax.swing.JLabel LCNombreM;
     private javax.swing.JLabel LCSemestre;
+    private javax.swing.JLabel LINoCtrl;
+    private javax.swing.JLabel LINombreM;
     private javax.swing.JPanel Opciones;
-    private javax.swing.JPanel Opciones1;
-    private javax.swing.JPanel Paneles;
-    private javax.swing.JPanel Tabla;
-    private javax.swing.JPanel TablaMat;
     private javax.swing.ButtonGroup btgOpciones;
     private javax.swing.JButton btnCAgregar;
     private javax.swing.JButton btnCAgregar1;
+    private javax.swing.JButton btnCAgregar2;
+    private javax.swing.JButton btnCAgregar3;
     javax.swing.JButton btnSalir;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler8;
@@ -692,18 +808,23 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblBNoCtrl;
     private javax.swing.JLabel lblBNombre;
@@ -711,21 +832,31 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JMenu menInicio;
     private javax.swing.JMenu menInscribir;
     private javax.swing.JMenu menMateria;
-    private javax.swing.JPanel pnlAPrincipal;
+    private javax.swing.JPanel pnlAMain;
+    private javax.swing.JPanel pnlAOpciones;
+    private javax.swing.JPanel pnlATabla;
     private javax.swing.JPanel pnlATitulo;
     public javax.swing.JPanel pnlAlumno;
     javax.swing.JPanel pnlBuscar;
     javax.swing.JPanel pnlCrearA;
     private javax.swing.JPanel pnlCrearAData;
     javax.swing.JPanel pnlCrearM;
+    javax.swing.JPanel pnlCrearM1;
     private javax.swing.JPanel pnlCrearMData;
+    private javax.swing.JPanel pnlCrearMData1;
     private javax.swing.JPanel pnlIOpciones;
     private javax.swing.JPanel pnlITitulo;
     private javax.swing.JPanel pnlInicio;
     private javax.swing.JPanel pnlInscribir;
-    private javax.swing.JPanel pnlMPrincipal;
+    private javax.swing.JPanel pnlMMain;
+    private javax.swing.JPanel pnlMTabla;
     private javax.swing.JPanel pnlMTitulo;
     public javax.swing.JPanel pnlMaterias;
+    private javax.swing.JPanel pnlNMain;
+    private javax.swing.JPanel pnlNMain1;
+    private javax.swing.JPanel pnlNOpciones;
+    private javax.swing.JPanel pnlNTablaReporte;
+    private javax.swing.JPanel pnlNTitulo;
     javax.swing.JPanel pnlTODO;
     private javax.swing.JRadioButton rbtBuscar;
     private javax.swing.JRadioButton rbtCrear;
@@ -737,6 +868,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTextField txtCNombre;
     private javax.swing.JTextField txtCNombreM;
     private javax.swing.JTextField txtCSemestre;
+    private javax.swing.JTextField txtINoCtrl;
     // End of variables declaration//GEN-END:variables
     // Extra variables @m
     java.awt.CardLayout CardLayout;
