@@ -2,13 +2,24 @@ package inicioarchivos;
 import java.util.*;
 public class InicioArchivos
 {
+            public static  Archivos obArch;
     public static void main(String[] args)
     {
+        obArch=new ArchivoAlumnos();
+        obArch.inicioMen();
+        obArch=new ArchivoMaterias();
+        obArch.inicioMen();
+        obArch=new ArchivoInscripciones();
+        obArch.inicioMen();
+        
         Ventana v_ventana = new Ventana();
         v_ventana.setVisible(true);
         
+        
+        
+        /*
         Scanner sc=new Scanner(System.in);
-        Archivos obArch;
+        
         byte opc=0;
         do
         {
@@ -32,6 +43,7 @@ public class InicioArchivos
             }
             System.out.println();
         }while(opc!=4);
+*/
     }
 }
 

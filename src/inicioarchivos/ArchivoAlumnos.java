@@ -11,8 +11,6 @@ public class ArchivoAlumnos extends Archivos {
         canal = null;
         try {
             canal = new RandomAccessFile("alumnos.dat", "rw");
-            menu();
-            canal.close();
         } catch (IOException e) {
             System.out.println("Error en el archivo");
         }

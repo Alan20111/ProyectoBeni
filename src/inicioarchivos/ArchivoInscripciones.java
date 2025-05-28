@@ -21,10 +21,6 @@ public class ArchivoInscripciones extends Archivos {
             canal = new RandomAccessFile("inscripciones.dat", "rw");
             canal1 = new RandomAccessFile("alumnos.dat", "rw");
             canal2 = new RandomAccessFile("materias.dat", "rw");
-            menu();
-            canal.close();
-            canal1.close();
-            canal2.close();
         } catch (IOException e) {
             System.out.println("Error en el archivo");
         }

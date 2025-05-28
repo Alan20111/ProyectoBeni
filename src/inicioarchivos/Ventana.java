@@ -4,8 +4,11 @@ package inicioarchivos;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.Objects;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static inicioarchivos.InicioArchivos.obArch;
 public class Ventana extends javax.swing.JFrame {
     String text;
     Archivos arch;
@@ -566,11 +569,35 @@ public class Ventana extends javax.swing.JFrame {
 
     private void salir(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salir
         JOptionPane.showMessageDialog(rootPane, "Hasta luego!", "Despedida", JOptionPane.INFORMATION_MESSAGE);
+        
+        obArch=new ArchivoAlumnos();
+        System.out.println(obArch.canal); 
+        try {
+            obArch.canal.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        obArch=new ArchivoMaterias();
+        try {
+            obArch.canal.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        obArch=new ArchivoInscripciones();
+        obArch.inicioMen();try {
+            obArch.canal.close();
+            obArch.canal1.close();
+            obArch.canal2.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
         dispose();
     }//GEN-LAST:event_salir
 
     private void AgregarAlumno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarAlumno
 
+        
+        
         boolean a = txtCNoCtrl.getText().isEmpty(),
                 b = txtCNombre.getText().isEmpty(),
                 c = txtCSemestre.getText().isEmpty();
