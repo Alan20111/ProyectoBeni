@@ -11,7 +11,10 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static inicioarchivos.InicioArchivos.obArch;
+import static inicioarchivos.InicioArchivos.obAlumnos;
+import static inicioarchivos.InicioArchivos.obInscripciones;
+import static inicioarchivos.InicioArchivos.obMaterias;
+
 public class Ventana extends javax.swing.JFrame {
 
     public Ventana() {
@@ -692,19 +695,19 @@ public class Ventana extends javax.swing.JFrame {
     private void salir(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salir
         JOptionPane.showMessageDialog(rootPane, "Hasta luego!", "Despedida", JOptionPane.INFORMATION_MESSAGE); 
         try {
-            obArch.canal.close();
+            obAlumnos.canal.close();
         } catch (IOException ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            obArch.canal.close();
+            obMaterias.canal.close();
         } catch (IOException ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            obArch.canal.close();
-            obArch.canal1.close();
-            obArch.canal2.close();
+            obInscripciones.canal.close();
+            obInscripciones.canal1.close();
+            obInscripciones.canal2.close();
         } catch (IOException ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -716,11 +719,10 @@ public class Ventana extends javax.swing.JFrame {
                 b = txtCNombre.getText().isEmpty(),
                 c = txtCSemestre.getText().isEmpty();
         if (!b & !c & !a) {
-            obArch.altas(obArch.canal,
+            obAlumnos.altas(obAlumnos.canal,
                     txtCNoCtrl.getText(),
                     txtCNombre.getText(),
                     Byte.parseByte(txtCSemestre.getText()));
-            
             /*text = String.format("%8s | %-40s | %2d", txtCNoCtrl.getText(), txtCNombre.getText(), Integer.valueOf(txtCSemestre.getText())) + "\n";*/
             JOptionPane.showMessageDialog(null, "Almuno Agregado", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             txtCNoCtrl.setText(null);

@@ -1,19 +1,20 @@
 package inicioarchivos;
+
 import java.util.*;
-public class InicioArchivos
-{
-    public static  Archivos obArch;
-    public static void main(String[] args)
-    {
-        obArch=new ArchivoAlumnos();
-        obArch.inicioMen();
-        obArch=new ArchivoMaterias();
-        obArch.inicioMen();
-        obArch=new ArchivoInscripciones();
-        obArch.inicioMen();
-        
+
+public class InicioArchivos {
+
+    public static Archivos obAlumnos = new ArchivoAlumnos();;
+    public static Archivos obMaterias = new ArchivoMaterias();;
+    public static Archivos obInscripciones = new ArchivoInscripciones();;
+
+    public static void main(String[] args) {
+        obAlumnos.inicioMen();
+        obMaterias.inicioMen();
+        obInscripciones.inicioMen();
+
         Ventana ven = new Ventana();
-        ven.setVisible(true); 
+        ven.setVisible(true);
         /*
         Scanner sc=new Scanner(System.in);
         
@@ -40,7 +41,6 @@ public class InicioArchivos
             }
             System.out.println();
         }while(opc!=4);
-*/
+         */
     }
 }
-
