@@ -578,7 +578,7 @@ public class Ventana extends javax.swing.JFrame {
         if (!b & !c & !a) {
             //TODO Leo code here
             arch=new ArchivoAlumnos();
-            Alumno al=new Alumno(txtCNoCtrl.getText(), txtCNombre.getText(), Byte.valueOf(txtCSemestre.getText()));
+            
             System.out.println(Byte.valueOf(txtCSemestre.getText()));
             arch.altas(arch.canal);
             
