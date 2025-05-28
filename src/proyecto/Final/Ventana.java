@@ -505,12 +505,12 @@ public class Ventana extends javax.swing.JFrame {
         DukeInicio = new ImageIcon(duke);
     }
 
-    private void rbtBuscarActionPerformed() {//GEN-FIRST:event_rbtBuscarActionPerformed
+    private void rbtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtBuscarActionPerformed
         pnlCrearA.setVisible(rbtCrear.isSelected());
         pnlBuscar.setVisible(rbtBuscar.isSelected());
     }//GEN-LAST:event_rbtBuscarActionPerformed
 
-    private void rbtCrearActionPerformed() {//GEN-FIRST:event_rbtCrearActionPerformed
+    private void rbtCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtCrearActionPerformed
         pnlCrearA.setVisible(rbtCrear.isSelected());
         pnlBuscar.setVisible(rbtBuscar.isSelected());
     }//GEN-LAST:event_rbtCrearActionPerformed
