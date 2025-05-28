@@ -106,7 +106,7 @@ public class Ventana extends javax.swing.JFrame {
         btnCAgregar2 = new javax.swing.JButton();
         pnlNMain1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        btnCAgregar3 = new javax.swing.JButton();
+        btnNReporte = new javax.swing.JButton();
         pnlNTablaReporte = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
@@ -123,6 +123,7 @@ public class Ventana extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Inscripciones");
+        setFont(new java.awt.Font("Segoe UI Semibold", 0, 10)); // NOI18N
         setForeground(java.awt.Color.white);
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(900, 600));
@@ -520,14 +521,14 @@ public class Ventana extends javax.swing.JFrame {
         jLabel7.setAlignmentY(1.0F);
         pnlNMain1.add(jLabel7, java.awt.BorderLayout.NORTH);
 
-        btnCAgregar3.setText("Inscribir");
-        btnCAgregar3.setAlignmentY(1.0F);
-        btnCAgregar3.addActionListener(new java.awt.event.ActionListener() {
+        btnNReporte.setText("Crear Reporte");
+        btnNReporte.setAlignmentY(1.0F);
+        btnNReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCAgregar3AgregarMateria(evt);
+                btnNReporteAgregarMateria(evt);
             }
         });
-        pnlNMain1.add(btnCAgregar3, java.awt.BorderLayout.SOUTH);
+        pnlNMain1.add(btnNReporte, java.awt.BorderLayout.SOUTH);
 
         pnlNTablaReporte.setLayout(new java.awt.BorderLayout());
 
@@ -733,9 +734,9 @@ public class Ventana extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCAgregar2AgregarMateria
 
-    private void btnCAgregar3AgregarMateria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCAgregar3AgregarMateria
+    private void btnNReporteAgregarMateria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNReporteAgregarMateria
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCAgregar3AgregarMateria
+    }//GEN-LAST:event_btnNReporteAgregarMateria
 
     /**
      * @param args the command line arguments
@@ -800,7 +801,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton btnCAgregar;
     private javax.swing.JButton btnCAgregar1;
     private javax.swing.JButton btnCAgregar2;
-    private javax.swing.JButton btnCAgregar3;
+    private javax.swing.JButton btnNReporte;
     javax.swing.JButton btnSalir;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler8;
