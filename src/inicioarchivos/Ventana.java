@@ -4,7 +4,9 @@ package inicioarchivos;
  * @author markb
  */
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
@@ -31,7 +33,6 @@ public class Ventana extends javax.swing.JFrame {
         );
         moreComponents();
         initComponents();
-        evenmoreComponents();
     }
 
     private void m_preCerrar() {
@@ -340,7 +341,7 @@ public class Ventana extends javax.swing.JFrame {
         txtBNoCtrl.setColumns(8);
         txtBNoCtrl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBNoCtrlActionPerformed(evt);
+                BuscarAlumno(evt);
             }
         });
         BNoCtrl.add(txtBNoCtrl, java.awt.BorderLayout.CENTER);
@@ -619,23 +620,19 @@ public class Ventana extends javax.swing.JFrame {
         Image duke = image.getScaledInstance(60, 100, Image.SCALE_SMOOTH);
         DukeInicio = new ImageIcon(duke);
     }
-
-    private void evenmoreComponents() {
-        DefaultTableModel Talum = new DefaultTableModel();
-        jTAlumnos.setModel(Talum);
-        jTAlumnos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        if (jTAlumnos.getColumnModel().getColumnCount() > 0) {
-            jTAlumnos.getColumnModel().getColumn(0).setHeaderValue("No. Control");
-            jTAlumnos.getColumnModel().getColumn(1).setHeaderValue("Nombre");
-            jTAlumnos.getColumnModel().getColumn(2).setHeaderValue("Semestre");
-            jTAlumnos.getColumnModel().getColumn(3).setHeaderValue("Creditos");
-            jTAlumnos.getColumnModel().getColumn(4).setHeaderValue("Acción");
-        }
-
-        try (BufferedReader br = new BufferedReader(new FileReader("alumnos.dat"))) {
+    
+    private void tableComponents(JTable Tabla, String Archivo){
+        Tabla.setModel(new javax.swing.table.DefaultTableModel());
+        Tabla.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        model.addColumn("No. Control");
+        
+        model.addColumn("Nombre");
+        model.addColumn("Semestre");
+        
+        try (BufferedReader bro = new BufferedReader(new FileReader(Archivo))) {
             String line;
-            while ((line = br.readLine()) != null) {
-                Talum.addRow(line.split(" ")); // Adjust delimiter as needed
+            while ((line = bro.readLine()) != null) {
+                model.addRow(line.split(" "));
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -749,9 +746,14 @@ public class Ventana extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BuscarAlumno
 
-    private void txtBNoCtrlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBNoCtrlActionPerformed
+    private void AActualizarTabla(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AActualizarTabla
+        tableComponents(jTAlumnos, "alumnos.dat");
+    }//GEN-LAST:event_AActualizarTabla
+
+    private void btnMActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMActualizarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtBNoCtrlActionPerformed
+    }//GEN-LAST:event_btnMActualizarActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -887,5 +889,6 @@ public class Ventana extends javax.swing.JFrame {
     // Extra variables @m
     java.awt.CardLayout CardLayout;
     javax.swing.ImageIcon DukeInicio;
+    DefaultTableModel model;
     // End of extra variables @m
 }
