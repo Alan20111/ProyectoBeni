@@ -124,7 +124,7 @@ public class ArchivoAlumnos extends Archivos {
         try {
             canal.seek(nReg * tr);
             canal.writeUTF(String.format("%8s", x.nroCtrl));
-            canal.writeUTF(String.format("%40s", x.nom));
+            canal.writeUTF(String.format("%-40s", x.nom));
             canal.write(x.sem);
         } catch (IOException e) {
             System.out.println("|Error en el archivo");
