@@ -2,20 +2,22 @@ package inicioarchivos;
 /**@author markb*/
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static inicioarchivos.InicioArchivos.obArch;
 public class Ventana extends javax.swing.JFrame {
-    String text;
-    Archivos arch;
 
     public Ventana() {
         moreComponents();
         initComponents();
+        evenmoreComponents();
     }
 
     /**
@@ -48,7 +50,7 @@ public class Ventana extends javax.swing.JFrame {
         pnlAMain = new javax.swing.JPanel();
         pnlATabla = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTAlumnos = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         pnlAOpciones = new javax.swing.JPanel();
@@ -112,7 +114,7 @@ public class Ventana extends javax.swing.JFrame {
         jTable3 = new javax.swing.JTable();
         filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
         filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
-        jPanel1 = new javax.swing.JPanel();
+        pnlCreditos = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -223,7 +225,7 @@ public class Ventana extends javax.swing.JFrame {
         pnlATabla.setEnabled(false);
         pnlATabla.setLayout(new java.awt.BorderLayout(10, 10));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -246,15 +248,15 @@ public class Ventana extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setColumnSelectionAllowed(true);
-        jScrollPane2.setViewportView(jTable1);
-        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
+        jTAlumnos.setColumnSelectionAllowed(true);
+        jScrollPane2.setViewportView(jTAlumnos);
+        jTAlumnos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        if (jTAlumnos.getColumnModel().getColumnCount() > 0) {
+            jTAlumnos.getColumnModel().getColumn(0).setResizable(false);
+            jTAlumnos.getColumnModel().getColumn(1).setResizable(false);
+            jTAlumnos.getColumnModel().getColumn(2).setResizable(false);
+            jTAlumnos.getColumnModel().getColumn(3).setResizable(false);
+            jTAlumnos.getColumnModel().getColumn(4).setResizable(false);
         }
 
         pnlATabla.add(jScrollPane2, java.awt.BorderLayout.CENTER);
@@ -554,11 +556,11 @@ public class Ventana extends javax.swing.JFrame {
         getContentPane().add(filler8, java.awt.BorderLayout.WEST);
         getContentPane().add(filler9, java.awt.BorderLayout.EAST);
 
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        pnlCreditos.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
         jLabel5.setForeground(new java.awt.Color(153, 153, 153));
         jLabel5.setText("®NULL NULL NULL Sahur");
-        jPanel1.add(jLabel5);
+        pnlCreditos.add(jLabel5);
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -566,9 +568,9 @@ public class Ventana extends javax.swing.JFrame {
                 salir(evt);
             }
         });
-        jPanel1.add(btnSalir);
+        pnlCreditos.add(btnSalir);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.SOUTH);
+        getContentPane().add(pnlCreditos, java.awt.BorderLayout.SOUTH);
 
         menInicio.setText("Inicio");
         menInicio.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -612,6 +614,19 @@ public class Ventana extends javax.swing.JFrame {
         Image image = DukeInicio.getImage();
         Image duke = image.getScaledInstance(60,100,Image.SCALE_SMOOTH);
         DukeInicio = new ImageIcon(duke);
+    }
+    private void evenmoreComponents(){
+        DefaultTableModel Talum = new  DefaultTableModel();
+        jTAlumnos.setModel(Talum);
+
+        try (BufferedReader br = new BufferedReader(new FileReader("alumnos.dat"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                Talum.addRow(line.split(" ")); // Adjust delimiter as needed
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void rbtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtBuscarActionPerformed
@@ -675,23 +690,18 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_AgregarMateria
 
     private void salir(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salir
-        JOptionPane.showMessageDialog(rootPane, "Hasta luego!", "Despedida", JOptionPane.INFORMATION_MESSAGE);
-        
-        obArch=new ArchivoAlumnos();
-        System.out.println(obArch.canal); 
+        JOptionPane.showMessageDialog(rootPane, "Hasta luego!", "Despedida", JOptionPane.INFORMATION_MESSAGE); 
         try {
             obArch.canal.close();
         } catch (IOException ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
-        obArch=new ArchivoMaterias();
         try {
             obArch.canal.close();
         } catch (IOException ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
-        obArch=new ArchivoInscripciones();
-        obArch.inicioMen();try {
+        try {
             obArch.canal.close();
             obArch.canal1.close();
             obArch.canal2.close();
@@ -702,18 +712,14 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_salir
 
     private void AgregarAlumno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarAlumno
-
-        
-        
         boolean a = txtCNoCtrl.getText().isEmpty(),
                 b = txtCNombre.getText().isEmpty(),
                 c = txtCSemestre.getText().isEmpty();
         if (!b & !c & !a) {
-            //TODO Leo code here
-            arch=new ArchivoAlumnos();
-            
-            System.out.println(Byte.valueOf(txtCSemestre.getText()));
-            arch.altas(arch.canal);
+            obArch.altas(obArch.canal,
+                    txtCNoCtrl.getText(),
+                    txtCNombre.getText(),
+                    Byte.parseByte(txtCSemestre.getText()));
             
             /*text = String.format("%8s | %-40s | %2d", txtCNoCtrl.getText(), txtCNombre.getText(), Integer.valueOf(txtCSemestre.getText())) + "\n";*/
             JOptionPane.showMessageDialog(null, "Almuno Agregado", "Notificación", JOptionPane.INFORMATION_MESSAGE);
@@ -818,12 +824,11 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
+    javax.swing.JTable jTAlumnos;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTextArea jTextArea1;
@@ -845,6 +850,7 @@ public class Ventana extends javax.swing.JFrame {
     javax.swing.JPanel pnlCrearM1;
     private javax.swing.JPanel pnlCrearMData;
     private javax.swing.JPanel pnlCrearMData1;
+    private javax.swing.JPanel pnlCreditos;
     private javax.swing.JPanel pnlIOpciones;
     private javax.swing.JPanel pnlITitulo;
     private javax.swing.JPanel pnlInicio;

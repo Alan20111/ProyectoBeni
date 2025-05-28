@@ -17,10 +17,11 @@ public class ArchivoAlumnos extends Archivos {
     }
 
     @Override
-    public void altas(RandomAccessFile canal) {
+    public void altas(RandomAccessFile canal, String noCtrl, String nom, byte sem) {
         System.out.println("Seguimiento de altas");
         try {
-            al.capturar();
+            
+            al.capturar(noCtrl, nom, sem);
             int reg = (int) canal.length() / tr;
             grabarReg(canal, reg, al);
         } catch (IOException e) {
@@ -76,14 +77,14 @@ public class ArchivoAlumnos extends Archivos {
     }
 
     @Override
-    public int modificaciones(RandomAccessFile canal) {
+    public int modificaciones(RandomAccessFile canal, String noCtrl, String nom, byte sem) {
         System.out.println("Ingrese el numero de control del alumno a modificar");
         String rem = sc.nextLine();
         int n = busqueda(canal, rem);
         if (n == -1) {
             return -1;
         }
-        al.capturar();
+        al.capturar(noCtrl, nom, sem);
         grabarReg(canal, n, al);
         return 0;
     }

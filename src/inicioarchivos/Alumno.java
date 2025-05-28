@@ -4,22 +4,16 @@ class Alumno
 {
     String nroCtrl,nom;
     byte sem;
-    void capturar()
+    void capturar(String nroCtrl, String nom, byte sem)
     {
         boolean flag=true;
         do
         {
             try
             {
-                Scanner tec=new Scanner(System.in);
-                System.out.println("Tecle numero de control ");
-                nroCtrl=tec.nextLine();
-                nroCtrl=String.format("%8s",nroCtrl);
-                System.out.println("Tecle nombre ");
-                nom=tec.nextLine();
-                nom=String.format("%-40s",nom);
-                System.out.println("Tecle semestre ");
-                sem=tec.nextByte();
+                this.nroCtrl=nroCtrl;
+                this.nom=nom;
+                this.sem=sem;
                 flag=false;
             }
             catch(java.util.InputMismatchException e)

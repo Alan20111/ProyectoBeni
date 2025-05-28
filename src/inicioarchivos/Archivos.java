@@ -4,7 +4,7 @@ import java.util.Scanner;
 abstract class Archivos
 {
     RandomAccessFile canal=null,canal1=null,canal2=null;
-    public void menu()
+/*  public void menu()
     {
         Scanner tec=new Scanner(System.in);
         int opc=0;
@@ -22,24 +22,23 @@ abstract class Archivos
             switch(opc)
             {
                 case 1: altas(canal);
-                    break;
+                break;
                 case 2: modificaciones(canal);
-                    break;
+                break;
                 case 3: reporte(canal);
-                    break;
+                break;
                 case 4: ordenar(canal);
-                    break;
+                break;
                 case 5: busqueda(canal,"");
-                    break;
+                break;
             }
-
-
         }while(opc!=6);
-    }
-    public abstract void altas(RandomAccessFile canal);
+    }*/
+
+    public abstract void altas(RandomAccessFile canal, String noCtrl, String nom, byte sem);
     public abstract int busqueda(RandomAccessFile canal,String s);
     public abstract void reporte(RandomAccessFile canal);
-    public abstract int modificaciones(RandomAccessFile canal);
+    public abstract int modificaciones(RandomAccessFile canal, String noCtrl, String nom, byte sem);
     public abstract void ordenar(RandomAccessFile canal);
     public abstract void inicioMen();
 }

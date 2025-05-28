@@ -17,7 +17,7 @@ public class ArchivoMaterias extends Archivos {
     }
 
     @Override
-    public void altas(RandomAccessFile canal) {
+    public void altas(RandomAccessFile canal, String a, String b, byte c) {
         System.out.println("Seguimiento de altas");
         try {
             ma.capturar();
@@ -78,7 +78,7 @@ public class ArchivoMaterias extends Archivos {
     }
 
     @Override
-    public int modificaciones(RandomAccessFile canal) {
+    public int modificaciones(RandomAccessFile canal, String a, String b, byte c) {
         System.out.println("Ingrese el numero de control del alumno a modificar");
         String rem = sc.nextLine();
         int n = busqueda(canal, rem);
