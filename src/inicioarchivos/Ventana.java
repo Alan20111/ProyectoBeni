@@ -87,8 +87,7 @@ public class Ventana extends javax.swing.JFrame {
         pnlATabla = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTAlumnos = new javax.swing.JTable();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        btnAActualizar = new javax.swing.JButton();
         pnlAOpciones = new javax.swing.JPanel();
         pnlCrearA = new javax.swing.JPanel();
         pnlCrearAData = new javax.swing.JPanel();
@@ -114,7 +113,8 @@ public class Ventana extends javax.swing.JFrame {
         pnlMMain = new javax.swing.JPanel();
         pnlMTabla = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTMaterias = new javax.swing.JTable();
+        btnMActualizar = new javax.swing.JButton();
         pnlCrearM = new javax.swing.JPanel();
         pnlCrearMData = new javax.swing.JPanel();
         CNoCrtl1 = new javax.swing.JPanel();
@@ -266,11 +266,13 @@ public class Ventana extends javax.swing.JFrame {
 
         pnlATabla.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        pnlATabla.add(jScrollPane1, java.awt.BorderLayout.SOUTH);
+        btnAActualizar.setText("Actualizar Tabla");
+        btnAActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AActualizarTabla(evt);
+            }
+        });
+        pnlATabla.add(btnAActualizar, java.awt.BorderLayout.PAGE_END);
 
         pnlAMain.add(pnlATabla, java.awt.BorderLayout.CENTER);
 
@@ -382,7 +384,7 @@ public class Ventana extends javax.swing.JFrame {
         pnlMTabla.setEnabled(false);
         pnlMTabla.setLayout(new java.awt.BorderLayout());
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -405,17 +407,25 @@ public class Ventana extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.setColumnSelectionAllowed(true);
-        jScrollPane3.setViewportView(jTable2);
-        jTable2.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setResizable(false);
-            jTable2.getColumnModel().getColumn(3).setResizable(false);
+        jTMaterias.setColumnSelectionAllowed(true);
+        jScrollPane3.setViewportView(jTMaterias);
+        jTMaterias.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        if (jTMaterias.getColumnModel().getColumnCount() > 0) {
+            jTMaterias.getColumnModel().getColumn(0).setResizable(false);
+            jTMaterias.getColumnModel().getColumn(1).setResizable(false);
+            jTMaterias.getColumnModel().getColumn(2).setResizable(false);
+            jTMaterias.getColumnModel().getColumn(3).setResizable(false);
         }
 
         pnlMTabla.add(jScrollPane3, java.awt.BorderLayout.CENTER);
+
+        btnMActualizar.setText("Actualizar Tabla");
+        btnMActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MActualizarTabla(evt);
+            }
+        });
+        pnlMTabla.add(btnMActualizar, java.awt.BorderLayout.PAGE_END);
 
         pnlMMain.add(pnlMTabla, java.awt.BorderLayout.CENTER);
 
@@ -750,9 +760,9 @@ public class Ventana extends javax.swing.JFrame {
         tableComponents(jTAlumnos, "alumnos.dat");
     }//GEN-LAST:event_AActualizarTabla
 
-    private void btnMActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMActualizarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMActualizarActionPerformed
+    private void MActualizarTabla(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MActualizarTabla
+        tableComponents(jTMaterias, "materias.dat");
+    }//GEN-LAST:event_MActualizarTabla
 
 
     /**
@@ -814,10 +824,12 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel LINombreM;
     private javax.swing.JPanel Opciones;
     private javax.swing.ButtonGroup btgOpciones;
+    private javax.swing.JButton btnAActualizar;
     private javax.swing.JButton btnCAgregar;
     private javax.swing.JButton btnCAgregar1;
     private javax.swing.JButton btnCAgregar2;
     private javax.swing.JButton btnCAgregar3;
+    private javax.swing.JButton btnMActualizar;
     private javax.swing.JButton btnNReporte;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler8;
@@ -834,14 +846,12 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     javax.swing.JTable jTAlumnos;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTMaterias;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblBNoCtrl;
     private javax.swing.JMenu menAlumno;
     private javax.swing.JMenu menInicio;
