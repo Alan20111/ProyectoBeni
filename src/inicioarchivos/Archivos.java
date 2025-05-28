@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.Scanner;
 abstract class Archivos
 {
-    RandomAccessFile canal=null,canal1=null,canal2=null;
+    RandomAccessFile canal,canal1,canal2;
 /*  public void menu()
     {
         Scanner tec=new Scanner(System.in);
