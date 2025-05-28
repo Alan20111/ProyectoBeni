@@ -108,7 +108,6 @@ public class ArchivoMaterias extends Archivos {
             System.out.println("Error en el archivo");
         }
     }
-
     public void leerReg(RandomAccessFile canal, int nReg, Materia x) {
         try {
             canal.seek(nReg * tr);
