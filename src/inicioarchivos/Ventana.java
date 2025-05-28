@@ -100,7 +100,7 @@ public class Ventana extends javax.swing.JFrame {
         CSemestre = new javax.swing.JPanel();
         LCSemestre = new javax.swing.JLabel();
         txtCSemestre = new javax.swing.JTextField();
-        btnCAgregar = new javax.swing.JButton();
+        btnCAAgregar = new javax.swing.JButton();
         pnlBuscar = new javax.swing.JPanel();
         pnlBuscarAData = new javax.swing.JPanel();
         BNoCtrl = new javax.swing.JPanel();
@@ -126,7 +126,7 @@ public class Ventana extends javax.swing.JFrame {
         CSemestre1 = new javax.swing.JPanel();
         LCCreditos = new javax.swing.JLabel();
         txtCCreditos = new javax.swing.JTextField();
-        btnCAgregar1 = new javax.swing.JButton();
+        btnCMAgregar = new javax.swing.JButton();
         pnlInscribir = new javax.swing.JPanel();
         pnlNMain = new javax.swing.JPanel();
         pnlNTitulo = new javax.swing.JPanel();
@@ -318,14 +318,14 @@ public class Ventana extends javax.swing.JFrame {
 
         pnlCrearA.add(pnlCrearAData);
 
-        btnCAgregar.setText("Agregar");
-        btnCAgregar.setAlignmentY(1.0F);
-        btnCAgregar.addActionListener(new java.awt.event.ActionListener() {
+        btnCAAgregar.setText("Agregar");
+        btnCAAgregar.setAlignmentY(1.0F);
+        btnCAAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AgregarAlumno(evt);
             }
         });
-        pnlCrearA.add(btnCAgregar);
+        pnlCrearA.add(btnCAAgregar);
 
         pnlAOpciones.add(pnlCrearA, "card2");
 
@@ -467,14 +467,14 @@ public class Ventana extends javax.swing.JFrame {
 
         pnlCrearM.add(pnlCrearMData);
 
-        btnCAgregar1.setText("Agregar");
-        btnCAgregar1.setAlignmentY(1.0F);
-        btnCAgregar1.addActionListener(new java.awt.event.ActionListener() {
+        btnCMAgregar.setText("Agregar");
+        btnCMAgregar.setAlignmentY(1.0F);
+        btnCMAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AgregarMateria(evt);
             }
         });
-        pnlCrearM.add(btnCAgregar1);
+        pnlCrearM.add(btnCMAgregar);
 
         pnlMMain.add(pnlCrearM, java.awt.BorderLayout.NORTH);
 
@@ -706,7 +706,27 @@ public class Ventana extends javax.swing.JFrame {
 
     //BOTONES DE MAS
     private void AgregarMateria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarMateria
-        // TODO add your handling code here:
+        boolean a = txtCClave.getText().isEmpty(),
+                b = txtCNombreM.getText().isEmpty(),
+                c = txtCCreditos.getText().isEmpty();
+        if (!b & !c & !a) {
+            obMaterias.altas(obMaterias.canal,
+                    txtCClave.getText(),
+                    txtCNombreM.getText(),
+                    Byte.parseByte(txtCCreditos.getText()));
+            System.out.print(String.format("%8s | %-40s | %2d", txtCClave.getText(), txtCNombreM.getText(), Integer.valueOf(txtCCreditos.getText())) + "\n");
+
+            txtCClave.setText(null);
+            txtCNombreM.setText(null);
+            txtCCreditos.setText(null);
+
+        } else {
+            if (a & b & c) {
+                JOptionPane.showMessageDialog(null, "Ingrese un alumno", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Faltan datos por agregar", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_AgregarMateria
 
     private void AgregarAlumno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarAlumno
@@ -723,7 +743,7 @@ public class Ventana extends javax.swing.JFrame {
             txtCNoCtrl.setText(null);
             txtCNombre.setText(null);
             txtCSemestre.setText(null);
-            btnCAgregar.setEnabled(true);
+            
         } else {
             if (a & b & c) {
                 JOptionPane.showMessageDialog(null, "Ingrese un alumno", "Error", JOptionPane.ERROR_MESSAGE);
@@ -750,7 +770,7 @@ public class Ventana extends javax.swing.JFrame {
            obAlumnosHijo.leerReg(obAlumnos.canal,n,obAlumno);
             System.out.println(obAlumno.nom+" "+obAlumno.nroCtrl);//Alumno
             txtBNoCtrl.setText(null);
-            btnCAgregar.setEnabled(true);
+            btnCAAgregar.setEnabled(true);
         } else {
                 JOptionPane.showMessageDialog(null, "Ingrese un alumno", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -825,10 +845,10 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel Opciones;
     private javax.swing.ButtonGroup btgOpciones;
     private javax.swing.JButton btnAActualizar;
-    private javax.swing.JButton btnCAgregar;
-    private javax.swing.JButton btnCAgregar1;
+    private javax.swing.JButton btnCAAgregar;
     private javax.swing.JButton btnCAgregar2;
     private javax.swing.JButton btnCAgregar3;
+    private javax.swing.JButton btnCMAgregar;
     private javax.swing.JButton btnMActualizar;
     private javax.swing.JButton btnNReporte;
     private javax.swing.Box.Filler filler1;

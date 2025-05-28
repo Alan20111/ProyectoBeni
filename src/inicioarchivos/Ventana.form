@@ -457,7 +457,7 @@
                             </Container>
                           </SubComponents>
                         </Container>
-                        <Component class="javax.swing.JButton" name="btnCAgregar">
+                        <Component class="javax.swing.JButton" name="btnCAAgregar">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Agregar"/>
                             <Property name="alignmentY" type="float" value="1.0"/>
@@ -769,7 +769,7 @@
                         </Container>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JButton" name="btnCAgregar1">
+                    <Component class="javax.swing.JButton" name="btnCMAgregar">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Agregar"/>
                         <Property name="alignmentY" type="float" value="1.0"/>
