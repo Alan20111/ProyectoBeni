@@ -19,6 +19,7 @@ public class ArchivoAlumnos extends Archivos {
 
     @Override
     public void altas(RandomAccessFile canal, String noCtrl, String nom, byte sem) {
+        System.out.println("Seguimiento de altas");
         try {
             al.capturar(noCtrl, nom, sem);
             int reg = (int) canal.length() / tr;

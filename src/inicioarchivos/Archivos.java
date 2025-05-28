@@ -35,7 +35,7 @@ abstract class Archivos
         }while(opc!=6);
     }*/
 
-    public abstract void altas(RandomAccessFile canal, String noCtrl, String nom, byte sem);
+    public abstract void altas(RandomAccessFile canal, String a, String b, byte c);
     public abstract int busqueda(RandomAccessFile canal,String s);
     public abstract void reporte(RandomAccessFile canal);
     public abstract int modificaciones(RandomAccessFile canal, String noCtrl, String nom, byte sem);

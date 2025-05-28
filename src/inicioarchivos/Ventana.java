@@ -101,12 +101,14 @@ public class Ventana extends javax.swing.JFrame {
         txtCSemestre = new javax.swing.JTextField();
         btnCAgregar = new javax.swing.JButton();
         pnlBuscar = new javax.swing.JPanel();
+        pnlBuscarAData = new javax.swing.JPanel();
         BNoCtrl = new javax.swing.JPanel();
         lblBNoCtrl = new javax.swing.JLabel();
         txtBNoCtrl = new javax.swing.JTextField();
         BNombre = new javax.swing.JPanel();
         lblBNombre = new javax.swing.JLabel();
         txtBNombre = new javax.swing.JTextField();
+        btnCAgregar3 = new javax.swing.JButton();
         pnlMaterias = new javax.swing.JPanel();
         pnlMTitulo = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -259,39 +261,10 @@ public class Ventana extends javax.swing.JFrame {
         pnlATabla.setEnabled(false);
         pnlATabla.setLayout(new java.awt.BorderLayout(10, 10));
 
-        jTAlumnos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "No. Control", "Nombre", "Semestre", "Creditos", "Acción"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Byte.class, java.lang.Byte.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        jTAlumnos.setModel(jTAlumnos.getModel());
         jTAlumnos.setColumnSelectionAllowed(true);
         jScrollPane2.setViewportView(jTAlumnos);
         jTAlumnos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        if (jTAlumnos.getColumnModel().getColumnCount() > 0) {
-            jTAlumnos.getColumnModel().getColumn(0).setResizable(false);
-            jTAlumnos.getColumnModel().getColumn(1).setResizable(false);
-            jTAlumnos.getColumnModel().getColumn(2).setResizable(false);
-            jTAlumnos.getColumnModel().getColumn(3).setResizable(false);
-            jTAlumnos.getColumnModel().getColumn(4).setResizable(false);
-        }
 
         pnlATabla.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
@@ -356,7 +329,10 @@ public class Ventana extends javax.swing.JFrame {
 
         pnlAOpciones.add(pnlCrearA, "card2");
 
-        pnlBuscar.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        pnlBuscar.setLayout(new javax.swing.BoxLayout(pnlBuscar, javax.swing.BoxLayout.LINE_AXIS));
+
+        pnlBuscarAData.setAlignmentY(1.0F);
+        pnlBuscarAData.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         BNoCtrl.setLayout(new java.awt.BorderLayout());
 
@@ -367,7 +343,7 @@ public class Ventana extends javax.swing.JFrame {
         txtBNoCtrl.setColumns(8);
         BNoCtrl.add(txtBNoCtrl, java.awt.BorderLayout.CENTER);
 
-        pnlBuscar.add(BNoCtrl);
+        pnlBuscarAData.add(BNoCtrl);
 
         BNombre.setLayout(new java.awt.BorderLayout());
 
@@ -378,7 +354,18 @@ public class Ventana extends javax.swing.JFrame {
         txtBNombre.setColumns(35);
         BNombre.add(txtBNombre, java.awt.BorderLayout.CENTER);
 
-        pnlBuscar.add(BNombre);
+        pnlBuscarAData.add(BNombre);
+
+        pnlBuscar.add(pnlBuscarAData);
+
+        btnCAgregar3.setText("Buscar");
+        btnCAgregar3.setAlignmentY(1.0F);
+        btnCAgregar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarAlumno(evt);
+            }
+        });
+        pnlBuscar.add(btnCAgregar3);
 
         pnlAOpciones.add(pnlBuscar, "card3");
 
@@ -653,6 +640,14 @@ public class Ventana extends javax.swing.JFrame {
     private void evenmoreComponents() {
         DefaultTableModel Talum = new DefaultTableModel();
         jTAlumnos.setModel(Talum);
+        jTAlumnos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        if (jTAlumnos.getColumnModel().getColumnCount() > 0) {
+            jTAlumnos.getColumnModel().getColumn(0).setHeaderValue("No. Control");
+            jTAlumnos.getColumnModel().getColumn(1).setHeaderValue("Nombre");
+            jTAlumnos.getColumnModel().getColumn(2).setHeaderValue("Semestre");
+            jTAlumnos.getColumnModel().getColumn(3).setHeaderValue("Creditos");
+            jTAlumnos.getColumnModel().getColumn(4).setHeaderValue("Acción");
+        }
 
         try (BufferedReader br = new BufferedReader(new FileReader("alumnos.dat"))) {
             String line;
@@ -725,7 +720,6 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_AgregarMateria
 
     private void salir(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salir
-
         dispose();
     }//GEN-LAST:event_salir
 
@@ -738,7 +732,7 @@ public class Ventana extends javax.swing.JFrame {
                     txtCNoCtrl.getText(),
                     txtCNombre.getText(),
                     Byte.parseByte(txtCSemestre.getText()));
-            /*text = String.format("%8s | %-40s | %2d", txtCNoCtrl.getText(), txtCNombre.getText(), Integer.valueOf(txtCSemestre.getText())) + "\n";*/
+            System.out.print(String.format("%8s | %-40s | %2d", txtCNoCtrl.getText(), txtCNombre.getText(), Integer.valueOf(txtCSemestre.getText())) + "\n");
             
             txtCNoCtrl.setText(null);
             txtCNombre.setText(null);
@@ -760,6 +754,10 @@ public class Ventana extends javax.swing.JFrame {
     private void btnNReporteAgregarMateria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNReporteAgregarMateria
         // TODO add your handling code here:
     }//GEN-LAST:event_btnNReporteAgregarMateria
+
+    private void BuscarAlumno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarAlumno
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarAlumno
 
     /**
      * @param args the command line arguments
@@ -824,6 +822,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton btnCAgregar;
     private javax.swing.JButton btnCAgregar1;
     private javax.swing.JButton btnCAgregar2;
+    private javax.swing.JButton btnCAgregar3;
     private javax.swing.JButton btnNReporte;
     javax.swing.JButton btnSalir;
     private javax.swing.Box.Filler filler1;
@@ -861,6 +860,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel pnlATitulo;
     public javax.swing.JPanel pnlAlumno;
     javax.swing.JPanel pnlBuscar;
+    private javax.swing.JPanel pnlBuscarAData;
     javax.swing.JPanel pnlCrearA;
     private javax.swing.JPanel pnlCrearAData;
     javax.swing.JPanel pnlCrearM;
