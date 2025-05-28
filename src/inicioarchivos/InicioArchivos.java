@@ -5,7 +5,7 @@ public class InicioArchivos
     public static void main(String[] args)
     {
         Scanner sc=new Scanner(System.in);
-        Archivos obArch; //Aquí podemos usar polimorfismo para pedirle al usuarió qué tipo de archivo quiere mover.
+        Archivos obArch;
         byte opc=0;
         do
         {

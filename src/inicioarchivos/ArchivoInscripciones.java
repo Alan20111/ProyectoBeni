@@ -1,13 +1,172 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package inicioarchivos;
+import java.util.Scanner;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 
-/**
- *
- * @author monro
- */
-public class ArchivoInscripciones {
-    
+public class ArchivoInscripciones extends Archivos {
+    Alumno al;
+    Materia ma;
+    Inscripcion in=new Inscripcion();
+    ArchivoAlumnos archAl;
+    ArchivoMaterias archMa;
+    final int tr = 16;
+    private Scanner sc=new Scanner(System.in);
+
+    @Override
+    public void inicioMen() {
+        canal = null;
+        canal1 = null;
+        canal2 = null;
+        try {
+            canal = new RandomAccessFile("inscripciones.dat", "rw");
+            canal1 = new RandomAccessFile("alumnos.dat", "rw");
+            canal2 = new RandomAccessFile("materias.dat", "rw");
+            menu();
+            canal.close();
+            canal1.close();
+            canal2.close();
+        } catch (IOException e) {
+            System.out.println("Error en el archivo");
+        }
+    }
+
+    public void menu() {
+        byte opc = 0;
+        do {
+            System.out.println("Menú de opciones");
+            System.out.println("1) Inscribir a una clase");
+            System.out.println("2) Ver materias inscritas");
+            System.out.println("3) Salida");
+            System.out.println("Tecle la opcion");
+            opc = sc.nextByte();
+            switch (opc) {
+                case 1:
+                    altas(canal);
+                    break;
+                case 2:
+                    reporte(canal);
+                    break;
+            }
+        } while (opc != 3);
+    }
+
+    public void altas(RandomAccessFile canal) {
+        try {
+            int n;
+            char opc = 0, sel = 0;
+            String bus;
+            archAl = new ArchivoAlumnos();
+            do {
+                System.out.println("Número de control del alumno a inscribir");
+                bus = sc.nextLine();
+                n = archAl.busqueda(canal1, bus);
+                if (n == -1) {
+                    System.out.println("El alumno no existe, ¿Desea volver a intentar? (y/n)");
+                    opc = sc.next().charAt(0);
+                }
+            } while (n == -1 && opc == 'y');
+            if (opc == 'n') {
+                return;
+            }
+            al = new Alumno();
+            archAl.leerReg(canal1, n, al);
+            archMa = new ArchivoMaterias();
+            do {
+                opc='n';
+                System.out.println("Escriba la clave de la materia que desea inscribir");
+                bus = sc.next();
+                n = archMa.busqueda(canal2, bus);
+                if (n == -1) {
+                    System.out.println("La materia no existe, ¿Desea volver a intentar? (y/n)");
+                    opc = sc.next().charAt(0);
+                } else {
+                    int  reg = (int) canal.length() / tr;
+                    ma = new Materia();
+                    archMa.leerReg(canal2, n, ma);
+                    in = new Inscripcion();
+                    in.nroCtrl = al.nroCtrl;
+                    in.cve = ma.cve;
+                    grabarReg(canal, reg, in);
+                    System.out.println("¿Desea registrar otra materia al mismo alumno? (y/n)");
+                    sel = sc.next().charAt(0);
+                }
+            } while (opc == 'y' || sel == 'y');
+        }
+        catch (IOException e) {
+            System.out.println("| Error en el archivo");
+        }
+    }
+
+    public void leerReg(RandomAccessFile canal, int nReg, Inscripcion x) {
+        try {
+            System.out.println(nReg);
+            canal.seek(nReg * tr);
+            x.nroCtrl = canal.readUTF();
+            x.cve = canal.readUTF();
+        } catch (IOException e) {
+            System.out.println("Error en el archivo");
+        }
+    }
+
+    public void grabarReg(RandomAccessFile canal, int nReg, Inscripcion x) {
+        try {
+            canal.seek(nReg * tr);
+            canal.writeUTF(String.format("%8s", x.nroCtrl));
+            canal.writeUTF(String.format("%4s", x.cve));
+        } catch (IOException e) {
+            System.out.println("|Error en el archivo");
+        }
+    }
+
+    public int busqueda(RandomAccessFile canal, String s) {
+        return 0;
+    }
+    public void reporte(RandomAccessFile canal) {
+        try {
+            int n = (int) canal.length() / tr;
+            for (int i = 0; i < n; i++) {
+                leerReg(canal, i, in);
+                System.out.println(in.mostrar());
+
+            }
+        } catch (IOException e) {
+            System.out.println("Error en el archivo");
+        }
+    }
+
+    public int modificaciones(RandomAccessFile canal) {
+        return 1;
+    }
+
+    public void ordenar(RandomAccessFile canal) {
+        try {
+            Inscripcion in2 = new Inscripcion();
+            System.out.println("Seleccione tipo de ordenamiento\n1) Numero de control\n2) Clave de materia");
+            byte opc=sc.nextByte();
+            if (opc==1)
+                for (int pas = 1; pas < (int) (canal.length()) / tr; pas++) {
+                    for (int co = 1; co <= ((int) (canal.length() / tr) - pas); co++) {
+                        leerReg(canal, co - 1, in);
+                        leerReg(canal, co, in2);
+                        if (in.nroCtrl.compareTo(in2.nroCtrl) > 0) {
+                            grabarReg(canal, co - 1, in2);
+                            grabarReg(canal, co, in2);
+                        }
+                    }
+                }
+            else
+                for (int pas = 1; pas < (int) (canal.length()) / tr; pas++) {
+                    for (int co = 1; co <= ((int) (canal.length() / tr) - pas); co++) {
+                        leerReg(canal, co - 1, in);
+                        leerReg(canal, co, in2);
+                        if (in.cve.compareTo(in2.cve) > 0) {
+                            grabarReg(canal, co - 1, in2);
+                            grabarReg(canal, co, in2);
+                        }
+                    }
+                }
+        } catch (IOException e) {
+            System.out.println("Error en el archivo");
+        }
+    }
 }

@@ -1,4 +1,4 @@
-package ProyectoBeni;
+package inicioarchivos;
 /**@author markb*/
 
 
