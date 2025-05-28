@@ -1,4 +1,4 @@
-package proyecto.Final;
+package ProyectoBeni;
 /**@author markb*/
 
 import javax.swing.*;
@@ -106,7 +106,6 @@ public class Ventana extends javax.swing.JFrame {
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(900, 600));
         setName("Registro de Alumnos"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(900, 600));
         getContentPane().setLayout(new java.awt.BorderLayout(10, 10));
 
         pnlTODO.setBackground(new java.awt.Color(255, 255, 255));
@@ -499,7 +498,7 @@ public class Ventana extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void moreComponents(){
-        DukeInicio=new ImageIcon(Objects.requireNonNull(getClass().getResource("/proyecto/Final/Duke.png")));
+        DukeInicio=new ImageIcon(Objects.requireNonNull(getClass().getResource("/ProyectoBeni/Duke.png")));
         Image image = DukeInicio.getImage();
         Image duke = image.getScaledInstance(60,100,Image.SCALE_SMOOTH);
         DukeInicio = new ImageIcon(duke);
