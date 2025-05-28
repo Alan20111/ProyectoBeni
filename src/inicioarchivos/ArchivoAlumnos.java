@@ -20,7 +20,6 @@ public class ArchivoAlumnos extends Archivos {
     public void altas(RandomAccessFile canal) {
         System.out.println("Seguimiento de altas");
         try {
-            
             al.capturar();
             int reg = (int) canal.length() / tr;
             grabarReg(canal, reg, al);

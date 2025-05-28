@@ -697,7 +697,7 @@ public class Ventana extends javax.swing.JFrame {
                 b = txtCNombre.getText().isEmpty(),
                 c = txtCSemestre.getText().isEmpty();
         if (!b & !c & !a) {
-            obArch.altas(obArch.canal);
+            obAlumnos.altas(obAlumnos.canal);
             
             /*text = String.format("%8s | %-40s | %2d", txtCNoCtrl.getText(), txtCNombre.getText(), Integer.valueOf(txtCSemestre.getText())) + "\n";*/
             JOptionPane.showMessageDialog(rootPane, "Almuno Agregado", "Notificación", JOptionPane.INFORMATION_MESSAGE);
