@@ -1,8 +1,6 @@
 package inicioarchivos;
+/**@author markb*/
 
-/**
- * @author markb
- */
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -16,42 +14,13 @@ import java.util.logging.Logger;
 import static inicioarchivos.InicioArchivos.obAlumnos;
 import static inicioarchivos.InicioArchivos.obInscripciones;
 import static inicioarchivos.InicioArchivos.obMaterias;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class Ventana extends javax.swing.JFrame {
 
     public Ventana() {
-        this.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent p_evt) {
-                m_preCerrar();
-            }
-        }
-        );
         moreComponents();
         initComponents();
         evenmoreComponents();
-    }
-
-    private void m_preCerrar() {
-        JOptionPane.showMessageDialog(rootPane, "Hasta luego!", "Despedida", JOptionPane.INFORMATION_MESSAGE);
-        try {
-            obAlumnos.canal.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            obMaterias.canal.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            obInscripciones.canal.close();
-            obInscripciones.canal1.close();
-            obInscripciones.canal2.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**
@@ -259,38 +228,16 @@ public class Ventana extends javax.swing.JFrame {
         pnlATabla.setEnabled(false);
         pnlATabla.setLayout(new java.awt.BorderLayout(10, 10));
 
-        jTAlumnos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "No. Control", "Nombre", "Semestre", "Creditos", "Acción"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Byte.class, java.lang.Byte.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        jTAlumnos.setModel(jTAlumnos.getModel());
         jTAlumnos.setColumnSelectionAllowed(true);
         jScrollPane2.setViewportView(jTAlumnos);
         jTAlumnos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         if (jTAlumnos.getColumnModel().getColumnCount() > 0) {
-            jTAlumnos.getColumnModel().getColumn(0).setResizable(false);
-            jTAlumnos.getColumnModel().getColumn(1).setResizable(false);
-            jTAlumnos.getColumnModel().getColumn(2).setResizable(false);
-            jTAlumnos.getColumnModel().getColumn(3).setResizable(false);
-            jTAlumnos.getColumnModel().getColumn(4).setResizable(false);
+            jTAlumnos.getColumnModel().getColumn(0).setHeaderValue("No. Control");
+            jTAlumnos.getColumnModel().getColumn(1).setHeaderValue("Nombre");
+            jTAlumnos.getColumnModel().getColumn(2).setHeaderValue("Semestre");
+            jTAlumnos.getColumnModel().getColumn(3).setHeaderValue("Creditos");
+            jTAlumnos.getColumnModel().getColumn(4).setHeaderValue("Acción");
         }
 
         pnlATabla.add(jScrollPane2, java.awt.BorderLayout.CENTER);
@@ -643,15 +590,14 @@ public class Ventana extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void moreComponents() {
-        DukeInicio = new ImageIcon(Objects.requireNonNull(getClass().getResource("/inicioarchivos/Duke.png")));
+    private void moreComponents(){
+        DukeInicio=new ImageIcon(Objects.requireNonNull(getClass().getResource("/inicioarchivos/Duke.png")));
         Image image = DukeInicio.getImage();
-        Image duke = image.getScaledInstance(60, 100, Image.SCALE_SMOOTH);
+        Image duke = image.getScaledInstance(60,100,Image.SCALE_SMOOTH);
         DukeInicio = new ImageIcon(duke);
     }
-
-    private void evenmoreComponents() {
-        DefaultTableModel Talum = new DefaultTableModel();
+    private void evenmoreComponents(){
+        DefaultTableModel Talum = new  DefaultTableModel();
         jTAlumnos.setModel(Talum);
 
         try (BufferedReader br = new BufferedReader(new FileReader("alumnos.dat"))) {
@@ -682,11 +628,11 @@ public class Ventana extends javax.swing.JFrame {
         CardLayout.show(pnlTODO, "card2");
     }//GEN-LAST:event_mostrarMInicio
 
-    private void mostrarMAlumno(java.awt.event.MouseEvent evt) {
+    private void mostrarMAlumno(java.awt.event.MouseEvent evt) {                                 
         // MOSTRAR Menu Alumno
         CardLayout = (CardLayout) pnlTODO.getLayout();
         CardLayout.show(pnlTODO, "card3");
-    }
+    }                                
 
     private void mostrarMMateria(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarMMateria
         // MOSTRAR Menu Alumno
@@ -725,7 +671,24 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_AgregarMateria
 
     private void salir(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salir
-
+        JOptionPane.showMessageDialog(rootPane, "Hasta luego!", "Despedida", JOptionPane.INFORMATION_MESSAGE); 
+        try {
+            obAlumnos.canal.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            obMaterias.canal.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            obInscripciones.canal.close();
+            obInscripciones.canal1.close();
+            obInscripciones.canal2.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
         dispose();
     }//GEN-LAST:event_salir
 
@@ -734,21 +697,19 @@ public class Ventana extends javax.swing.JFrame {
                 b = txtCNombre.getText().isEmpty(),
                 c = txtCSemestre.getText().isEmpty();
         if (!b & !c & !a) {
-            obAlumnos.altas(obAlumnos.canal,
-                    txtCNoCtrl.getText(),
-                    txtCNombre.getText(),
-                    Byte.parseByte(txtCSemestre.getText()));
-            /*text = String.format("%8s | %-40s | %2d", txtCNoCtrl.getText(), txtCNombre.getText(), Integer.valueOf(txtCSemestre.getText())) + "\n";*/
+            obAlumnos.altas(obAlumnos.canal);
             
+            /*text = String.format("%8s | %-40s | %2d", txtCNoCtrl.getText(), txtCNombre.getText(), Integer.valueOf(txtCSemestre.getText())) + "\n";*/
+            JOptionPane.showMessageDialog(rootPane, "Almuno Agregado", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             txtCNoCtrl.setText(null);
             txtCNombre.setText(null);
             txtCSemestre.setText(null);
             btnCAgregar.setEnabled(true);
         } else {
             if (a & b & c) {
-                JOptionPane.showMessageDialog(null, "Ingrese un alumno", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(rootPane, "Ingrese un alumno", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "Faltan datos por agregar", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(rootPane, "Faltan datos por agregar", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_AgregarAlumno
@@ -765,14 +726,14 @@ public class Ventana extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-
+                        
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -795,7 +756,7 @@ public class Ventana extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Ventana().setVisible(true);
-
+                
             }
         });
     }

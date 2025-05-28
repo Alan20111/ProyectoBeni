@@ -4,16 +4,13 @@ class Alumno
 {
     String nroCtrl,nom;
     byte sem;
-    void capturar(String nroCtrl, String nom, byte sem)
+    void capturar()
     {
         boolean flag=true;
         do
         {
             try
             {
-                this.nroCtrl=nroCtrl;
-                this.nom=nom;
-                this.sem=sem;
                 flag=false;
             }
             catch(java.util.InputMismatchException e)
