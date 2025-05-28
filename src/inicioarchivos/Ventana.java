@@ -4,7 +4,9 @@ package inicioarchivos;
  * @author markb
  */
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
@@ -30,7 +32,6 @@ public class Ventana extends javax.swing.JFrame {
         );
         moreComponents();
         initComponents();
-        evenmoreComponents();
     }
 
     private void m_preCerrar() {
@@ -85,8 +86,7 @@ public class Ventana extends javax.swing.JFrame {
         pnlATabla = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTAlumnos = new javax.swing.JTable();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        btnAActualizar = new javax.swing.JButton();
         pnlAOpciones = new javax.swing.JPanel();
         pnlCrearA = new javax.swing.JPanel();
         pnlCrearAData = new javax.swing.JPanel();
@@ -116,6 +116,7 @@ public class Ventana extends javax.swing.JFrame {
         pnlMTabla = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        btnMActualizar = new javax.swing.JButton();
         pnlCrearM = new javax.swing.JPanel();
         pnlCrearMData = new javax.swing.JPanel();
         CNoCrtl1 = new javax.swing.JPanel();
@@ -261,18 +262,20 @@ public class Ventana extends javax.swing.JFrame {
         pnlATabla.setEnabled(false);
         pnlATabla.setLayout(new java.awt.BorderLayout(10, 10));
 
-        jTAlumnos.setModel(jTAlumnos.getModel());
         jTAlumnos.setColumnSelectionAllowed(true);
+        jTAlumnos.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTAlumnos);
-        jTAlumnos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jTAlumnos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         pnlATabla.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        pnlATabla.add(jScrollPane1, java.awt.BorderLayout.SOUTH);
+        btnAActualizar.setText("Actualizar Tabla");
+        btnAActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AActualizarTabla(evt);
+            }
+        });
+        pnlATabla.add(btnAActualizar, java.awt.BorderLayout.PAGE_END);
 
         pnlAMain.add(pnlATabla, java.awt.BorderLayout.CENTER);
 
@@ -385,10 +388,10 @@ public class Ventana extends javax.swing.JFrame {
 
         pnlMaterias.add(pnlMTitulo, java.awt.BorderLayout.NORTH);
 
-        pnlMMain.setLayout(new java.awt.BorderLayout(5, 5));
+        pnlMMain.setLayout(new java.awt.BorderLayout(10, 10));
 
         pnlMTabla.setEnabled(false);
-        pnlMTabla.setLayout(new java.awt.BorderLayout());
+        pnlMTabla.setLayout(new java.awt.BorderLayout(10, 10));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -424,6 +427,14 @@ public class Ventana extends javax.swing.JFrame {
         }
 
         pnlMTabla.add(jScrollPane3, java.awt.BorderLayout.CENTER);
+
+        btnMActualizar.setText("Actualizar Tabla");
+        btnMActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMActualizarActionPerformed(evt);
+            }
+        });
+        pnlMTabla.add(btnMActualizar, java.awt.BorderLayout.PAGE_END);
 
         pnlMMain.add(pnlMTabla, java.awt.BorderLayout.CENTER);
 
@@ -636,23 +647,19 @@ public class Ventana extends javax.swing.JFrame {
         Image duke = image.getScaledInstance(60, 100, Image.SCALE_SMOOTH);
         DukeInicio = new ImageIcon(duke);
     }
-
-    private void evenmoreComponents() {
-        DefaultTableModel Talum = new DefaultTableModel();
-        jTAlumnos.setModel(Talum);
-        jTAlumnos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        if (jTAlumnos.getColumnModel().getColumnCount() > 0) {
-            jTAlumnos.getColumnModel().getColumn(0).setHeaderValue("No. Control");
-            jTAlumnos.getColumnModel().getColumn(1).setHeaderValue("Nombre");
-            jTAlumnos.getColumnModel().getColumn(2).setHeaderValue("Semestre");
-            jTAlumnos.getColumnModel().getColumn(3).setHeaderValue("Creditos");
-            jTAlumnos.getColumnModel().getColumn(4).setHeaderValue("Acción");
-        }
-
-        try (BufferedReader br = new BufferedReader(new FileReader("alumnos.dat"))) {
+    
+    private void tableComponents(JTable Tabla, String Archivo){
+        Tabla.setModel(new javax.swing.table.DefaultTableModel());
+        Tabla.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        model.addColumn("No. Control");
+        
+        model.addColumn("Nombre");
+        model.addColumn("Semestre");
+        
+        try (BufferedReader bro = new BufferedReader(new FileReader(Archivo))) {
             String line;
-            while ((line = br.readLine()) != null) {
-                Talum.addRow(line.split(" ")); // Adjust delimiter as needed
+            while ((line = bro.readLine()) != null) {
+                model.addRow(line.split(" "));
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -759,6 +766,14 @@ public class Ventana extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BuscarAlumno
 
+    private void AActualizarTabla(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AActualizarTabla
+        tableComponents(jTAlumnos, "alumnos.dat");
+    }//GEN-LAST:event_AActualizarTabla
+
+    private void btnMActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMActualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMActualizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -819,10 +834,12 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel LINombreM;
     private javax.swing.JPanel Opciones;
     private javax.swing.ButtonGroup btgOpciones;
+    private javax.swing.JButton btnAActualizar;
     private javax.swing.JButton btnCAgregar;
     private javax.swing.JButton btnCAgregar1;
     private javax.swing.JButton btnCAgregar2;
     private javax.swing.JButton btnCAgregar3;
+    private javax.swing.JButton btnMActualizar;
     private javax.swing.JButton btnNReporte;
     javax.swing.JButton btnSalir;
     private javax.swing.Box.Filler filler1;
@@ -840,14 +857,12 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     javax.swing.JTable jTAlumnos;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblBNoCtrl;
     private javax.swing.JLabel lblBNombre;
     private javax.swing.JMenu menAlumno;
@@ -897,5 +912,6 @@ public class Ventana extends javax.swing.JFrame {
     // Extra variables @m
     java.awt.CardLayout CardLayout;
     javax.swing.ImageIcon DukeInicio;
+    DefaultTableModel model;
     // End of extra variables @m
 }
