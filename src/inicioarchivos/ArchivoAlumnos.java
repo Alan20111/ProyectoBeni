@@ -1,6 +1,7 @@
 package inicioarchivos;
 import java.io.*;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 public class ArchivoAlumnos extends Archivos {
     Alumno al = new Alumno();
     Scanner sc = new Scanner(System.in);
@@ -18,14 +19,13 @@ public class ArchivoAlumnos extends Archivos {
 
     @Override
     public void altas(RandomAccessFile canal, String noCtrl, String nom, byte sem) {
-        System.out.println("Seguimiento de altas");
         try {
-            
             al.capturar(noCtrl, nom, sem);
             int reg = (int) canal.length() / tr;
             grabarReg(canal, reg, al);
+            JOptionPane.showMessageDialog(null, "Almuno Agregado", "Notificación", JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException e) {
-            System.out.println("Error en el archivo");
+            JOptionPane.showMessageDialog(null, "Almuno no Agregado", "Notificación", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
