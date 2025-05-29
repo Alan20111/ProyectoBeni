@@ -13,10 +13,13 @@ public class ModificarVen extends JFrame
 {
     String lA, lB, lC;
     String dA, dB, dC;
+    int row;
+    Ventana ven=new Ventana();
     
-    public ModificarVen(String lA, String lB, String lC, String dA, String dB, String dC) 
+    public ModificarVen(String lA, String lB, String lC, String dA, String dB, String dC, int row) 
     {
         setValues(lA, lB, lC, dA, dB, dC);
+        this.row=row;
         initComponents();
     }
     
@@ -126,14 +129,15 @@ public class ModificarVen extends JFrame
         this.dA = dA;
         this.dB = dB;
         this.dC = dC;
+        
     }
     
     private void modificarAl(){
-        obAlumnos.modificaciones(obAlumnos.canal, 0, txtDatoA.getText(), txtDatoB.getText(), Byte.parseByte(txtDatoC.getText()));
+        obAlumnos.modificaciones(obAlumnos.canal, row, txtDatoA.getText(), txtDatoB.getText(), Byte.parseByte(txtDatoC.getText()));
     }
     
     private void modificarMat(){
-        obMaterias.modificaciones(obMaterias.canal, 0, txtDatoA.getText(), txtDatoB.getText(), Byte.parseByte(txtDatoC.getText()));
+        obMaterias.modificaciones(obMaterias.canal, row, txtDatoA.getText(), txtDatoB.getText(), Byte.parseByte(txtDatoC.getText()));
     }
     
     private void cancelar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelar
@@ -165,7 +169,7 @@ public class ModificarVen extends JFrame
     }//GEN-LAST:event_modificar
 
     public static void main(String args[]) {
-        ModificarVen mv = new ModificarVen("a", "b", "c", "d","e","f");
+        ModificarVen mv = new ModificarVen("a", "b", "c", "d","e","f", 0);
         mv.setVisible(true);
     }
 

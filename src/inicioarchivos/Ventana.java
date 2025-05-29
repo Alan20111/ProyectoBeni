@@ -69,8 +69,10 @@ class BotonTabla extends AbstractCellEditor implements TableCellRenderer, TableC
         a_tabla.getColumnName(2),
         a_tabla.getValueAt(v_fila, 0).toString(),
         a_tabla.getValueAt(v_fila, 1).toString(),
-        a_tabla.getValueAt(v_fila, 2).toString());
+        a_tabla.getValueAt(v_fila, 2).toString(),
+        a_tabla.getSelectedRow());
         mod.setVisible(true);
+        
         fireEditingStopped();
     }
 }
