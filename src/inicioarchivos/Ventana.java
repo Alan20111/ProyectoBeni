@@ -37,13 +37,13 @@ public class Ventana extends javax.swing.JFrame {
         initComponents();
     }
 
-    void TablaModelo(JTable Tabla, JPanel Info) {
-        TablaModelo.addColumn("No. Ctrl");
-        TablaModelo.addColumn("Nombre");
-        TablaModelo.addColumn("Semestre");
+    void TablaModelo(JTable Tabla, Object x, String a, String b, String c) {
+        TablaModelo.addColumn(a);
+        TablaModelo.addColumn(b);
+        TablaModelo.addColumn(c);
         TablaModelo.addColumn("Acciones");
 
-        TableAlumnos.setModel(TablaModelo);
+        Tabla.setModel(TablaModelo);
         ArchivoAlumnos obAlumnosHijo = (ArchivoAlumnos) obAlumnos;
         try {
             int i = 0;
