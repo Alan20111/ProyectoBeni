@@ -1,8 +1,11 @@
 package inicioarchivos;
+
 import java.io.*;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
+
 public class ArchivoAlumnos extends Archivos {
+
     Alumno al = new Alumno();
     Scanner sc = new Scanner(System.in);
     final int tr = 53;
@@ -47,8 +50,7 @@ public class ArchivoAlumnos extends Archivos {
     }
 
     @Override
-    public int busqueda(RandomAccessFile canal, String bus)
-    {
+    public int busqueda(RandomAccessFile canal, String bus) {
         ordenar(canal);
         if (bus.isEmpty()) {
             System.out.println("Ingresa busqueda");
@@ -61,10 +63,11 @@ public class ArchivoAlumnos extends Archivos {
             do {
                 pm = (li + ls) / 2;
                 leerReg(canal, pm, al);
-                if (al.nroCtrl.compareTo(bus) < 0)
+                if (al.nroCtrl.compareTo(bus) < 0) {
                     li = pm + 1;
-                else
+                } else {
                     ls = pm - 1;
+                }
             } while (!bus.equals(al.nroCtrl) && li <= ls);
             if (bus.equals(al.nroCtrl)) {
                 System.out.println("Se ha encontrado el número de control\n" + al.mostrar());

@@ -7,8 +7,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -38,11 +36,12 @@ public class Ventana extends javax.swing.JFrame {
         );
         moreComponents();
         initComponents();
-        //TablaModelo(TableAlumnos,"No.Control","Nombre","Semestre",'A');
+        TablaModelo(TableAlumnos, "No.Control", "Nombre", "Semestre", 'A');
 
     }
 
-    void TablaModelo(JTable Tabla, String a, String b, String c, char op) {
+    public void TablaModelo(JTable Tabla, String a, String b, String c, char op) {
+        DefaultTableModel TablaModelo = new DefaultTableModel();
         TablaModelo.addColumn(a);
         TablaModelo.addColumn(b);
         TablaModelo.addColumn(c);
@@ -87,7 +86,7 @@ public class Ventana extends javax.swing.JFrame {
                     while ((obInscripciones.canal.length() / 53) > i) {
                         System.out.println(i);
                         obInscripcionesHijo.leerReg(obInscripciones.canal, i, obInscripcion);
-                        TablaModelo.addRow(new Object[]{obInscripcion.nroCtrl, obInscripcion.cve,"", ""});
+                        TablaModelo.addRow(new Object[]{obInscripcion.nroCtrl, obInscripcion.cve, "", ""});
                         i++;
                     }
                 } catch (IOException e) {
@@ -151,7 +150,6 @@ public class Ventana extends javax.swing.JFrame {
         pnlATabla = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TableAlumnos = new javax.swing.JTable();
-        btnAActualizar = new javax.swing.JButton();
         pnlAOpciones = new javax.swing.JPanel();
         pnlCrearA = new javax.swing.JPanel();
         pnlCrearAData = new javax.swing.JPanel();
@@ -329,14 +327,6 @@ public class Ventana extends javax.swing.JFrame {
         TableAlumnos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         pnlATabla.add(jScrollPane2, java.awt.BorderLayout.CENTER);
-
-        btnAActualizar.setText("Actualizar Tabla");
-        btnAActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AActualizar(evt);
-            }
-        });
-        pnlATabla.add(btnAActualizar, java.awt.BorderLayout.PAGE_END);
 
         pnlAMain.add(pnlATabla, java.awt.BorderLayout.CENTER);
 
@@ -715,8 +705,6 @@ public class Ventana extends javax.swing.JFrame {
 
     private void mostrarMAlumno(java.awt.event.MouseEvent evt) {
         // MOSTRAR Menu Alumno
-                TablaModelo(TableAlumnos,"No.Control","Nombre","Semestre",'A');
-
         CardLayout = (CardLayout) pnlTODO.getLayout();
         CardLayout.show(pnlTODO, "card3");
     }
@@ -768,9 +756,7 @@ public class Ventana extends javax.swing.JFrame {
                     txtCNombre.getText(),
                     Byte.parseByte(txtCSemestre.getText()))) {
             }
-
-            System.out.print(String.format("%8s | %-40s | %2d", txtCNoCtrl.getText(), txtCNombre.getText(), Integer.valueOf(txtCSemestre.getText())) + "\n");
-
+            TablaModelo(TableAlumnos, "No.Control", "Nombre", "Semestre", 'A');
             txtCNoCtrl.setText(null);
             txtCNombre.setText(null);
             txtCSemestre.setText(null);
@@ -805,10 +791,6 @@ public class Ventana extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ingrese un alumno", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_BuscarAlumno
-
-    private void AActualizar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AActualizar
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AActualizar
 
     private void MActualizar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MActualizar
         // TODO add your handling code here:
@@ -876,7 +858,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTable TableInscripciones;
     private javax.swing.JTable TableMaterias;
     private javax.swing.ButtonGroup btgOpciones;
-    private javax.swing.JButton btnAActualizar;
     private javax.swing.JButton btnCAgregar;
     private javax.swing.JButton btnCAgregar1;
     private javax.swing.JButton btnCAgregar2;
