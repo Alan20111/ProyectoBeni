@@ -58,7 +58,7 @@ class BotonTabla extends AbstractCellEditor implements TableCellRenderer, TableC
         switch (a_tipoTabla) {
             case "A" ->
                 v_info = "Alumno con ID: " + a_tabla.getValueAt(v_fila, 0);
-                
+
             case "M" ->
                 v_info = "Materia con clave: " + a_tabla.getValueAt(v_fila, 0);
             case "I" ->
@@ -77,6 +77,8 @@ public class Ventana extends javax.swing.JFrame {
     Alumno obAlumno = new Alumno();
     Materia obMateria = new Materia();
     Inscripcion obInscripcion = new Inscripcion();
+    ArchivoAlumnos obAlumnosHijo = (ArchivoAlumnos) obAlumnos;
+    ArchivoMaterias obMateriasHijo = (ArchivoMaterias) obMaterias;
 
     DefaultTableModel TablaModelo = new DefaultTableModel();
 
@@ -110,7 +112,6 @@ public class Ventana extends javax.swing.JFrame {
                 v_colAccion.setCellRenderer(new BotonTabla(Tabla, "A"));
                 v_colAccion.setCellEditor(new BotonTabla(Tabla, "A"));
 
-                ArchivoAlumnos obAlumnosHijo = (ArchivoAlumnos) obAlumnos;
                 try {
                     int i = 0;
                     while ((obAlumnos.canal.length() / 53) > i) {
@@ -129,7 +130,6 @@ public class Ventana extends javax.swing.JFrame {
                 v_colAccion.setCellRenderer(new BotonTabla(Tabla, "M"));
                 v_colAccion.setCellEditor(new BotonTabla(Tabla, "M"));
 
-                ArchivoMaterias obMateriasHijo = (ArchivoMaterias) obMaterias;
                 try {
                     int i = 0;
                     while ((obMaterias.canal.length() / 37) > i) {
