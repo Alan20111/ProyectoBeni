@@ -244,7 +244,6 @@ public class Ventana extends javax.swing.JFrame {
         pnlMTabla = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         TableMaterias = new javax.swing.JTable();
-        btnMActualizar = new javax.swing.JButton();
         pnlCrearM = new javax.swing.JPanel();
         pnlCrearMData = new javax.swing.JPanel();
         CNoCrtl1 = new javax.swing.JPanel();
@@ -545,14 +544,6 @@ public class Ventana extends javax.swing.JFrame {
         }
 
         pnlMTabla.add(jScrollPane3, java.awt.BorderLayout.CENTER);
-
-        btnMActualizar.setText("Actualizar Tabla");
-        btnMActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MActualizar(evt);
-            }
-        });
-        pnlMTabla.add(btnMActualizar, java.awt.BorderLayout.PAGE_END);
 
         pnlMMain.add(pnlMTabla, java.awt.BorderLayout.CENTER);
 
@@ -891,10 +882,6 @@ public class Ventana extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BuscarAlumno
 
-    private void MActualizar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MActualizar
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MActualizar
-
     private void txtCNombreMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCNombreMActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCNombreMActionPerformed
@@ -970,7 +957,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton btnCAgregar1;
     private javax.swing.JButton btnCAgregar2;
     private javax.swing.JButton btnCAgregar3;
-    private javax.swing.JButton btnMActualizar;
     private javax.swing.JButton btnNReporte;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler8;
