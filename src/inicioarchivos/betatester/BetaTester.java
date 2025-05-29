@@ -15,8 +15,7 @@ public class BetaTester
     
     public void initComponents()
     {
-        ven = new JFrame();
-        ven.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ven = new JFrame("Easter Egg");
         ven.setAlwaysOnTop(true);
         ven.setSize(300,300);
         ven.setVisible(true);

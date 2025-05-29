@@ -22,9 +22,9 @@ import java.awt.event.WindowEvent;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import inicioarchivos.betatester.*;
 
 class BotonTabla extends AbstractCellEditor implements TableCellRenderer, TableCellEditor, ActionListener {
-
     JButton a_boton;
     JTable a_tabla;
     String a_tipoTabla;
@@ -35,22 +35,18 @@ class BotonTabla extends AbstractCellEditor implements TableCellRenderer, TableC
         a_boton = new JButton("Editar");
         a_boton.addActionListener(this);
     }
-
     @Override
     public Object getCellEditorValue() {
         return "Editar";
     }
-
     @Override
     public Component getTableCellRendererComponent(JTable p_tabla, Object p_valor, boolean p_sel, boolean p_foco, int p_fila, int p_col) {
         return a_boton;
     }
-
     @Override
     public Component getTableCellEditorComponent(JTable p_tabla, Object p_valor, boolean p_sel, int p_fila, int p_col) {
         return a_boton;
     }
-
     @Override
     public void actionPerformed(ActionEvent p_evt) {
         int v_fila = a_tabla.getSelectedRow();
@@ -67,8 +63,8 @@ class BotonTabla extends AbstractCellEditor implements TableCellRenderer, TableC
                 v_info = "Tabla desconocida ";
                 break;
         }
-
-        JOptionPane.showMessageDialog(null, "Editando " + v_info + " en fila: " + v_fila);
+        ModificarVen mod = new ModificarVen();
+        mod.setVisible(true);
         fireEditingStopped();
     }
 }
@@ -899,6 +895,7 @@ public class Ventana extends javax.swing.JFrame {
 
     private void EasterEgg(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EasterEgg
         JOptionPane.showMessageDialog(rootPane, "Funciona");
+        BetaTester bt=new BetaTester();
     }//GEN-LAST:event_EasterEgg
 
     /**
