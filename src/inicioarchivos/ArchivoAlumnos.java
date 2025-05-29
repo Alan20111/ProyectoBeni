@@ -21,10 +21,9 @@ public class ArchivoAlumnos extends Archivos {
     }
 
     @Override
-    public boolean altas(RandomAccessFile canal, String noCtrl, String nom, byte sem) {
-        System.out.println("Seguimiento de altas");
+    public boolean altas(RandomAccessFile canal, String a, String b, byte c) {
         try {
-            al.capturar(noCtrl, nom, sem);
+            al.capturar(a, b, c);
             int reg = (int) canal.length() / tr;
             grabarReg(canal, reg, al);
             JOptionPane.showMessageDialog(null, "Almuno Agregado", "Notificación", JOptionPane.INFORMATION_MESSAGE);

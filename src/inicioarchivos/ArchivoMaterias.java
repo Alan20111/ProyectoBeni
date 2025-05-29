@@ -1,6 +1,7 @@
 package inicioarchivos;
 import java.util.Scanner;
 import java.io.*;
+import javax.swing.JOptionPane;
 public class ArchivoMaterias extends Archivos {
     Materia ma = new Materia();
     Scanner sc = new Scanner(System.in);
@@ -18,11 +19,11 @@ public class ArchivoMaterias extends Archivos {
 
     @Override
     public boolean altas(RandomAccessFile canal, String a, String b, byte c) {
-        System.out.println("Seguimiento de altas");
         try {
-            ma.capturar();
+            ma.capturar(a,b,c);
             int reg = (int) canal.length() / tr;
             grabarReg(canal, reg, ma);
+            JOptionPane.showMessageDialog(null, "Materia Agregada", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return true;
         } catch (IOException e) {
             System.out.println("Error en el archivo");
@@ -87,7 +88,7 @@ public class ArchivoMaterias extends Archivos {
         if (n == -1) {
             return -1;
         }
-        ma.capturar();
+        ma.capturar(a,b,c);
         grabarReg(canal, n, ma);
         return 0;
     }

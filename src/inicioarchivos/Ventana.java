@@ -37,7 +37,8 @@ public class Ventana extends javax.swing.JFrame {
         moreComponents();
         initComponents();
         TablaModelo(TableAlumnos, "No.Control", "Nombre", "Semestre", 'A');
-
+        TablaModelo(TableMaterias, "No.Clave", "Nombre", "Creditos", 'M');
+        TablaModelo(TableInscripciones, "No.Control", "No.Clave", "", 'I');
     }
 
     public void TablaModelo(JTable Tabla, String a, String b, String c, char op) {
@@ -68,7 +69,7 @@ public class Ventana extends javax.swing.JFrame {
                 ArchivoMaterias obMateriasHijo = (ArchivoMaterias) obMaterias;
                 try {
                     int i = 0;
-                    while ((obMaterias.canal.length() / 53) > i) {
+                    while ((obMaterias.canal.length() / 37) > i) {
                         System.out.println(i);
                         obMateriasHijo.leerReg(obMaterias.canal, i, obMateria);
                         TablaModelo.addRow(new Object[]{obMateria.cve, obMateria.nom, obMateria.cred, ""});
@@ -505,6 +506,11 @@ public class Ventana extends javax.swing.JFrame {
         CNombre1.add(LCNombreM, java.awt.BorderLayout.NORTH);
 
         txtCNombreM.setColumns(35);
+        txtCNombreM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCNombreMActionPerformed(evt);
+            }
+        });
         CNombre1.add(txtCNombreM, java.awt.BorderLayout.CENTER);
 
         pnlCrearMData.add(CNombre1);
@@ -743,7 +749,27 @@ public class Ventana extends javax.swing.JFrame {
 
     //BOTONES DE MAS
     private void AgregarMateria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarMateria
-        // TODO add your handling code here:
+        boolean a = txtCClave.getText().isEmpty(),
+                b = txtCNombreM.getText().isEmpty(),
+                c = txtCCreditos.getText().isEmpty();
+        if (!b & !c & !a) {
+            if (obMaterias.altas(obMaterias.canal,
+                    txtCClave.getText(),
+                    txtCNombreM.getText(),
+                    Byte.parseByte(txtCCreditos.getText()))) 
+            TablaModelo(TableMaterias, "No.Clave", "Nombre", "Creditos", 'M');
+
+            txtCClave.setText(null);
+            txtCNombreM.setText(null);
+            txtCCreditos.setText(null);
+            btnCAgregar.setEnabled(true);
+        } else {
+            if (a & b & c) {
+                JOptionPane.showMessageDialog(null, "Ingrese una Materia", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Faltan datos por agregar", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_AgregarMateria
 
     private void AgregarAlumno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarAlumno
@@ -754,8 +780,7 @@ public class Ventana extends javax.swing.JFrame {
             if (obAlumnos.altas(obAlumnos.canal,
                     txtCNoCtrl.getText(),
                     txtCNombre.getText(),
-                    Byte.parseByte(txtCSemestre.getText()))) {
-            }
+                    Byte.parseByte(txtCSemestre.getText())))
             TablaModelo(TableAlumnos, "No.Control", "Nombre", "Semestre", 'A');
             txtCNoCtrl.setText(null);
             txtCNombre.setText(null);
@@ -795,6 +820,10 @@ public class Ventana extends javax.swing.JFrame {
     private void MActualizar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MActualizar
         // TODO add your handling code here:
     }//GEN-LAST:event_MActualizar
+
+    private void txtCNombreMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCNombreMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCNombreMActionPerformed
 
     /**
      * @param args the command line arguments
