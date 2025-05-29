@@ -18,15 +18,17 @@ public class ArchivoAlumnos extends Archivos {
     }
 
     @Override
-    public void altas(RandomAccessFile canal, String noCtrl, String nom, byte sem) {
+    public boolean altas(RandomAccessFile canal, String noCtrl, String nom, byte sem) {
         System.out.println("Seguimiento de altas");
         try {
             al.capturar(noCtrl, nom, sem);
             int reg = (int) canal.length() / tr;
             grabarReg(canal, reg, al);
             JOptionPane.showMessageDialog(null, "Almuno Agregado", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+            return true;
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Almuno no Agregado", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+            return false;
         }
     }
 

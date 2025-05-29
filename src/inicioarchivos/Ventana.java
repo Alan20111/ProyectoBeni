@@ -720,10 +720,12 @@ public class Ventana extends javax.swing.JFrame {
                 b = txtCNombre.getText().isEmpty(),
                 c = txtCSemestre.getText().isEmpty();
         if (!b & !c & !a) {
-            obAlumnos.altas(obAlumnos.canal,
+            if (obAlumnos.altas(obAlumnos.canal,
                     txtCNoCtrl.getText(),
                     txtCNombre.getText(),
-                    Byte.parseByte(txtCSemestre.getText()));
+                    Byte.parseByte(txtCSemestre.getText()))) {
+            }
+            
             System.out.print(String.format("%8s | %-40s | %2d", txtCNoCtrl.getText(), txtCNombre.getText(), Integer.valueOf(txtCSemestre.getText())) + "\n");
 
             txtCNoCtrl.setText(null);

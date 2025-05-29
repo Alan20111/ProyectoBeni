@@ -46,7 +46,7 @@ public class ArchivoInscripciones extends Archivos {
         } while (opc != 3);
     }
 
-    public void altas(RandomAccessFile canal, String a, String b, byte c) {
+    public boolean altas(RandomAccessFile canal, String a, String b, byte c) {
         try {
             int n;
             char opc = 0, sel = 0;
@@ -62,7 +62,7 @@ public class ArchivoInscripciones extends Archivos {
                 }
             } while (n == -1 && opc == 'y');
             if (opc == 'n') {
-                return;
+                return false;
             }
             al = new Alumno();
             archAl.leerReg(canal1, n, al);
@@ -87,9 +87,11 @@ public class ArchivoInscripciones extends Archivos {
                     sel = sc.next().charAt(0);
                 }
             } while (opc == 'y' || sel == 'y');
+            return true;
         }
         catch (IOException e) {
             System.out.println("| Error en el archivo");
+            return false;
         }
     }
 

@@ -17,14 +17,16 @@ public class ArchivoMaterias extends Archivos {
     }
 
     @Override
-    public void altas(RandomAccessFile canal, String a, String b, byte c) {
+    public boolean altas(RandomAccessFile canal, String a, String b, byte c) {
         System.out.println("Seguimiento de altas");
         try {
             ma.capturar();
             int reg = (int) canal.length() / tr;
             grabarReg(canal, reg, ma);
+            return true;
         } catch (IOException e) {
             System.out.println("Error en el archivo");
+            return false;
         }
     }
 
