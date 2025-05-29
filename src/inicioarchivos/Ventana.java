@@ -347,6 +347,11 @@ public class Ventana extends javax.swing.JFrame {
 
         Duke.setIcon(DukeInicio);
         Duke.setAlignmentX(0.5F);
+        Duke.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EasterEgg(evt);
+            }
+        });
         Opciones.add(Duke);
 
         pnlInicio.add(Opciones, java.awt.BorderLayout.CENTER);
@@ -754,7 +759,7 @@ public class Ventana extends javax.swing.JFrame {
     private void moreComponents() {
         DukeInicio = new ImageIcon(Objects.requireNonNull(getClass().getResource("/inicioarchivos/Duke.png")));
         Image image = DukeInicio.getImage();
-        Image duke = image.getScaledInstance(60, 100, Image.SCALE_SMOOTH);
+        Image duke = image.getScaledInstance(120, 200, Image.SCALE_SMOOTH);
         DukeInicio = new ImageIcon(duke);
     }
 
@@ -893,6 +898,10 @@ public class Ventana extends javax.swing.JFrame {
     private void txtCNombreMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCNombreMActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCNombreMActionPerformed
+
+    private void EasterEgg(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EasterEgg
+        JOptionPane.showMessageDialog(rootPane, "Funciona");
+    }//GEN-LAST:event_EasterEgg
 
     /**
      * @param args the command line arguments
