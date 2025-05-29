@@ -14,8 +14,62 @@ import java.util.logging.Logger;
 import static inicioarchivos.InicioArchivos.obAlumnos;
 import static inicioarchivos.InicioArchivos.obInscripciones;
 import static inicioarchivos.InicioArchivos.obMaterias;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+
+class BotonTabla extends AbstractCellEditor implements TableCellRenderer, TableCellEditor, ActionListener {
+
+    JButton a_boton;
+    JTable a_tabla;
+    String a_tipoTabla;
+
+    public BotonTabla(JTable p_tabla, String p_tipoTabla) {
+        a_tabla = p_tabla;
+        a_tipoTabla = p_tipoTabla;
+        a_boton = new JButton("Editar");
+        a_boton.addActionListener(this);
+    }
+
+    @Override
+    public Object getCellEditorValue() {
+        return "Editar";
+    }
+
+    @Override
+    public Component getTableCellRendererComponent(JTable p_tabla, Object p_valor, boolean p_sel, boolean p_foco, int p_fila, int p_col) {
+        return a_boton;
+    }
+
+    @Override
+    public Component getTableCellEditorComponent(JTable p_tabla, Object p_valor, boolean p_sel, int p_fila, int p_col) {
+        return a_boton;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent p_evt) {
+        int v_fila = a_tabla.getSelectedRow();
+        String v_info = "";
+
+        switch (a_tipoTabla) {
+            case "A" ->
+                v_info = "Alumno con ID: " + a_tabla.getValueAt(v_fila, 0);
+            case "M" ->
+                v_info = "Materia con clave: " + a_tabla.getValueAt(v_fila, 0);
+            case "I" ->
+                v_info = "Inscripción de alumno: " + a_tabla.getValueAt(v_fila, 0);
+            default ->
+                v_info = "Tabla desconocida ";
+        }
+
+        JOptionPane.showMessageDialog(null, "Editando " + v_info + " en fila: " + v_fila);
+        fireEditingStopped();
+    }
+}
 
 public class Ventana extends javax.swing.JFrame {
 
@@ -49,23 +103,31 @@ public class Ventana extends javax.swing.JFrame {
         TablaModelo.addColumn("Acciones");
 
         switch (op) {
-            case 'A':
+            case 'A' -> {
                 Tabla.setModel(TablaModelo);
+                TableColumn v_colAccion = Tabla.getColumnModel().getColumn(3);
+                v_colAccion.setCellRenderer(new BotonTabla(Tabla, "A"));
+                v_colAccion.setCellEditor(new BotonTabla(Tabla, "A"));
+
                 ArchivoAlumnos obAlumnosHijo = (ArchivoAlumnos) obAlumnos;
                 try {
                     int i = 0;
                     while ((obAlumnos.canal.length() / 53) > i) {
                         System.out.println(i);
                         obAlumnosHijo.leerReg(obAlumnos.canal, i, obAlumno);
-                        TablaModelo.addRow(new Object[]{obAlumno.nroCtrl, obAlumno.nom, obAlumno.sem, ""});
+                        TablaModelo.addRow(new Object[]{obAlumno.nroCtrl, obAlumno.nom, obAlumno.sem, "Editar"});
                         i++;
                     }
                 } catch (IOException e) {
                     // Maneja la excepción según sea necesario
                 }
-                break;
-            case 'M':
+            }
+            case 'M' -> {
                 Tabla.setModel(TablaModelo);
+                TableColumn v_colAccion = Tabla.getColumnModel().getColumn(3);
+                v_colAccion.setCellRenderer(new BotonTabla(Tabla, "M"));
+                v_colAccion.setCellEditor(new BotonTabla(Tabla, "M"));
+
                 ArchivoMaterias obMateriasHijo = (ArchivoMaterias) obMaterias;
                 try {
                     int i = 0;
@@ -78,9 +140,13 @@ public class Ventana extends javax.swing.JFrame {
                 } catch (IOException e) {
                     // Maneja la excepción según sea necesario
                 }
-                break;
-            case 'I':
+            }
+            case 'I' -> {
                 Tabla.setModel(TablaModelo);
+                TableColumn v_colAccion = Tabla.getColumnModel().getColumn(3);
+                v_colAccion.setCellRenderer(new BotonTabla(Tabla, "I"));
+                v_colAccion.setCellEditor(new BotonTabla(Tabla, "I"));
+
                 ArchivoInscripciones obInscripcionesHijo = (ArchivoInscripciones) obInscripciones;
                 try {
                     int i = 0;
@@ -93,8 +159,8 @@ public class Ventana extends javax.swing.JFrame {
                 } catch (IOException e) {
                     // Maneja la excepción según sea necesario
                 }
-                break;
-            default:
+            }
+            default ->
                 throw new AssertionError();
         }
 
@@ -756,8 +822,9 @@ public class Ventana extends javax.swing.JFrame {
             if (obMaterias.altas(obMaterias.canal,
                     txtCClave.getText(),
                     txtCNombreM.getText(),
-                    Byte.parseByte(txtCCreditos.getText()))) 
-            TablaModelo(TableMaterias, "No.Clave", "Nombre", "Creditos", 'M');
+                    Byte.parseByte(txtCCreditos.getText()))) {
+                TablaModelo(TableMaterias, "No.Clave", "Nombre", "Creditos", 'M');
+            }
 
             txtCClave.setText(null);
             txtCNombreM.setText(null);
@@ -780,8 +847,9 @@ public class Ventana extends javax.swing.JFrame {
             if (obAlumnos.altas(obAlumnos.canal,
                     txtCNoCtrl.getText(),
                     txtCNombre.getText(),
-                    Byte.parseByte(txtCSemestre.getText())))
-            TablaModelo(TableAlumnos, "No.Control", "Nombre", "Semestre", 'A');
+                    Byte.parseByte(txtCSemestre.getText()))) {
+                TablaModelo(TableAlumnos, "No.Control", "Nombre", "Semestre", 'A');
+            }
             txtCNoCtrl.setText(null);
             txtCNombre.setText(null);
             txtCSemestre.setText(null);

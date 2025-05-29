@@ -82,15 +82,9 @@ public class ArchivoAlumnos extends Archivos {
     }
 
     @Override
-    public int modificaciones(RandomAccessFile canal, String noCtrl, String nom, byte sem) {
-        System.out.println("Ingrese el numero de control del alumno a modificar");
-        String rem = sc.nextLine();
-        int n = busqueda(canal, rem);
-        if (n == -1) {
-            return -1;
-        }
+    public int modificaciones(RandomAccessFile canal,int ID, String noCtrl, String nom, byte sem) {
         al.capturar(noCtrl, nom, sem);
-        grabarReg(canal, n, al);
+        grabarReg(canal, ID, al);
         return 0;
     }
 

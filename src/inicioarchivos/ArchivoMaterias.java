@@ -81,15 +81,9 @@ public class ArchivoMaterias extends Archivos {
     }
 
     @Override
-    public int modificaciones(RandomAccessFile canal, String a, String b, byte c) {
-        System.out.println("Ingrese el numero de control del alumno a modificar");
-        String rem = sc.nextLine();
-        int n = busqueda(canal, rem);
-        if (n == -1) {
-            return -1;
-        }
+    public int modificaciones(RandomAccessFile canal,int ID, String a, String b, byte c) {
         ma.capturar(a,b,c);
-        grabarReg(canal, n, ma);
+        grabarReg(canal, ID, ma);
         return 0;
     }
 
