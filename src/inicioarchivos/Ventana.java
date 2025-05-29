@@ -4,7 +4,9 @@ package inicioarchivos;
  * @author markb
  */
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
@@ -35,6 +37,7 @@ public class Ventana extends javax.swing.JFrame {
         );
         moreComponents();
         initComponents();
+<<<<<<< HEAD
         evenmoreComponents();
         TablaAlumnosModelo();
     }
@@ -59,6 +62,8 @@ public class Ventana extends javax.swing.JFrame {
             // Maneja la excepción según sea necesario
         }
 
+=======
+>>>>>>> 6ba1eb0653fac8ec439693b211748aedfb1eee73
     }
 
     private void m_preCerrar() {
@@ -112,7 +117,12 @@ public class Ventana extends javax.swing.JFrame {
         pnlAMain = new javax.swing.JPanel();
         pnlATabla = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
+<<<<<<< HEAD
         TableAlumnos = new javax.swing.JTable();
+=======
+        jTAlumnos = new javax.swing.JTable();
+        btnAActualizar = new javax.swing.JButton();
+>>>>>>> 6ba1eb0653fac8ec439693b211748aedfb1eee73
         pnlAOpciones = new javax.swing.JPanel();
         pnlCrearA = new javax.swing.JPanel();
         pnlCrearAData = new javax.swing.JPanel();
@@ -125,7 +135,7 @@ public class Ventana extends javax.swing.JFrame {
         CSemestre = new javax.swing.JPanel();
         LCSemestre = new javax.swing.JLabel();
         txtCSemestre = new javax.swing.JTextField();
-        btnCAgregar = new javax.swing.JButton();
+        btnCAAgregar = new javax.swing.JButton();
         pnlBuscar = new javax.swing.JPanel();
         pnlBuscarAData = new javax.swing.JPanel();
         BNoCtrl = new javax.swing.JPanel();
@@ -138,7 +148,8 @@ public class Ventana extends javax.swing.JFrame {
         pnlMMain = new javax.swing.JPanel();
         pnlMTabla = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTMaterias = new javax.swing.JTable();
+        btnMActualizar = new javax.swing.JButton();
         pnlCrearM = new javax.swing.JPanel();
         pnlCrearMData = new javax.swing.JPanel();
         CNoCrtl1 = new javax.swing.JPanel();
@@ -150,7 +161,7 @@ public class Ventana extends javax.swing.JFrame {
         CSemestre1 = new javax.swing.JPanel();
         LCCreditos = new javax.swing.JLabel();
         txtCCreditos = new javax.swing.JTextField();
-        btnCAgregar1 = new javax.swing.JButton();
+        btnCMAgregar = new javax.swing.JButton();
         pnlInscribir = new javax.swing.JPanel();
         pnlNMain = new javax.swing.JPanel();
         pnlNTitulo = new javax.swing.JPanel();
@@ -290,6 +301,17 @@ public class Ventana extends javax.swing.JFrame {
 
         pnlATabla.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
+<<<<<<< HEAD
+=======
+        btnAActualizar.setText("Actualizar Tabla");
+        btnAActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AActualizarTabla(evt);
+            }
+        });
+        pnlATabla.add(btnAActualizar, java.awt.BorderLayout.PAGE_END);
+
+>>>>>>> 6ba1eb0653fac8ec439693b211748aedfb1eee73
         pnlAMain.add(pnlATabla, java.awt.BorderLayout.CENTER);
 
         pnlAOpciones.setLayout(new java.awt.CardLayout());
@@ -334,14 +356,14 @@ public class Ventana extends javax.swing.JFrame {
 
         pnlCrearA.add(pnlCrearAData);
 
-        btnCAgregar.setText("Agregar");
-        btnCAgregar.setAlignmentY(1.0F);
-        btnCAgregar.addActionListener(new java.awt.event.ActionListener() {
+        btnCAAgregar.setText("Agregar");
+        btnCAAgregar.setAlignmentY(1.0F);
+        btnCAAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AgregarAlumno(evt);
             }
         });
-        pnlCrearA.add(btnCAgregar);
+        pnlCrearA.add(btnCAAgregar);
 
         pnlAOpciones.add(pnlCrearA, "card2");
 
@@ -359,7 +381,7 @@ public class Ventana extends javax.swing.JFrame {
         txtBNoCtrl.setColumns(8);
         txtBNoCtrl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBNoCtrlActionPerformed(evt);
+                BuscarAlumno(evt);
             }
         });
         BNoCtrl.add(txtBNoCtrl, java.awt.BorderLayout.CENTER);
@@ -400,7 +422,7 @@ public class Ventana extends javax.swing.JFrame {
         pnlMTabla.setEnabled(false);
         pnlMTabla.setLayout(new java.awt.BorderLayout());
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -423,17 +445,25 @@ public class Ventana extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.setColumnSelectionAllowed(true);
-        jScrollPane3.setViewportView(jTable2);
-        jTable2.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setResizable(false);
-            jTable2.getColumnModel().getColumn(3).setResizable(false);
+        jTMaterias.setColumnSelectionAllowed(true);
+        jScrollPane3.setViewportView(jTMaterias);
+        jTMaterias.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        if (jTMaterias.getColumnModel().getColumnCount() > 0) {
+            jTMaterias.getColumnModel().getColumn(0).setResizable(false);
+            jTMaterias.getColumnModel().getColumn(1).setResizable(false);
+            jTMaterias.getColumnModel().getColumn(2).setResizable(false);
+            jTMaterias.getColumnModel().getColumn(3).setResizable(false);
         }
 
         pnlMTabla.add(jScrollPane3, java.awt.BorderLayout.CENTER);
+
+        btnMActualizar.setText("Actualizar Tabla");
+        btnMActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MActualizarTabla(evt);
+            }
+        });
+        pnlMTabla.add(btnMActualizar, java.awt.BorderLayout.PAGE_END);
 
         pnlMMain.add(pnlMTabla, java.awt.BorderLayout.CENTER);
 
@@ -475,14 +505,14 @@ public class Ventana extends javax.swing.JFrame {
 
         pnlCrearM.add(pnlCrearMData);
 
-        btnCAgregar1.setText("Agregar");
-        btnCAgregar1.setAlignmentY(1.0F);
-        btnCAgregar1.addActionListener(new java.awt.event.ActionListener() {
+        btnCMAgregar.setText("Agregar");
+        btnCMAgregar.setAlignmentY(1.0F);
+        btnCMAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AgregarMateria(evt);
             }
         });
-        pnlCrearM.add(btnCAgregar1);
+        pnlCrearM.add(btnCMAgregar);
 
         pnlMMain.add(pnlCrearM, java.awt.BorderLayout.NORTH);
 
@@ -638,6 +668,7 @@ public class Ventana extends javax.swing.JFrame {
         Image duke = image.getScaledInstance(60, 100, Image.SCALE_SMOOTH);
         DukeInicio = new ImageIcon(duke);
     }
+<<<<<<< HEAD
 
     private void evenmoreComponents() {
         DefaultTableModel Talum = new DefaultTableModel();
@@ -652,9 +683,21 @@ public class Ventana extends javax.swing.JFrame {
         }
 
         try (BufferedReader br = new BufferedReader(new FileReader("alumnos.dat"))) {
+=======
+    
+    private void tableComponents(JTable Tabla, String Archivo){
+        Tabla.setModel(new javax.swing.table.DefaultTableModel());
+        Tabla.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        model.addColumn("No. Control");
+        
+        model.addColumn("Nombre");
+        model.addColumn("Semestre");
+        
+        try (BufferedReader bro = new BufferedReader(new FileReader(Archivo))) {
+>>>>>>> 6ba1eb0653fac8ec439693b211748aedfb1eee73
             String line;
-            while ((line = br.readLine()) != null) {
-                Talum.addRow(line.split(" ")); // Adjust delimiter as needed
+            while ((line = bro.readLine()) != null) {
+                model.addRow(line.split(" "));
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -718,7 +761,27 @@ public class Ventana extends javax.swing.JFrame {
 
     //BOTONES DE MAS
     private void AgregarMateria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarMateria
-        // TODO add your handling code here:
+        boolean a = txtCClave.getText().isEmpty(),
+                b = txtCNombreM.getText().isEmpty(),
+                c = txtCCreditos.getText().isEmpty();
+        if (!b & !c & !a) {
+            obMaterias.altas(obMaterias.canal,
+                    txtCClave.getText(),
+                    txtCNombreM.getText(),
+                    Byte.parseByte(txtCCreditos.getText()));
+            System.out.print(String.format("%8s | %-40s | %2d", txtCClave.getText(), txtCNombreM.getText(), Integer.valueOf(txtCCreditos.getText())) + "\n");
+
+            txtCClave.setText(null);
+            txtCNombreM.setText(null);
+            txtCCreditos.setText(null);
+
+        } else {
+            if (a & b & c) {
+                JOptionPane.showMessageDialog(null, "Ingrese un alumno", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Faltan datos por agregar", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_AgregarMateria
 
     private void AgregarAlumno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarAlumno
@@ -735,7 +798,7 @@ public class Ventana extends javax.swing.JFrame {
             txtCNoCtrl.setText(null);
             txtCNombre.setText(null);
             txtCSemestre.setText(null);
-            btnCAgregar.setEnabled(true);
+            
         } else {
             if (a & b & c) {
                 JOptionPane.showMessageDialog(null, "Ingrese un alumno", "Error", JOptionPane.ERROR_MESSAGE);
@@ -761,15 +824,20 @@ public class Ventana extends javax.swing.JFrame {
             obAlumnosHijo.leerReg(obAlumnos.canal, n, obAlumno);
             System.out.println(obAlumno.nom + " " + obAlumno.nroCtrl);//Alumno
             txtBNoCtrl.setText(null);
-            btnCAgregar.setEnabled(true);
+            btnCAAgregar.setEnabled(true);
         } else {
             JOptionPane.showMessageDialog(null, "Ingrese un alumno", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_BuscarAlumno
 
-    private void txtBNoCtrlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBNoCtrlActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBNoCtrlActionPerformed
+    private void AActualizarTabla(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AActualizarTabla
+        tableComponents(jTAlumnos, "alumnos.dat");
+    }//GEN-LAST:event_AActualizarTabla
+
+    private void MActualizarTabla(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MActualizarTabla
+        tableComponents(jTMaterias, "materias.dat");
+    }//GEN-LAST:event_MActualizarTabla
+
 
     /**
      * @param args the command line arguments
@@ -831,10 +899,12 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel Opciones;
     private javax.swing.JTable TableAlumnos;
     private javax.swing.ButtonGroup btgOpciones;
-    private javax.swing.JButton btnCAgregar;
-    private javax.swing.JButton btnCAgregar1;
+    private javax.swing.JButton btnAActualizar;
+    private javax.swing.JButton btnCAAgregar;
     private javax.swing.JButton btnCAgregar2;
     private javax.swing.JButton btnCAgregar3;
+    private javax.swing.JButton btnCMAgregar;
+    private javax.swing.JButton btnMActualizar;
     private javax.swing.JButton btnNReporte;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler8;
@@ -854,7 +924,12 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+<<<<<<< HEAD
     private javax.swing.JTable jTable2;
+=======
+    javax.swing.JTable jTAlumnos;
+    private javax.swing.JTable jTMaterias;
+>>>>>>> 6ba1eb0653fac8ec439693b211748aedfb1eee73
     private javax.swing.JTable jTable3;
     private javax.swing.JLabel lblBNoCtrl;
     private javax.swing.JMenu menAlumno;
@@ -903,5 +978,6 @@ public class Ventana extends javax.swing.JFrame {
     // Extra variables @m
     java.awt.CardLayout CardLayout;
     javax.swing.ImageIcon DukeInicio;
+    DefaultTableModel model;
     // End of extra variables @m
 }
