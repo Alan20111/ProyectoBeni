@@ -62,7 +62,6 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     private void m_preCerrar() {
-        JOptionPane.showMessageDialog(rootPane, "Hasta luego!", "Despedida", JOptionPane.INFORMATION_MESSAGE);
         try {
             obAlumnos.canal.close();
         } catch (IOException ex) {
