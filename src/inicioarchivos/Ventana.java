@@ -63,7 +63,13 @@ class BotonTabla extends AbstractCellEditor implements TableCellRenderer, TableC
                 v_info = "Tabla desconocida ";
                 break;
         }
-        ModificarVen mod = new ModificarVen();
+        ModificarVen mod = new ModificarVen(
+        a_tabla.getColumnName(0),
+        a_tabla.getColumnName(1),
+        a_tabla.getColumnName(2),
+        a_tabla.getValueAt(v_fila, 0).toString(),
+        a_tabla.getValueAt(v_fila, 1).toString(),
+        a_tabla.getValueAt(v_fila, 2).toString());
         mod.setVisible(true);
         fireEditingStopped();
     }
@@ -91,8 +97,8 @@ public class Ventana extends javax.swing.JFrame {
         );
         moreComponents();
         initComponents();
-        TablaModelo(TableAlumnos, "No.Control", "Nombre", "Semestre", 'A');
-        TablaModelo(TableMaterias, "No.Clave", "Nombre", "Creditos", 'M');
+        TablaModelo(TableAlumnos, "No. Control", "Nombre", "Semestre", 'A');
+        TablaModelo(TableMaterias, "Clave", "Nombre", "Creditos", 'M');
         TablaModelo(TableInscripciones, "No.Control", "No.Clave", "", 'I');
     }
 

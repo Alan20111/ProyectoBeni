@@ -9,10 +9,13 @@ import javax.swing.*;
 import inicioarchivos.Ventana;
 public class ModificarVen extends JFrame
 {
-    public ModificarVen() 
+    String lA, lB, lC;
+    String dA, dB, dC;
+    
+    public ModificarVen(String lA, String lB, String lC, String dA, String dB, String dC) 
     {
+        setValues(lA, lB, lC, dA, dB, dC);
         initComponents();
-        moreComponents();
     }
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -44,18 +47,16 @@ public class ModificarVen extends JFrame
 
         pnlTODO.setLayout(new java.awt.BorderLayout(10, 0));
 
-        pnlData.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
         pnlA.setAlignmentX(0.0F);
         pnlA.setAlignmentY(0.0F);
         pnlA.setLayout(new javax.swing.BoxLayout(pnlA, javax.swing.BoxLayout.PAGE_AXIS));
 
-        lblA.setText("jLabel2");
+        lblA.setText(lA);
         lblA.setAlignmentY(0.0F);
         pnlA.add(lblA);
 
         txtDatoA.setColumns(8);
-        txtDatoA.setText("jTextField1");
+        txtDatoA.setText(dA);
         txtDatoA.setAlignmentX(0.0F);
         txtDatoA.setAlignmentY(0.0F);
         pnlA.add(txtDatoA);
@@ -64,12 +65,12 @@ public class ModificarVen extends JFrame
 
         pnlB.setLayout(new javax.swing.BoxLayout(pnlB, javax.swing.BoxLayout.PAGE_AXIS));
 
-        lblB.setText("jLabel2");
+        lblB.setText(lB);
         lblB.setAlignmentY(0.0F);
         pnlB.add(lblB);
 
         txtDatoB.setColumns(35);
-        txtDatoB.setText("jTextField1");
+        txtDatoB.setText(dB);
         txtDatoB.setAlignmentX(0.0F);
         txtDatoB.setAlignmentY(0.0F);
         pnlB.add(txtDatoB);
@@ -78,12 +79,12 @@ public class ModificarVen extends JFrame
 
         pnlC.setLayout(new javax.swing.BoxLayout(pnlC, javax.swing.BoxLayout.PAGE_AXIS));
 
-        lblC.setText("jLabel2");
+        lblC.setText(lC);
         lblC.setAlignmentY(0.0F);
         pnlC.add(lblC);
 
         txtDatoC.setColumns(2);
-        txtDatoC.setText("jTextField1");
+        txtDatoC.setText(dC);
         txtDatoC.setAlignmentX(0.0F);
         txtDatoC.setAlignmentY(0.0F);
         pnlC.add(txtDatoC);
@@ -115,8 +116,14 @@ public class ModificarVen extends JFrame
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void moreComponents(){
-
+    
+    private void setValues(String lA, String lB, String lC, String dA, String dB, String dC){
+        this.lA=lA;
+        this.lB = lB;
+        this.lC = lC;
+        this.dA = dA;
+        this.dB = dB;
+        this.dC = dC;
     }
     private void cancelar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelar
         dispose();
@@ -124,12 +131,23 @@ public class ModificarVen extends JFrame
 
     private void modificar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificar
         String text;
-        text=String.format("%8s | %-40s | %2d", txtDatoA.getText(), txtDatoB.getText(), Byte.valueOf(txtDatoC.getText()));
-        JOptionPane.showMessageDialog(rootPane, "Todavía no está listo\n"+text);
+        boolean a = txtDatoA.getText().isEmpty(),
+                b = txtDatoB.getText().isEmpty(),
+                c = txtDatoC.getText().isEmpty();
+        if(!a&!b&!c){
+            int op = JOptionPane.showConfirmDialog(rootPane, "¿Confirma su modificación?","Confirmar Modificación",JOptionPane.YES_OPTION);
+            if(op==0){
+                JOptionPane.showMessageDialog(rootPane, "Modificación Realizada", "Modificación", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }else if(a&b&c){
+            JOptionPane.showMessageDialog(rootPane, "Error w","Error Modificación",JOptionPane.ERROR_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Una wea");
+        }
     }//GEN-LAST:event_modificar
 
     public static void main(String args[]) {
-        ModificarVen mv = new ModificarVen();
+        ModificarVen mv = new ModificarVen("a", "b", "c", "d","e","f");
         mv.setVisible(true);
     }
 
