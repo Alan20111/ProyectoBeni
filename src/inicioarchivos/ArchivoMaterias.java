@@ -20,7 +20,7 @@ public class ArchivoMaterias extends Archivos {
     public void altas(RandomAccessFile canal, String a, String b, byte c) {
         System.out.println("Seguimiento de altas");
         try {
-            ma.capturar(a,b,c);
+            ma.capturar();
             int reg = (int) canal.length() / tr;
             grabarReg(canal, reg, ma);
         } catch (IOException e) {
@@ -85,7 +85,7 @@ public class ArchivoMaterias extends Archivos {
         if (n == -1) {
             return -1;
         }
-        ma.capturar(a,b,c);
+        ma.capturar();
         grabarReg(canal, n, ma);
         return 0;
     }
