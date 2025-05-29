@@ -82,7 +82,7 @@ public class ArchivoAlumnos extends Archivos {
     }
 
     @Override
-    public int modificaciones(RandomAccessFile canal,int ID, String noCtrl, String nom, byte sem) {
+    public int modificaciones(RandomAccessFile canal, int ID, String noCtrl, String nom, byte sem) {
         al.capturar(noCtrl, nom, sem);
         grabarReg(canal, ID, al);
         return 0;

@@ -6,7 +6,9 @@ package inicioarchivos;
 
 import java.awt.*;
 import javax.swing.*;
-import inicioarchivos.Ventana;
+import static inicioarchivos.InicioArchivos.obAlumnos;
+import static inicioarchivos.InicioArchivos.obInscripciones;
+import static inicioarchivos.InicioArchivos.obMaterias;
 public class ModificarVen extends JFrame
 {
     String lA, lB, lC;
@@ -125,6 +127,15 @@ public class ModificarVen extends JFrame
         this.dB = dB;
         this.dC = dC;
     }
+    
+    private void modificarAl(){
+        obAlumnos.modificaciones(obAlumnos.canal, 0, txtDatoA.getText(), txtDatoB.getText(), Byte.parseByte(txtDatoC.getText()));
+    }
+    
+    private void modificarMat(){
+        obMaterias.modificaciones(obMaterias.canal, 0, txtDatoA.getText(), txtDatoB.getText(), Byte.parseByte(txtDatoC.getText()));
+    }
+    
     private void cancelar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelar
         dispose();
     }//GEN-LAST:event_cancelar
@@ -137,7 +148,14 @@ public class ModificarVen extends JFrame
         if(!a&!b&!c){
             int op = JOptionPane.showConfirmDialog(rootPane, "¿Confirma su modificación?","Confirmar Modificación",JOptionPane.YES_OPTION);
             if(op==0){
+                if(lblA.getText().equals("No. Control")){
+                    modificarAl();
+                }
+                if(lblA.getText().equals("Clave")){
+                    modificarMat();
+                }
                 JOptionPane.showMessageDialog(rootPane, "Modificación Realizada", "Modificación", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
             }
         }else if(a&b&c){
             JOptionPane.showMessageDialog(rootPane, "Error w","Error Modificación",JOptionPane.ERROR_MESSAGE);

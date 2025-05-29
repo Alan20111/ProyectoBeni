@@ -38,7 +38,7 @@ abstract class Archivos
     public abstract boolean altas(RandomAccessFile canal, String a, String b, byte c);
     public abstract int busqueda(RandomAccessFile canal,String s);
     public abstract void reporte(RandomAccessFile canal);
-    public abstract int modificaciones(RandomAccessFile canal,int ID, String noCtrl, String nom, byte sem);
+    public abstract int modificaciones(RandomAccessFile canal, int ID, String a, String b, byte c);
     public abstract void ordenar(RandomAccessFile canal);
     public abstract void inicioMen();
 }

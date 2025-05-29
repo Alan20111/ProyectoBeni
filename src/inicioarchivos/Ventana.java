@@ -950,8 +950,8 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel LINombreM;
     private javax.swing.JPanel Opciones;
     javax.swing.JTable TableAlumnos;
-    private javax.swing.JTable TableInscripciones;
-    private javax.swing.JTable TableMaterias;
+    javax.swing.JTable TableInscripciones;
+    javax.swing.JTable TableMaterias;
     private javax.swing.ButtonGroup btgOpciones;
     private javax.swing.JButton btnCAgregar;
     private javax.swing.JButton btnCAgregar1;

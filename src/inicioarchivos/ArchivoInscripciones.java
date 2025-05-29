@@ -132,7 +132,7 @@ public class ArchivoInscripciones extends Archivos {
         }
     }
 
-    public int modificaciones(RandomAccessFile canal,int ID, String noCtrl, String nom, byte sem) {
+    public int modificaciones(RandomAccessFile canal,int ID, String A, String B, byte C) {
         return 1;
     }
 

@@ -81,8 +81,8 @@ public class ArchivoMaterias extends Archivos {
     }
 
     @Override
-    public int modificaciones(RandomAccessFile canal,int ID, String a, String b, byte c) {
-        ma.capturar(a,b,c);
+    public int modificaciones(RandomAccessFile canal, int ID, String Clave, String Nombre, byte Cred) {
+        ma.capturar(Clave, Nombre, Cred);
         grabarReg(canal, ID, ma);
         return 0;
     }
