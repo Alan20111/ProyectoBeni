@@ -21,7 +21,11 @@ import java.awt.event.WindowEvent;
 
 public class Ventana extends javax.swing.JFrame {
 
+    Alumno obAlumno = new Alumno();
+    DefaultTableModel TablaAlumnosModelo = new DefaultTableModel();
+
     public Ventana() {
+
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent p_evt) {
@@ -32,6 +36,29 @@ public class Ventana extends javax.swing.JFrame {
         moreComponents();
         initComponents();
         evenmoreComponents();
+        TablaAlumnosModelo();
+    }
+
+    void TablaAlumnosModelo() {
+        TablaAlumnosModelo.addColumn("No.Control");
+        TablaAlumnosModelo.addColumn("Nombre");
+        TablaAlumnosModelo.addColumn("Semestre");
+        TablaAlumnosModelo.addColumn("Acciones");
+
+        TableAlumnos.setModel(TablaAlumnosModelo);
+        ArchivoAlumnos obAlumnosHijo = (ArchivoAlumnos) obAlumnos;
+        try {
+            int i = 0;
+            while ((obAlumnos.canal.length() / 53) > i) {
+                System.out.println(i);
+                obAlumnosHijo.leerReg(obAlumnos.canal, i, obAlumno);
+                TablaAlumnosModelo.addRow(new Object[]{obAlumno.nroCtrl, obAlumno.nom, obAlumno.sem, ""});
+                i++;
+            }
+        } catch (IOException e) {
+            // Maneja la excepción según sea necesario
+        }
+
     }
 
     private void m_preCerrar() {
@@ -85,9 +112,7 @@ public class Ventana extends javax.swing.JFrame {
         pnlAMain = new javax.swing.JPanel();
         pnlATabla = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTAlumnos = new javax.swing.JTable();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        TableAlumnos = new javax.swing.JTable();
         pnlAOpciones = new javax.swing.JPanel();
         pnlCrearA = new javax.swing.JPanel();
         pnlCrearAData = new javax.swing.JPanel();
@@ -258,18 +283,12 @@ public class Ventana extends javax.swing.JFrame {
         pnlATabla.setEnabled(false);
         pnlATabla.setLayout(new java.awt.BorderLayout(10, 10));
 
-        jTAlumnos.setModel(jTAlumnos.getModel());
-        jTAlumnos.setColumnSelectionAllowed(true);
-        jScrollPane2.setViewportView(jTAlumnos);
-        jTAlumnos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        TableAlumnos.setModel(TableAlumnos.getModel());
+        TableAlumnos.setColumnSelectionAllowed(true);
+        jScrollPane2.setViewportView(TableAlumnos);
+        TableAlumnos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         pnlATabla.add(jScrollPane2, java.awt.BorderLayout.CENTER);
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        pnlATabla.add(jScrollPane1, java.awt.BorderLayout.SOUTH);
 
         pnlAMain.add(pnlATabla, java.awt.BorderLayout.CENTER);
 
@@ -622,14 +641,14 @@ public class Ventana extends javax.swing.JFrame {
 
     private void evenmoreComponents() {
         DefaultTableModel Talum = new DefaultTableModel();
-        jTAlumnos.setModel(Talum);
-        jTAlumnos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        if (jTAlumnos.getColumnModel().getColumnCount() > 0) {
-            jTAlumnos.getColumnModel().getColumn(0).setHeaderValue("No. Control");
-            jTAlumnos.getColumnModel().getColumn(1).setHeaderValue("Nombre");
-            jTAlumnos.getColumnModel().getColumn(2).setHeaderValue("Semestre");
-            jTAlumnos.getColumnModel().getColumn(3).setHeaderValue("Creditos");
-            jTAlumnos.getColumnModel().getColumn(4).setHeaderValue("Acción");
+        TableAlumnos.setModel(Talum);
+        TableAlumnos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        if (TableAlumnos.getColumnModel().getColumnCount() > 0) {
+            TableAlumnos.getColumnModel().getColumn(0).setHeaderValue("No. Control");
+            TableAlumnos.getColumnModel().getColumn(1).setHeaderValue("Nombre");
+            TableAlumnos.getColumnModel().getColumn(2).setHeaderValue("Semestre");
+            TableAlumnos.getColumnModel().getColumn(3).setHeaderValue("Creditos");
+            TableAlumnos.getColumnModel().getColumn(4).setHeaderValue("Acción");
         }
 
         try (BufferedReader br = new BufferedReader(new FileReader("alumnos.dat"))) {
@@ -733,19 +752,18 @@ public class Ventana extends javax.swing.JFrame {
     private void btnNReporteAgregarMateria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNReporteAgregarMateria
         // TODO add your handling code here:
     }//GEN-LAST:event_btnNReporteAgregarMateria
-    Alumno obAlumno = new Alumno();
+
     private void BuscarAlumno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarAlumno
-       
         boolean a = txtBNoCtrl.getText().isEmpty();
         if (!a) {
-           int n = obAlumnos.busqueda(obAlumnos.canal, txtBNoCtrl.getText());
-           ArchivoAlumnos obAlumnosHijo = (ArchivoAlumnos) obAlumnos;
-           obAlumnosHijo.leerReg(obAlumnos.canal,n,obAlumno);
-            System.out.println(obAlumno.nom+" "+obAlumno.nroCtrl);//Alumno
+            int n = obAlumnos.busqueda(obAlumnos.canal, txtBNoCtrl.getText());
+            ArchivoAlumnos obAlumnosHijo = (ArchivoAlumnos) obAlumnos;
+            obAlumnosHijo.leerReg(obAlumnos.canal, n, obAlumno);
+            System.out.println(obAlumno.nom + " " + obAlumno.nroCtrl);//Alumno
             txtBNoCtrl.setText(null);
             btnCAgregar.setEnabled(true);
         } else {
-                JOptionPane.showMessageDialog(null, "Ingrese un alumno", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ingrese un alumno", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_BuscarAlumno
 
@@ -811,6 +829,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel LINoCtrl;
     private javax.swing.JLabel LINombreM;
     private javax.swing.JPanel Opciones;
+    private javax.swing.JTable TableAlumnos;
     private javax.swing.ButtonGroup btgOpciones;
     private javax.swing.JButton btnCAgregar;
     private javax.swing.JButton btnCAgregar1;
@@ -832,14 +851,11 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    javax.swing.JTable jTAlumnos;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblBNoCtrl;
     private javax.swing.JMenu menAlumno;
     private javax.swing.JMenu menInicio;
