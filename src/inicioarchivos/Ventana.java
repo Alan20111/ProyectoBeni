@@ -58,6 +58,7 @@ class BotonTabla extends AbstractCellEditor implements TableCellRenderer, TableC
         switch (a_tipoTabla) {
             case "A" ->
                 v_info = "Alumno con ID: " + a_tabla.getValueAt(v_fila, 0);
+                
             case "M" ->
                 v_info = "Materia con clave: " + a_tabla.getValueAt(v_fila, 0);
             case "I" ->
