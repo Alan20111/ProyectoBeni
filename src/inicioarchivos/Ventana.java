@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import static inicioarchivos.InicioArchivos.obAlumnos;
 import static inicioarchivos.InicioArchivos.obInscripciones;
 import static inicioarchivos.InicioArchivos.obMaterias;
+import static inicioarchivos.Ventana.obAlumnosHijo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -56,15 +57,15 @@ class BotonTabla extends AbstractCellEditor implements TableCellRenderer, TableC
         String v_info = "";
 
         switch (a_tipoTabla) {
-            case "A" ->
-                v_info = "Alumno con ID: " + a_tabla.getValueAt(v_fila, 0);
-
-            case "M" ->
+            case "A":
+                //obAlumnosHijo.modificaciones(obAlumnos.canal, v_fila, , ,);
+                break;
+            case "M":
                 v_info = "Materia con clave: " + a_tabla.getValueAt(v_fila, 0);
-            case "I" ->
-                v_info = "Inscripción de alumno: " + a_tabla.getValueAt(v_fila, 0);
-            default ->
+                break;
+            default:
                 v_info = "Tabla desconocida ";
+                break;
         }
 
         JOptionPane.showMessageDialog(null, "Editando " + v_info + " en fila: " + v_fila);
@@ -77,8 +78,9 @@ public class Ventana extends javax.swing.JFrame {
     Alumno obAlumno = new Alumno();
     Materia obMateria = new Materia();
     Inscripcion obInscripcion = new Inscripcion();
-    ArchivoAlumnos obAlumnosHijo = (ArchivoAlumnos) obAlumnos;
+    public static ArchivoAlumnos obAlumnosHijo = (ArchivoAlumnos) obAlumnos;
     ArchivoMaterias obMateriasHijo = (ArchivoMaterias) obMaterias;
+    ArchivoInscripciones obInscripcionesHijo = (ArchivoInscripciones) obInscripciones;
 
     DefaultTableModel TablaModelo = new DefaultTableModel();
 
@@ -144,11 +146,7 @@ public class Ventana extends javax.swing.JFrame {
             }
             case 'I' -> {
                 Tabla.setModel(TablaModelo);
-                TableColumn v_colAccion = Tabla.getColumnModel().getColumn(3);
-                v_colAccion.setCellRenderer(new BotonTabla(Tabla, "I"));
-                v_colAccion.setCellEditor(new BotonTabla(Tabla, "I"));
 
-                ArchivoInscripciones obInscripcionesHijo = (ArchivoInscripciones) obInscripciones;
                 try {
                     int i = 0;
                     while ((obInscripciones.canal.length() / 53) > i) {
