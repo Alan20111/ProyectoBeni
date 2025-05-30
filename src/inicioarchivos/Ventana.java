@@ -296,8 +296,8 @@ public class Ventana extends javax.swing.JFrame {
         pnlNTablaReporte = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         TableInscripciones = new javax.swing.JTable();
-        filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
-        filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
+        javax.swing.Box.Filler filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
+        javax.swing.Box.Filler filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
         pnlCreditos = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -1126,8 +1126,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton btnNReporte2;
     private javax.swing.JComboBox<String> cbMaterias;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.Box.Filler filler8;
-    private javax.swing.Box.Filler filler9;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
