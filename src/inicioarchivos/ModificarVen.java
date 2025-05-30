@@ -145,7 +145,7 @@ public class ModificarVen extends JFrame {
 
     private void modificarMat() {
         obMaterias.modificaciones(obMaterias.canal, row, txtDatoA.getText(), txtDatoB.getText(), Byte.parseByte(txtDatoC.getText()));
-        obAlumnos.ordenar(obAlumnos.canal);
+        obMaterias.ordenar(obMaterias.canal);
         VentanaImport.TablaModelo(TablaLocal, "Clave", "Nombre", "Creditos", 'M');
     }
 
