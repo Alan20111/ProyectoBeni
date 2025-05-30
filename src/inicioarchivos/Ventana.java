@@ -280,6 +280,10 @@ public class Ventana extends javax.swing.JFrame {
         IMateria = new javax.swing.JPanel();
         LINombreM = new javax.swing.JLabel();
         cbMaterias = new javax.swing.JComboBox<>();
+        IMateria1 = new javax.swing.JPanel();
+        LINombreM1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         btnInscribir = new javax.swing.JButton();
         pnlNMain1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -675,6 +679,20 @@ public class Ventana extends javax.swing.JFrame {
 
         pnlCrearIData.add(IMateria);
 
+        IMateria1.setLayout(new java.awt.BorderLayout());
+
+        LINombreM1.setText("Clave de la Materia:");
+        IMateria1.add(LINombreM1, java.awt.BorderLayout.NORTH);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(1);
+        jTextArea1.setText(getCve(cbMaterias, TableMaterias));
+        jScrollPane1.setViewportView(jTextArea1);
+
+        IMateria1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        pnlCrearIData.add(IMateria1);
+
         pnlCrearM1.add(pnlCrearIData);
 
         btnInscribir.setText("Inscribir");
@@ -854,6 +872,7 @@ public class Ventana extends javax.swing.JFrame {
                     Byte.parseByte(txtCCreditos.getText()))) {
                 obMaterias.ordenar(obMaterias.canal);
                 TablaModelo(TableMaterias, "Clave", "Nombre", "Creditos", 'M');
+                cbMaterias.setModel(InscriComboModel(TableMaterias));
             }
 
             txtCClave.setText(null);
@@ -1011,6 +1030,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel CSemestre1;
     private javax.swing.JLabel Duke;
     private javax.swing.JPanel IMateria;
+    private javax.swing.JPanel IMateria1;
     private javax.swing.JPanel INoCrtl;
     private javax.swing.JLabel LCClave;
     private javax.swing.JLabel LCCreditos;
@@ -1020,6 +1040,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel LCSemestre;
     private javax.swing.JLabel LINoCtrl;
     private javax.swing.JLabel LINombreM;
+    private javax.swing.JLabel LINombreM1;
     private javax.swing.JPanel Opciones;
     javax.swing.JTable TableAlumnos;
     javax.swing.JTable TableInscripciones;
@@ -1047,9 +1068,11 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblBClave;
     private javax.swing.JLabel lblBNoCtrl;
     private javax.swing.JMenu menAlumno;
