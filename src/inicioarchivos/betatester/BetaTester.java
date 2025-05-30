@@ -23,9 +23,7 @@ public class BetaTester
         ven.setAlwaysOnTop(true);
         ven.setSize(400,200);
         ven.setVisible(true);
-        
-        boolean superEgg;
-        
+                
         JPanel panelTODO = new JPanel();
         panelTODO.setLayout(new BorderLayout(10,10));
         panelTODO.setVisible(true);
@@ -92,7 +90,7 @@ public class BetaTester
                     }
                 }
             }
-        }
+        
         int i= (int)(Math.random()*5)+1;
         System.out.println(i);
         switch(i)
