@@ -197,7 +197,8 @@ public class Ventana extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btgOpciones = new javax.swing.ButtonGroup();
+        btgAlumno = new javax.swing.ButtonGroup();
+        btgMateria = new javax.swing.ButtonGroup();
         pnlTODO = new javax.swing.JPanel();
         pnlInicio = new javax.swing.JPanel();
         pnlITitulo = new javax.swing.JPanel();
@@ -213,8 +214,8 @@ public class Ventana extends javax.swing.JFrame {
         pnlATitulo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
-        rbtCrear = new javax.swing.JRadioButton();
-        rbtBuscar = new javax.swing.JRadioButton();
+        rbtACrear = new javax.swing.JRadioButton();
+        rbtABuscar = new javax.swing.JRadioButton();
         pnlAMain = new javax.swing.JPanel();
         pnlATabla = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -237,10 +238,12 @@ public class Ventana extends javax.swing.JFrame {
         BNoCtrl = new javax.swing.JPanel();
         lblBNoCtrl = new javax.swing.JLabel();
         txtBNoCtrl = new javax.swing.JTextField();
-        btnCAgregar3 = new javax.swing.JButton();
+        btnABuscar = new javax.swing.JButton();
         pnlMaterias = new javax.swing.JPanel();
         pnlMTitulo = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        rbtMCrear = new javax.swing.JRadioButton();
+        rbtMBuscar = new javax.swing.JRadioButton();
         pnlMMain = new javax.swing.JPanel();
         pnlMTabla = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -248,6 +251,7 @@ public class Ventana extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         MActualizar = new javax.swing.JButton();
         MOrdenarC = new javax.swing.JButton();
+        pnlMOpciones = new javax.swing.JPanel();
         pnlCrearM = new javax.swing.JPanel();
         pnlCrearMData = new javax.swing.JPanel();
         CNoCrtl1 = new javax.swing.JPanel();
@@ -260,6 +264,12 @@ public class Ventana extends javax.swing.JFrame {
         LCCreditos = new javax.swing.JLabel();
         txtCCreditos = new javax.swing.JTextField();
         btnCAgregar1 = new javax.swing.JButton();
+        pnlBuscarM = new javax.swing.JPanel();
+        pnlBuscarMData = new javax.swing.JPanel();
+        BClave = new javax.swing.JPanel();
+        lblBClave = new javax.swing.JLabel();
+        txtBClave = new javax.swing.JTextField();
+        btnMBuscar = new javax.swing.JButton();
         pnlInscribir = new javax.swing.JPanel();
         pnlNMain = new javax.swing.JPanel();
         pnlNTitulo = new javax.swing.JPanel();
@@ -370,25 +380,25 @@ public class Ventana extends javax.swing.JFrame {
         pnlATitulo.add(jLabel1);
         pnlATitulo.add(filler1);
 
-        btgOpciones.add(rbtCrear);
-        rbtCrear.setSelected(true);
-        rbtCrear.setText("Crear");
-        rbtCrear.addActionListener(new java.awt.event.ActionListener() {
+        btgAlumno.add(rbtACrear);
+        rbtACrear.setSelected(true);
+        rbtACrear.setText("Crear");
+        rbtACrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbtCrearActionPerformed(evt);
+                rbtACrearActionPerformed(evt);
             }
         });
-        pnlATitulo.add(rbtCrear);
+        pnlATitulo.add(rbtACrear);
 
-        btgOpciones.add(rbtBuscar);
-        rbtBuscar.setText("Buscar");
-        rbtBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        rbtBuscar.addActionListener(new java.awt.event.ActionListener() {
+        btgAlumno.add(rbtABuscar);
+        rbtABuscar.setText("Buscar");
+        rbtABuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        rbtABuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbtBuscarActionPerformed(evt);
+                rbtABuscarActionPerformed(evt);
             }
         });
-        pnlATitulo.add(rbtBuscar);
+        pnlATitulo.add(rbtABuscar);
 
         pnlAlumno.add(pnlATitulo, java.awt.BorderLayout.NORTH);
 
@@ -473,7 +483,7 @@ public class Ventana extends javax.swing.JFrame {
         txtBNoCtrl.setColumns(8);
         txtBNoCtrl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BuscarAlumno(evt);
+                buscarAlumno(evt);
             }
         });
         BNoCtrl.add(txtBNoCtrl, java.awt.BorderLayout.CENTER);
@@ -482,14 +492,14 @@ public class Ventana extends javax.swing.JFrame {
 
         pnlBuscar.add(pnlBuscarAData);
 
-        btnCAgregar3.setText("Buscar");
-        btnCAgregar3.setAlignmentY(1.0F);
-        btnCAgregar3.addActionListener(new java.awt.event.ActionListener() {
+        btnABuscar.setText("Buscar");
+        btnABuscar.setAlignmentY(1.0F);
+        btnABuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BuscarAlumno(evt);
+                buscarAlumno(evt);
             }
         });
-        pnlBuscar.add(btnCAgregar3);
+        pnlBuscar.add(btnABuscar);
 
         pnlAOpciones.add(pnlBuscar, "card3");
 
@@ -506,6 +516,25 @@ public class Ventana extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel2.setText("Registro de Materias");
         pnlMTitulo.add(jLabel2);
+
+        btgMateria.add(rbtMCrear);
+        rbtMCrear.setSelected(true);
+        rbtMCrear.setText("Crear");
+        rbtMCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtMCrearActionPerformed(evt);
+            }
+        });
+        pnlMTitulo.add(rbtMCrear);
+
+        btgMateria.add(rbtMBuscar);
+        rbtMBuscar.setText("Buscar");
+        rbtMBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtMBuscarActionPerformed(evt);
+            }
+        });
+        pnlMTitulo.add(rbtMBuscar);
 
         pnlMaterias.add(pnlMTitulo, java.awt.BorderLayout.NORTH);
 
@@ -537,6 +566,8 @@ public class Ventana extends javax.swing.JFrame {
         pnlMTabla.add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
         pnlMMain.add(pnlMTabla, java.awt.BorderLayout.CENTER);
+
+        pnlMOpciones.setLayout(new java.awt.CardLayout());
 
         pnlCrearM.setLayout(new javax.swing.BoxLayout(pnlCrearM, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -585,7 +616,38 @@ public class Ventana extends javax.swing.JFrame {
         });
         pnlCrearM.add(btnCAgregar1);
 
-        pnlMMain.add(pnlCrearM, java.awt.BorderLayout.NORTH);
+        pnlMOpciones.add(pnlCrearM, "card2");
+
+        pnlBuscarM.setLayout(new javax.swing.BoxLayout(pnlBuscarM, javax.swing.BoxLayout.LINE_AXIS));
+
+        pnlBuscarMData.setAlignmentY(1.0F);
+        pnlBuscarMData.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        BClave.setLayout(new java.awt.BorderLayout());
+
+        lblBClave.setText("Clave:");
+        lblBClave.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        BClave.add(lblBClave, java.awt.BorderLayout.NORTH);
+
+        txtBClave.setColumns(8);
+        BClave.add(txtBClave, java.awt.BorderLayout.CENTER);
+
+        pnlBuscarMData.add(BClave);
+
+        pnlBuscarM.add(pnlBuscarMData);
+
+        btnMBuscar.setText("Buscar");
+        btnMBuscar.setAlignmentY(1.0F);
+        btnMBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarMateria(evt);
+            }
+        });
+        pnlBuscarM.add(btnMBuscar);
+
+        pnlMOpciones.add(pnlBuscarM, "card3");
+
+        pnlMMain.add(pnlMOpciones, java.awt.BorderLayout.NORTH);
 
         pnlMaterias.add(pnlMMain, java.awt.BorderLayout.CENTER);
 
@@ -733,15 +795,15 @@ public class Ventana extends javax.swing.JFrame {
         DukeInicio = new ImageIcon(duke);
     }
 
-    private void rbtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtBuscarActionPerformed
-        pnlCrearA.setVisible(rbtCrear.isSelected());
-        pnlBuscar.setVisible(rbtBuscar.isSelected());
-    }//GEN-LAST:event_rbtBuscarActionPerformed
+    private void rbtABuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtABuscarActionPerformed
+        pnlCrearA.setVisible(rbtACrear.isSelected());
+        pnlBuscar.setVisible(rbtABuscar.isSelected());
+    }//GEN-LAST:event_rbtABuscarActionPerformed
 
-    private void rbtCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtCrearActionPerformed
-        pnlCrearA.setVisible(rbtCrear.isSelected());
-        pnlBuscar.setVisible(rbtBuscar.isSelected());
-    }//GEN-LAST:event_rbtCrearActionPerformed
+    private void rbtACrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtACrearActionPerformed
+        pnlCrearA.setVisible(rbtACrear.isSelected());
+        pnlBuscar.setVisible(rbtABuscar.isSelected());
+    }//GEN-LAST:event_rbtACrearActionPerformed
 
     //MOSTRAR PANELES
     // {
@@ -806,7 +868,6 @@ public class Ventana extends javax.swing.JFrame {
             txtCClave.setText(null);
             txtCNombreM.setText(null);
             txtCCreditos.setText(null);
-            btnCAgregar.setEnabled(true);
         } else {
             if (a & b & c) {
                 JOptionPane.showMessageDialog(null, "Ingrese una Materia", "Error", JOptionPane.ERROR_MESSAGE);
@@ -831,7 +892,6 @@ public class Ventana extends javax.swing.JFrame {
             txtCNoCtrl.setText(null);
             txtCNombre.setText(null);
             txtCSemestre.setText(null);
-            btnCAgregar.setEnabled(true);
         } else {
             if (a & b & c) {
                 JOptionPane.showMessageDialog(null, "Ingrese un alumno", "Error", JOptionPane.ERROR_MESSAGE);
@@ -849,7 +909,7 @@ public class Ventana extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_crearReporte
 
-    private void BuscarAlumno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarAlumno
+    private void buscarAlumno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarAlumno
         boolean a = txtBNoCtrl.getText().isEmpty();
         if (!a) {
             int n = obAlumnos.busqueda(obAlumnos.canal, txtBNoCtrl.getText());
@@ -861,11 +921,10 @@ public class Ventana extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(TableAlumnos, "Error al obtener el ID de la fila seleccionada.");
             }
             txtBNoCtrl.setText(null);
-            btnCAgregar.setEnabled(true);
         } else {
             JOptionPane.showMessageDialog(null, "Ingrese un alumno", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_BuscarAlumno
+    }//GEN-LAST:event_buscarAlumno
 
     private void EasterEgg(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EasterEgg
         JOptionPane.showMessageDialog(rootPane, "Funciona");
@@ -876,6 +935,31 @@ public class Ventana extends javax.swing.JFrame {
         TablaModelo(TableMaterias, "Clave", "Nombre", "Creditos", 'M');
         TableMaterias.setModel(TablaModelo);
     }//GEN-LAST:event_MActualizarT
+
+    private void rbtMCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtMCrearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtMCrearActionPerformed
+
+    private void rbtMBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtMBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtMBuscarActionPerformed
+
+    private void buscarMateria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarMateria
+        boolean a = txtBClave.getText().isEmpty();
+        if (!a) {
+            int n = obMaterias.busqueda(obMaterias.canal, txtBClave.getText());
+            try {
+                ModificarVen v_modVen = new ModificarVen(TableMaterias, n);
+                v_modVen.setVisible(true);
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(TableMaterias, "Error al obtener el ID de la fila seleccionada.");
+            }
+            txtBClave.setText(null);
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese un alumno", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_buscarMateria
 
     /**
      * @param args the command line arguments
@@ -916,6 +1000,7 @@ public class Ventana extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel BClave;
     private javax.swing.JPanel BNoCtrl;
     private javax.swing.JPanel CNoCrtl;
     private javax.swing.JPanel CNoCrtl1;
@@ -940,11 +1025,13 @@ public class Ventana extends javax.swing.JFrame {
     javax.swing.JTable TableAlumnos;
     javax.swing.JTable TableInscripciones;
     javax.swing.JTable TableMaterias;
-    private javax.swing.ButtonGroup btgOpciones;
+    private javax.swing.ButtonGroup btgAlumno;
+    private javax.swing.ButtonGroup btgMateria;
+    private javax.swing.JButton btnABuscar;
     private javax.swing.JButton btnCAgregar;
     private javax.swing.JButton btnCAgregar1;
-    private javax.swing.JButton btnCAgregar3;
     private javax.swing.JButton btnInscribir;
+    private javax.swing.JButton btnMBuscar;
     private javax.swing.JButton btnNReporte;
     private javax.swing.JComboBox<String> cbMaterias;
     private javax.swing.Box.Filler filler1;
@@ -965,6 +1052,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel lblBClave;
     private javax.swing.JLabel lblBNoCtrl;
     private javax.swing.JMenu menAlumno;
     private javax.swing.JMenu menInicio;
@@ -977,6 +1065,8 @@ public class Ventana extends javax.swing.JFrame {
     public javax.swing.JPanel pnlAlumno;
     javax.swing.JPanel pnlBuscar;
     private javax.swing.JPanel pnlBuscarAData;
+    javax.swing.JPanel pnlBuscarM;
+    private javax.swing.JPanel pnlBuscarMData;
     javax.swing.JPanel pnlCrearA;
     private javax.swing.JPanel pnlCrearAData;
     private javax.swing.JPanel pnlCrearIData;
@@ -989,6 +1079,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel pnlInicio;
     private javax.swing.JPanel pnlInscribir;
     private javax.swing.JPanel pnlMMain;
+    private javax.swing.JPanel pnlMOpciones;
     private javax.swing.JPanel pnlMTabla;
     private javax.swing.JPanel pnlMTitulo;
     public javax.swing.JPanel pnlMaterias;
@@ -998,8 +1089,11 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel pnlNTablaReporte;
     private javax.swing.JPanel pnlNTitulo;
     javax.swing.JPanel pnlTODO;
-    private javax.swing.JRadioButton rbtBuscar;
-    private javax.swing.JRadioButton rbtCrear;
+    private javax.swing.JRadioButton rbtABuscar;
+    private javax.swing.JRadioButton rbtACrear;
+    private javax.swing.JRadioButton rbtMBuscar;
+    private javax.swing.JRadioButton rbtMCrear;
+    private javax.swing.JTextField txtBClave;
     private javax.swing.JTextField txtBNoCtrl;
     private javax.swing.JTextField txtCClave;
     private javax.swing.JTextField txtCCreditos;
