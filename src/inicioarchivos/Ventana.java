@@ -884,21 +884,16 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_AgregarAlumno
 
     private void Inscribir(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inscribir
-        boolean a = txtINoCtrl.getText().isEmpty(),
-                b = (boolean) cbMaterias.getSelectedItem();
-        if (!b & !a) {
-            if (obAlumnos.altas(obAlumnos.canal,
-                    txtCNoCtrl.getText(),
-                    txtCNombre.getText(),
-                    Byte.parseByte(txtCSemestre.getText()))) {
-                obAlumnos.ordenar(obAlumnos.canal);
-                TablaModelo(TableAlumnos, "No. Control", "Nombre", "Semestre", 'A');
+        boolean a = txtINoCtrl.getText().isEmpty();
+        if (!a) {
+            if (obInscripciones.altas(obInscripciones.canal, txtINoCtrl.getText(),cbMaterias.getSelectedItem().toString(),(byte)0)) {
+                obInscripciones.ordenar(obInscripciones.canal);
+                TablaModelo(TableInscripciones, "No. Control", "Nombre", "Semestre", 'A');
             }
-            txtCNoCtrl.setText(null);
-            txtCNombre.setText(null);
+            txtINoCtrl.setText(null);
             txtCSemestre.setText(null);
         } else {
-            if (a & b) {
+            if (a) {
                 JOptionPane.showMessageDialog(null, "Ingrese un alumno", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Faltan datos por agregar", "Error", JOptionPane.ERROR_MESSAGE);

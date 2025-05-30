@@ -55,12 +55,9 @@ public class ArchivoInscripciones extends Archivos {
         try {
             int n;
             char opc = 0, sel = 0;
-            String bus;
             archAl = new ArchivoAlumnos();
             do {
-                System.out.println("Número de control del alumno a inscribir");
-                bus = sc.nextLine();
-                n = archAl.busqueda(canal1, bus);
+                n = archAl.busqueda(canal1, a);
                 if (n == -1) {
                     System.out.println("El alumno no existe, ¿Desea volver a intentar? (y/n)");
                     opc = sc.next().charAt(0);
@@ -74,9 +71,7 @@ public class ArchivoInscripciones extends Archivos {
             archMa = new ArchivoMaterias();
             do {
                 opc='n';
-                System.out.println("Escriba la clave de la materia que desea inscribir");
-                bus = sc.next();
-                n = archMa.busqueda(canal2, bus);
+                n = archMa.busqueda(canal2, b);
                 if (n == -1) {
                     System.out.println("La materia no existe, ¿Desea volver a intentar? (y/n)");
                     opc = sc.next().charAt(0);
