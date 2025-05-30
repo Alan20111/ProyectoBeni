@@ -102,40 +102,45 @@ public class ArchivoInscripciones extends Archivos {
         return 0;
     }
 
-    public void reporte(RandomAccessFile canal) {
+        public void reporte(RandomAccessFile canal) {
         String fichero, aux;
         PrintWriter salida = null;
         try {
             archAl = new ArchivoAlumnos();
             archMa = new ArchivoMaterias();
-            fichero = "C:\\Users\\monro\\Desktop\\ITCelaya\\Semestre 2\\Programacion Orientada a Objetos\\reporte.rep.txt";
+            fichero = "reporte.rep.txt";
             salida = new PrintWriter(new FileWriter(fichero, true));
             String res = "";
-            salida.println("\t\tReporte alumnos");
-            salida.println("");
-            salida.println("Número de control\t\t\tNombre\t\t\tSemestre");
+            salida.println("REPORTE DE ALUMNOS");
+            salida.println("__________________________________________________________________________");
+            salida.println(String.format("%11s \t| %-40s \t|%9s", "No. Control", "Nombre", "Semestre"));
+            salida.println("__________________________________________________________________________");
             for (int i = 0; i < (int) canal1.length() / archAl.tr; i++) {
                 Alumno al = new Alumno();
                 archAl.leerReg(canal1, i, al);
-                salida.println(String.format("%8s   %-40s   %5d", al.nroCtrl, al.nom, al.sem));
+                salida.println(String.format("%8s \t| %-40s \t|%9d", al.nroCtrl, al.nom, al.sem));
             }
             salida.println("\n\n");
-            salida.println("\t\tReporte alumnos");
-            salida.println("");
-            salida.println("Clave de la materia\t\t\tNombre\t\t\tCréditos");
+            salida.println("REPORTE DE MATERIAS");
+            salida.println("__________________________________________________________________________");
+            salida.println(String.format("%5s \t| %-28s \t|%5s", "Clave","Nombre","Créditos"));
+            salida.println("__________________________________________________________________________");            
             for (int i = 0; i < (int) canal2.length() / archMa.tr; i++) {
                 Materia ma = new Materia();
                 archMa.leerReg(canal2, i, ma);
-                salida.println(String.format("%4s   %-28s   %5d", ma.cve, ma.nom, ma.cred));
+                salida.println(String.format("%5s \t| %-28s \t|%5d", ma.cve, ma.nom, ma.cred));
             }
             salida.println("\n\n");
-            salida.println("\t\tReporte inscripciones");
-            salida.println("");
-            salida.println("Número de control\t\t\tMAteria");
+            salida.println("REPORTE DE INSCRIPCIONES");
+            salida.println("__________________________________________________________________________");
+            salida.println(String.format("%11s \t| %-28s", "No. Control","Clave de la Materia"));
+            salida.println("__________________________________________________________________________");
             for (int i = 0; i < (int) canal.length() / tr; i++) {
                 leerReg(canal, i, in);
-                salida.println(String.format("%8s   %4s", in.nroCtrl, in.cve));
+                salida.println(String.format("%8s \t| %4s", in.nroCtrl, in.cve));
             }
+            salida.println("\n\n");
+            salida.println("NULL NULL NULL SAHUR");
             salida.close();
         } catch (IOException e) {
             System.out.println(" No se abrio bien el fichero \n" + e.toString());

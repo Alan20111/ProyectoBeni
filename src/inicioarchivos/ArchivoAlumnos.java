@@ -37,18 +37,28 @@ public class ArchivoAlumnos extends Archivos {
 
     @Override
     public void reporte(RandomAccessFile canal) {
-        try {
-            int n = (int) canal.length() / tr;
-            for (int i = 0; i < n; i++) {
-                leerReg(canal, i, al);
-                System.out.println("Alumno " + al.mostrar());
-
-            }
-        } catch (IOException e) {
+        String fichero, aux;
+            PrintWriter salida = null;
+            try {
+                fichero = "reporteAlumnos.rep.txt";
+                salida = new PrintWriter(new FileWriter(fichero, true));
+                String res = "";
+                salida.println("REPORTE DE ALUMNOS");
+                salida.println("__________________________________________________________________________");
+                salida.println(String.format("%11s \t| %-40s \t|%9s", "No. Control", "Nombre", "Semestre"));
+                salida.println("__________________________________________________________________________");
+                for (int i = 0; i < (int) canal1.length() / tr; i++) {
+                    Alumno al = new Alumno();
+                    leerReg(canal1, i, al);
+                    salida.println(String.format("%8s \t| %-40s \t|%9d", al.nroCtrl, al.nom, al.sem));
+                }
+                salida.println("\n\n");
+                salida.println("NULL NULL NULL SAHUR");
+                salida.close();
+            }catch (IOException e) {
                        JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
-
+            }
         }
-    }
 
     @Override
     public int busqueda(RandomAccessFile canal, String bus) {

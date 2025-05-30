@@ -220,6 +220,7 @@ public class Ventana extends javax.swing.JFrame {
         pnlATabla = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TableAlumnos = new javax.swing.JTable();
+        btnNReporte2 = new javax.swing.JButton();
         pnlAOpciones = new javax.swing.JPanel();
         pnlCrearA = new javax.swing.JPanel();
         pnlCrearAData = new javax.swing.JPanel();
@@ -248,6 +249,7 @@ public class Ventana extends javax.swing.JFrame {
         pnlMTabla = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         TableMaterias = new javax.swing.JTable();
+        btnNReporte1 = new javax.swing.JButton();
         pnlMOpciones = new javax.swing.JPanel();
         pnlCrearM = new javax.swing.JPanel();
         pnlCrearMData = new javax.swing.JPanel();
@@ -415,6 +417,15 @@ public class Ventana extends javax.swing.JFrame {
 
         pnlATabla.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
+        btnNReporte2.setText("Crear Reporte");
+        btnNReporte2.setAlignmentY(1.0F);
+        btnNReporte2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reportarAl(evt);
+            }
+        });
+        pnlATabla.add(btnNReporte2, java.awt.BorderLayout.SOUTH);
+
         pnlAMain.add(pnlATabla, java.awt.BorderLayout.CENTER);
 
         pnlAOpciones.setLayout(new java.awt.CardLayout());
@@ -550,6 +561,15 @@ public class Ventana extends javax.swing.JFrame {
         TableMaterias.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         pnlMTabla.add(jScrollPane3, java.awt.BorderLayout.CENTER);
+
+        btnNReporte1.setText("Crear Reporte");
+        btnNReporte1.setAlignmentY(1.0F);
+        btnNReporte1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reportarMat(evt);
+            }
+        });
+        pnlMTabla.add(btnNReporte1, java.awt.BorderLayout.SOUTH);
 
         pnlMMain.add(pnlMTabla, java.awt.BorderLayout.CENTER);
 
@@ -935,7 +955,8 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_Inscribir
 
     private void crearReporte(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearReporte
-        // TODO add your handling code here:
+        obInscripciones.reporte(obInscripciones.canal);
+        JOptionPane.showMessageDialog(rootPane, "Reporte Creado","Generar Reporte",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_crearReporte
 
     private void buscarAlumno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarAlumno
@@ -990,6 +1011,16 @@ public class Ventana extends javax.swing.JFrame {
     private void cambiarTxtArea(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarTxtArea
         txtClave.setText(getCve(cbMaterias, TableMaterias));
     }//GEN-LAST:event_cambiarTxtArea
+
+    private void reportarMat(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportarMat
+        obMaterias.reporte(obMaterias.canal);
+        JOptionPane.showMessageDialog(rootPane, "Reporte Creado","Generar Reporte",JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_reportarMat
+
+    private void reportarAl(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportarAl
+        obAlumnos.reporte(obAlumnos.canal);
+        JOptionPane.showMessageDialog(rootPane, "Reporte Creado","Generar Reporte",JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_reportarAl
 
     /**
      * @param args the command line arguments
@@ -1063,6 +1094,8 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton btnInscribir;
     private javax.swing.JButton btnMBuscar;
     private javax.swing.JButton btnNReporte;
+    private javax.swing.JButton btnNReporte1;
+    private javax.swing.JButton btnNReporte2;
     private javax.swing.JComboBox<String> cbMaterias;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler8;
