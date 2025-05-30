@@ -25,46 +25,45 @@ import javax.swing.table.TableColumn;
 import inicioarchivos.betatester.*;
 
 class BotonTabla extends AbstractCellEditor implements TableCellRenderer, TableCellEditor, ActionListener {
-    JButton a_boton;
-    JTable a_tabla;
-    String a_tipoTabla;
 
+    // Atributos
+    private JButton a_boton;
+    private JTable a_tabla;
+    private String a_tipoTabla;
+    private int a_fila;
+
+    // Constructor
     public BotonTabla(JTable p_tabla, String p_tipoTabla) {
-        a_tabla = p_tabla;
-        a_tipoTabla = p_tipoTabla;
-        a_boton = new JButton("Editar");
-        a_boton.addActionListener(this);
+        this.a_tabla = p_tabla;
+        this.a_tipoTabla = p_tipoTabla;
+        this.a_boton = new JButton("Editar");
+        this.a_boton.addActionListener(this);
     }
+
     @Override
     public Object getCellEditorValue() {
         return "Editar";
     }
+
     @Override
     public Component getTableCellRendererComponent(JTable p_tabla, Object p_valor, boolean p_sel, boolean p_foco, int p_fila, int p_col) {
         return a_boton;
     }
+
     @Override
     public Component getTableCellEditorComponent(JTable p_tabla, Object p_valor, boolean p_sel, int p_fila, int p_col) {
+        this.a_fila = p_fila;
         return a_boton;
     }
+
     @Override
     public void actionPerformed(ActionEvent p_evt) {
-        /*        int v_fila = a_tabla.getSelectedRow();
-        String v_info = "";
-        
-        switch (a_tipoTabla) {
-        case "A":
-        //obAlumnosHijo.modificaciones(obAlumnos.canal, v_fila, , ,);
-        break;
-        case "M":
-        v_info = "Materia con clave: " + a_tabla.getValueAt(v_fila, 0);
-        break;
-        default:
-        v_info = "Tabla desconocida ";
-        break;
-        }*/
-        ModificarVen mod = new ModificarVen(a_tabla);
-        mod.setVisible(true);
+        try {
+            ModificarVen v_modVen = new ModificarVen(a_tabla, a_fila);
+            v_modVen.setVisible(true);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(a_tabla, "Error al obtener el ID de la fila seleccionada.");
+        }
         fireEditingStopped();
     }
 }
@@ -93,26 +92,24 @@ public class Ventana extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void loadTablas(){
+    public void loadTablas() {
         TablaModelo(TableAlumnos, "No. Control", "Nombre", "Semestre", 'A');
         TablaModelo(TableMaterias, "Clave", "Nombre", "Creditos", 'M');
         TablaModelo(TableInscripciones, "No.Control", "No.Clave", "", 'I');
     }
-    
-    public DefaultComboBoxModel InscriComboModel(JTable Tabla)
-    {
+
+    public DefaultComboBoxModel InscriComboModel(JTable Tabla) {
         DefaultComboBoxModel cb = new DefaultComboBoxModel();
-        for(int i=0; i<Tabla.getRowCount(); i++)
-        {
+        for (int i = 0; i < Tabla.getRowCount(); i++) {
             cb.addElement(Tabla.getValueAt(i, 1).toString());
         }
         return cb;
     }
-    
+
     public DefaultTableModel TablaModelo(JTable Tabla, String a, String b, String c, char op) {
         TablaModelo = new DefaultTableModel() {
             @Override
-            public boolean isCellEditable(int row, int column){
+            public boolean isCellEditable(int row, int column) {
                 return column == 3;
             }
         };
@@ -163,7 +160,7 @@ public class Ventana extends javax.swing.JFrame {
 
                 try {
                     int i = 0;
-                    while ((obInscripciones.canal.length() / 53) > i) {
+                    while ((obInscripciones.canal.length() / 16) > i) {
                         System.out.println(i);
                         obInscripcionesHijo.leerReg(obInscripciones.canal, i, obInscripcion);
                         TablaModelo.addRow(new Object[]{obInscripcion.nroCtrl, obInscripcion.cve, "", ""});
@@ -893,7 +890,7 @@ public class Ventana extends javax.swing.JFrame {
 
     private void EasterEgg(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EasterEgg
         JOptionPane.showMessageDialog(rootPane, "Funciona");
-        BetaTester bt=new BetaTester();
+        BetaTester bt = new BetaTester();
     }//GEN-LAST:event_EasterEgg
 
     private void AActualizarT(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AActualizarT

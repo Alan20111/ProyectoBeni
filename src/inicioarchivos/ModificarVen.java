@@ -1,4 +1,5 @@
 package inicioarchivos;
+
 /**
  *
  * @author markb
@@ -9,15 +10,17 @@ import javax.swing.*;
 import static inicioarchivos.InicioArchivos.obAlumnos;
 import static inicioarchivos.InicioArchivos.obInscripciones;
 import static inicioarchivos.InicioArchivos.obMaterias;
-public class ModificarVen extends JFrame
-{
+
+public class ModificarVen extends JFrame {
+
     Ventana ven = new Ventana();
     String lA, lB, lC;
     String dA, dB, dC;
     int row;
-    
-    public ModificarVen(JTable Tabla) 
-    {
+
+    public ModificarVen(JTable Tabla,int id) {
+        System.out.println("row:" + id);
+        row = id;
         lA = Tabla.getColumnName(0);
         lB = Tabla.getColumnName(1);
         lC = Tabla.getColumnName(2);
@@ -27,7 +30,7 @@ public class ModificarVen extends JFrame
         row = Tabla.getSelectedRow();
         initComponents();
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -70,6 +73,11 @@ public class ModificarVen extends JFrame
         txtDatoA.setText(dA);
         txtDatoA.setAlignmentX(0.0F);
         txtDatoA.setAlignmentY(0.0F);
+        txtDatoA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDatoAActionPerformed(evt);
+            }
+        });
         pnlA.add(txtDatoA);
 
         pnlData.add(pnlA);
@@ -127,15 +135,15 @@ public class ModificarVen extends JFrame
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void modificarAl(){
+
+    private void modificarAl() {
         obAlumnos.modificaciones(obAlumnos.canal, row, txtDatoA.getText(), txtDatoB.getText(), Byte.parseByte(txtDatoC.getText()));
     }
-    
-    private void modificarMat(){
+
+    private void modificarMat() {
         obMaterias.modificaciones(obMaterias.canal, row, txtDatoA.getText(), txtDatoB.getText(), Byte.parseByte(txtDatoC.getText()));
     }
-    
+
     private void cancelar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelar
         dispose();
     }//GEN-LAST:event_cancelar
@@ -145,27 +153,31 @@ public class ModificarVen extends JFrame
         boolean a = txtDatoA.getText().isEmpty(),
                 b = txtDatoB.getText().isEmpty(),
                 c = txtDatoC.getText().isEmpty();
-        if(!a&!b&!c){
-            int op = JOptionPane.showConfirmDialog(rootPane, "¿Confirma su modificación?","Confirmar Modificación",JOptionPane.YES_OPTION);
-            if(op==0){
-                if(lblA.getText().equals("No. Control")){
+        if (!a & !b & !c) {
+            int op = JOptionPane.showConfirmDialog(rootPane, "¿Confirma su modificación?", "Confirmar Modificación", JOptionPane.YES_OPTION);
+            if (op == 0) {
+                if (lblA.getText().equals("No. Control")) {
                     modificarAl();
                 }
-                if(lblA.getText().equals("Clave")){
+                if (lblA.getText().equals("Clave")) {
                     modificarMat();
                 }
+                ven.loadTablas();
                 JOptionPane.showMessageDialog(rootPane, "Modificación Realizada", "Modificación", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
             }
-        }else if(a&b&c){
-            JOptionPane.showMessageDialog(rootPane, "Error w","Error Modificación",JOptionPane.ERROR_MESSAGE);
-        }else{
+        } else if (a & b & c) {
+            JOptionPane.showMessageDialog(rootPane, "Error w", "Error Modificación", JOptionPane.ERROR_MESSAGE);
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Una wea");
         }
     }//GEN-LAST:event_modificar
 
+    private void txtDatoAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDatoAActionPerformed
+    }//GEN-LAST:event_txtDatoAActionPerformed
+
     public static void main(String args[]) {
-        ModificarVen mv = new ModificarVen(null);
+        ModificarVen mv = new ModificarVen(null,0);
         mv.setVisible(true);
     }
 
