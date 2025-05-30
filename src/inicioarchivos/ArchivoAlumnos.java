@@ -68,7 +68,6 @@ public class ArchivoAlumnos extends Archivos {
                 }
             } while (!bus.equals(al.nroCtrl) && li <= ls);
             if (bus.equals(al.nroCtrl)) {
-                System.out.println("Se ha encontrado el número de control\n" + al.mostrar());
                 return pm;
             } else {
                 System.out.println(bus + " no existe");

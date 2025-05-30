@@ -81,7 +81,7 @@ public class ArchivoMaterias extends Archivos {
             return 0;
         }
     }
-
+    
     @Override
     public int modificaciones(RandomAccessFile canal, int ID, String Clave, String Nombre, byte Cred) {
         ordenar(canal);

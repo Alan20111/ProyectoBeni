@@ -888,7 +888,7 @@ public class Ventana extends javax.swing.JFrame {
         if (!a) {
             if (obInscripciones.altas(obInscripciones.canal, txtINoCtrl.getText(),cbMaterias.getSelectedItem().toString(),(byte)0)) {
                 obInscripciones.ordenar(obInscripciones.canal);
-                TablaModelo(TableInscripciones, "No. Control", "Nombre", "Semestre", 'A');
+                TablaModelo(TableInscripciones, "No. Control", "Clave de materias", "", 'I');
             }
             txtINoCtrl.setText(null);
             txtCSemestre.setText(null);
