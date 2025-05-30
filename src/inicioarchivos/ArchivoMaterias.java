@@ -16,7 +16,8 @@ public class ArchivoMaterias extends Archivos {
         try {
             canal = new RandomAccessFile("materias.dat", "rw");
         } catch (IOException e) {
-            System.out.println("Error en el archivo");
+                       JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
+
         }
     }
 
@@ -29,7 +30,8 @@ public class ArchivoMaterias extends Archivos {
             JOptionPane.showMessageDialog(null, "Materia Agregada", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             return true;
         } catch (IOException e) {
-            System.out.println("Error en el archivo");
+                       JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
+
             return false;
         }
     }
@@ -44,7 +46,8 @@ public class ArchivoMaterias extends Archivos {
 
             }
         } catch (IOException e) {
-            System.out.println("Error en el archivo");
+                       JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
+
         }
     }
 
@@ -72,7 +75,8 @@ public class ArchivoMaterias extends Archivos {
                 return -1;
             }
         } catch (IOException e) {
-            System.out.println("Error en el archivo");
+                       JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
+
             return 0;
         }
     }
@@ -101,7 +105,8 @@ public class ArchivoMaterias extends Archivos {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error en el archivo");
+                       JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
+
         }
     }
 
@@ -112,7 +117,8 @@ public class ArchivoMaterias extends Archivos {
             x.nom = canal.readUTF();
             x.cred = canal.readByte();
         } catch (IOException e) {
-            System.out.println("Error en el archivo");
+                       JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
+
         }
     }
 
@@ -123,7 +129,8 @@ public class ArchivoMaterias extends Archivos {
             canal.writeUTF(String.format("%-28s", x.nom.length() > 28 ? x.nom.substring(0, 28) : x.nom));
             canal.writeByte(x.cred);
         } catch (IOException e) {
-            System.out.println("Error en el archivo");
+                       JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
+
         }
     }
 }

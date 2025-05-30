@@ -16,7 +16,8 @@ public class ArchivoAlumnos extends Archivos {
         try {
             canal = new RandomAccessFile("alumnos.dat", "rw");
         } catch (IOException e) {
-            System.out.println("Error en el archivo");
+                       JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
+
         }
     }
 
@@ -44,7 +45,8 @@ public class ArchivoAlumnos extends Archivos {
 
             }
         } catch (IOException e) {
-            System.out.println("Error en el archivo");
+                       JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
+
         }
     }
 
@@ -74,7 +76,8 @@ public class ArchivoAlumnos extends Archivos {
                 return -1;
             }
         } catch (IOException e) {
-            System.out.println("Error en el archivo");
+                       JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
+
             return 0;
         }
     }
@@ -103,7 +106,8 @@ public class ArchivoAlumnos extends Archivos {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error en el archivo");
+                       JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
+
         }
     }
 
@@ -114,7 +118,8 @@ public class ArchivoAlumnos extends Archivos {
             x.nom = canal.readUTF();
             x.sem = canal.readByte();
         } catch (IOException e) {
-            System.out.println("Error en el archivo");
+                       JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
+
         }
     }
 
@@ -125,7 +130,8 @@ public class ArchivoAlumnos extends Archivos {
             canal.writeUTF(String.format("%-40s", x.nom.length() > 40 ? x.nom.substring(0, 40) : x.nom));
             canal.write(x.sem);
         } catch (IOException e) {
-            System.out.println("|Error en el archivo");
+                       JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
+
         }
     }
 }
