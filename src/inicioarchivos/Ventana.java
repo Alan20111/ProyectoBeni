@@ -206,9 +206,11 @@ public class Ventana extends javax.swing.JFrame {
         Opciones = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         pnlIOpciones = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         Duke = new javax.swing.JLabel();
         pnlAlumno = new javax.swing.JPanel();
         pnlATitulo = new javax.swing.JPanel();
@@ -339,7 +341,7 @@ public class Ventana extends javax.swing.JFrame {
                 InicioMAlumno(evt);
             }
         });
-        pnlIOpciones.add(jButton1);
+        jPanel1.add(jButton1);
 
         jButton2.setText("Materia");
         jButton2.setAlignmentX(0.5F);
@@ -348,7 +350,7 @@ public class Ventana extends javax.swing.JFrame {
                 InicioMMateria(evt);
             }
         });
-        pnlIOpciones.add(jButton2);
+        jPanel1.add(jButton2);
 
         jButton3.setText("Inscibir");
         jButton3.setAlignmentX(0.5F);
@@ -357,7 +359,18 @@ public class Ventana extends javax.swing.JFrame {
                 InicioMInscribir(evt);
             }
         });
-        pnlIOpciones.add(jButton3);
+        jPanel1.add(jButton3);
+
+        jButton4.setText("Generar Reporte");
+        jButton4.setAlignmentX(0.5F);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearReporte(evt);
+            }
+        });
+        jPanel1.add(jButton4);
+
+        pnlIOpciones.add(jPanel1);
 
         Opciones.add(pnlIOpciones);
 
@@ -747,7 +760,7 @@ public class Ventana extends javax.swing.JFrame {
         btnNReporte.setAlignmentY(1.0F);
         btnNReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                crearReporte(evt);
+                reportarIns(evt);
             }
         });
         pnlNMain1.add(btnNReporte, java.awt.BorderLayout.SOUTH);
@@ -955,7 +968,11 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_Inscribir
 
     private void crearReporte(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearReporte
-        obInscripciones.reporte(obInscripciones.canal);
+        ArchivoInscripciones report = new ArchivoInscripciones();
+        report.canal=obInscripciones.canal;
+        report.canal1=obInscripciones.canal1;
+        report.canal2=obInscripciones.canal2;
+        report.reporteGen(report.canal);
         JOptionPane.showMessageDialog(rootPane, "Reporte Creado","Generar Reporte",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_crearReporte
 
@@ -1021,6 +1038,11 @@ public class Ventana extends javax.swing.JFrame {
         obAlumnos.reporte(obAlumnos.canal);
         JOptionPane.showMessageDialog(rootPane, "Reporte Creado","Generar Reporte",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_reportarAl
+
+    private void reportarIns(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportarIns
+        obInscripciones.reporte(obInscripciones.canal);
+        JOptionPane.showMessageDialog(rootPane, "Reporte Creado","Generar Reporte",JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_reportarIns
 
     /**
      * @param args the command line arguments
@@ -1103,6 +1125,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1111,6 +1134,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
