@@ -37,33 +37,12 @@ public class ArchivoInscripciones extends Archivos {
             System.out.println("Error en el archivo");
         }
     }
-
-    public void menu(String noCtrl, String nom, byte sem) {
-        byte opc = 0;
-        do {
-            System.out.println("Menú de opciones");
-            System.out.println("1) Inscribir a una clase");
-            System.out.println("2) Ver materias inscritas");
-            System.out.println("3) Salida");
-            System.out.println("Tecle la opcion");
-            opc = sc.nextByte();
-            switch (opc) {
-                case 1:
-                    altas(canal, noCtrl, nom, sem);
-                    break;
-                case 2:
-                    reporte(canal);
-                    break;
-            }
-        } while (opc != 3);
-    }
-
     @Override
     public boolean altas(RandomAccessFile canal, String a, String b, byte c) {
         ordenar(canal);
         try {
             int n;
-            char opc = 0, sel = 0;
+            char opc = 0;
             al = new Alumno();
             ma = new Materia();
             int reg = (int) canal.length() / tr;
@@ -78,13 +57,12 @@ public class ArchivoInscripciones extends Archivos {
                 return false;
             }
             archAl.leerReg(canal1, n, al);
-            n = busquedaMat(canal2, b);
+            n = archMa.busqueda(canal2, b);
             archMa.leerReg(canal2, n, ma);
-            System.out.println("ma" + ma.cve + " y n es:" + n);
+            System.out.println("ma: " + ma.cve + " y n es: " + n);
             in = new Inscripcion();
             in.nroCtrl = al.nroCtrl;
             in.cve = ma.cve;
-            System.out.println("in" + in.cve);
             grabarReg(canal, reg, in);
             return true;
         } catch (IOException e) {

@@ -78,7 +78,6 @@ public class Ventana extends javax.swing.JFrame {
     ArchivoInscripciones obInscripcionesHijo = (ArchivoInscripciones) obInscripciones;
 
     DefaultTableModel TablaModelo;
-    String cveInscripcion;
 
     public Ventana() {
 
@@ -96,9 +95,7 @@ public class Ventana extends javax.swing.JFrame {
     public DefaultComboBoxModel InscriComboModel(JTable Tabla) {
         DefaultComboBoxModel cb = new DefaultComboBoxModel();
         for (int i = 0; i < Tabla.getRowCount(); i++) {
-            System.out.println(Tabla.getValueAt(i, 1).toString());
             cb.addElement(Tabla.getValueAt(i, 1).toString());
-            cveInscripcion=Tabla.getValueAt(i, 1).toString();
         }
         return cb;
     }
@@ -899,7 +896,6 @@ public class Ventana extends javax.swing.JFrame {
         boolean a = txtINoCtrl.getText().isEmpty();
         if (!a) {
             if (obInscripciones.altas(obInscripciones.canal, txtINoCtrl.getText(),getCve(cbMaterias,TableMaterias),(byte)0)) {
-                obInscripciones.ordenar(obInscripciones.canal);
                 TablaModelo(TableInscripciones, "No. Control", "Clave de materias", "", 'I');
             }
             txtINoCtrl.setText(null);
