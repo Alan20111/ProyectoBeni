@@ -18,8 +18,9 @@ public class ArchivoInscripciones extends Archivos {
     Alumno al;
     Materia ma;
     Inscripcion in = new Inscripcion();
-    ArchivoAlumnos archAl;
-    ArchivoMaterias archMa;
+    ArchivoAlumnos archAl = new ArchivoAlumnos();
+    ArchivoMaterias archMa = new ArchivoMaterias();
+    ;
     final int tr = 16;
     private Scanner sc = new Scanner(System.in);
 
@@ -57,13 +58,15 @@ public class ArchivoInscripciones extends Archivos {
         } while (opc != 3);
     }
 
+    @Override
     public boolean altas(RandomAccessFile canal, String a, String b, byte c) {
-        System.out.println(a + "    " + b);
+        ordenar(canal);
         try {
             int n;
             char opc = 0, sel = 0;
-
-            archAl = new ArchivoAlumnos();
+            al = new Alumno();
+            ma = new Materia();
+            int reg = (int) canal.length() / tr;
             do {
                 n = archAl.busqueda(canal1, a);
                 if (n == -1) {
@@ -74,13 +77,8 @@ public class ArchivoInscripciones extends Archivos {
             if (opc == 'n') {
                 return false;
             }
-
-            al = new Alumno();
             archAl.leerReg(canal1, n, al);
-            System.out.println(canal1.getFilePointer());
-            archMa = new ArchivoMaterias();
-            int reg = (int) canal.length() / tr;
-            ma = new Materia();
+            n = busquedaMat(canal2, b);
             archMa.leerReg(canal2, n, ma);
             System.out.println("ma" + ma.cve + " y n es:" + n);
             in = new Inscripcion();
@@ -118,64 +116,7 @@ public class ArchivoInscripciones extends Archivos {
 
     @Override
     public int busqueda(RandomAccessFile canal, String bus) {
-        ordenar(canal);
-        if (bus.isEmpty()) {
-            bus = sc.nextLine();
-        }
-        int li = 0;
-        int pm;
-        try {
-            int ls = (int) (canal.length() / tr) - 1;
-            do {
-                pm = (li + ls) / 2;
-                leerReg(canal, pm, in);
-                if (in.nroCtrl.compareTo(bus) < 0) {
-                    li = pm + 1;
-                } else {
-                    ls = pm - 1;
-                }
-            } while (!bus.equals(in.nroCtrl) && li <= ls);
-            if (bus.equals(in.nroCtrl)) {
-                System.out.println("Se ha encontrado el número de control\n" + al.mostrar());
-                return pm;
-            } else {
-                System.out.println(bus + " no existe");
-                return -1;
-            }
-        } catch (IOException e) {
-            System.out.println("Error en el archivo");
-            return 0;
-        }
-    }
-
-    public int busquedaMat(RandomAccessFile canal, String bus) {
-        ordenar(canal);
-        if (bus.isEmpty()) {
-            bus = sc.nextLine();
-        }
-        int li = 0;
-        int pm;
-        try {
-            int ls = (int) (canal.length() / tr) - 1;
-            do {
-                pm = (li + ls) / 2;
-                leerReg(canal, pm, in);
-                if (in.cve.compareTo(bus) < 0) {
-                    li = pm + 1;
-                } else {
-                    ls = pm - 1;
-                }
-            } while (!bus.equals(in.cve) && li <= ls);
-            if (bus.equals(in.cve)) {
-                return pm;
-            } else {
-                System.out.println(bus + " no existe");
-                return -1;
-            }
-        } catch (IOException e) {
-            System.out.println("Error en el archivo");
-            return 0;
-        }
+        return 0;
     }
 
     public void reporte(RandomAccessFile canal) {

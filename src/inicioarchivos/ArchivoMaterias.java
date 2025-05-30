@@ -51,11 +51,6 @@ public class ArchivoMaterias extends Archivos {
     @Override
     public int busqueda(RandomAccessFile canal, String bus) {
         ordenar(canal);
-        if (bus.isEmpty()) {
-            System.out.println("Ingresa busqueda");
-            bus = sc.nextLine();
-        }
-
         int li = 0;
         int pm;
         try {
@@ -81,6 +76,7 @@ public class ArchivoMaterias extends Archivos {
             return 0;
         }
     }
+    
     
     @Override
     public int modificaciones(RandomAccessFile canal, int ID, String Clave, String Nombre, byte Cred) {
@@ -124,7 +120,7 @@ public class ArchivoMaterias extends Archivos {
         try {
             canal.seek(nReg * tr);
             canal.writeUTF(String.format("%4s", x.cve.length() > 4 ? x.cve.substring(0, 4) : x.cve));
-            canal.writeUTF(String.format("%28s", x.nom.length() > 28 ? x.nom.substring(0, 28) : x.nom));
+            canal.writeUTF(String.format("%-28s", x.nom.length() > 28 ? x.nom.substring(0, 28) : x.nom));
             canal.writeByte(x.cred);
         } catch (IOException e) {
             System.out.println("Error en el archivo");

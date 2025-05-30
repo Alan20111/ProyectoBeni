@@ -96,6 +96,7 @@ public class Ventana extends javax.swing.JFrame {
     public DefaultComboBoxModel InscriComboModel(JTable Tabla) {
         DefaultComboBoxModel cb = new DefaultComboBoxModel();
         for (int i = 0; i < Tabla.getRowCount(); i++) {
+            System.out.println(Tabla.getValueAt(i, 1).toString());
             cb.addElement(Tabla.getValueAt(i, 1).toString());
             cveInscripcion=Tabla.getValueAt(i, 1).toString();
         }
