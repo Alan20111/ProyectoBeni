@@ -57,7 +57,6 @@ public class ArchivoMaterias extends Archivos {
                 salida.println("NULL NULL NULL SAHUR");
                 salida.close();
             }catch (IOException e) {
-                       JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
 
@@ -85,8 +84,6 @@ public class ArchivoMaterias extends Archivos {
                 return -1;
             }
         } catch (IOException e) {
-                       JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
-
             return 0;
         }
     }
@@ -115,8 +112,6 @@ public class ArchivoMaterias extends Archivos {
                 }
             }
         } catch (IOException e) {
-                       JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
-
         }
     }
 
@@ -127,8 +122,6 @@ public class ArchivoMaterias extends Archivos {
             x.nom = canal.readUTF();
             x.cred = canal.readByte();
         } catch (IOException e) {
-                       JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
-
         }
     }
 
@@ -139,8 +132,6 @@ public class ArchivoMaterias extends Archivos {
             canal.writeUTF(String.format("%-28s", x.nom.length() > 28 ? x.nom.substring(0, 28) : x.nom));
             canal.writeByte(x.cred);
         } catch (IOException e) {
-                       JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
-
         }
     }
 }
