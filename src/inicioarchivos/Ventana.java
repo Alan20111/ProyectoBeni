@@ -79,7 +79,6 @@ public class Ventana extends javax.swing.JFrame {
     ArchivoInscripciones obInscripcionesHijo = (ArchivoInscripciones) obInscripciones;
 
     DefaultTableModel TablaModelo;
-    DefaultComboBoxModel cb;
 
     public Ventana() {
 
@@ -102,7 +101,7 @@ public class Ventana extends javax.swing.JFrame {
     
     public DefaultComboBoxModel InscriComboModel(JTable Tabla)
     {
-        cb = new DefaultComboBoxModel();
+        DefaultComboBoxModel cb = new DefaultComboBoxModel();
         for(int i=0; i<Tabla.getRowCount(); i++)
         {
             cb.addElement(Tabla.getValueAt(i, 1).toString());
@@ -657,6 +656,7 @@ public class Ventana extends javax.swing.JFrame {
         LINombreM.setText("Nombre de la Materia:");
         IMateria.add(LINombreM, java.awt.BorderLayout.NORTH);
 
+        jComboBox1.setModel(InscriComboModel(TableMaterias));
         IMateria.add(jComboBox1, java.awt.BorderLayout.PAGE_END);
 
         pnlCrearIData.add(IMateria);
