@@ -102,7 +102,7 @@ public class ArchivoInscripciones extends Archivos {
         return 0;
     }
 
-        public void reporte(RandomAccessFile canal) {
+    public void reporte(RandomAccessFile canal) {
         String fichero, aux;
         PrintWriter salida = null;
         try {
@@ -111,12 +111,17 @@ public class ArchivoInscripciones extends Archivos {
             fichero = "reporteInscripciones.rep.txt";
             salida = new PrintWriter(new FileWriter(fichero, true));
             salida.println("REPORTE DE INSCRIPCIONES");
-            salida.println("__________________________________________________________________________");
-            salida.println(String.format("%11s \t| %-28s", "No. Control","Clave de la Materia"));
-            salida.println("__________________________________________________________________________");
+            salida.println("__________________________________________________________________________________________________________________________________________");
+            salida.println(String.format("%11s \t| %-40s \t|%9s| %-5s| %-28s \t|%5s", "No. Control", "Nombre", "Semestre", "Clave", "Nombre", "Créditos"));
+            salida.println("__________________________________________________________________________________________________________________________________________");
+
             for (int i = 0; i < (int) canal.length() / tr; i++) {
+                Materia ma = new Materia();
+                archMa.leerReg(canal2, i, ma);
+                Alumno al = new Alumno();
+                archAl.leerReg(canal1, i, al);
                 leerReg(canal, i, in);
-                salida.println(String.format("%8s \t| %4s", in.nroCtrl, in.cve));
+                salida.println(String.format("%8s \t| %-40s \t|%9d| %5s| %-28s \t|%5d", in.nroCtrl, al.nom, al.sem, in.cve, ma.nom, ma.cred));
             }
             salida.println("\n\n");
             salida.println("NULL NULL NULL SAHUR");
@@ -147,8 +152,8 @@ public class ArchivoInscripciones extends Archivos {
             System.out.println("Error en el archivo");
         }
     }
-    
-    public void reporteGen(RandomAccessFile canal){
+
+    public void reporteGen(RandomAccessFile canal) {
         String fichero, aux;
         PrintWriter salida = null;
         try {
@@ -169,8 +174,8 @@ public class ArchivoInscripciones extends Archivos {
             salida.println("\n\n");
             salida.println("REPORTE DE MATERIAS");
             salida.println("__________________________________________________________________________");
-            salida.println(String.format("%5s \t| %-28s \t|%5s", "Clave","Nombre","Créditos"));
-            salida.println("__________________________________________________________________________");            
+            salida.println(String.format("%5s \t| %-28s \t|%5s", "Clave", "Nombre", "Créditos"));
+            salida.println("__________________________________________________________________________");
             for (int i = 0; i < (int) canal2.length() / archMa.tr; i++) {
                 Materia ma = new Materia();
                 archMa.leerReg(canal2, i, ma);
@@ -178,18 +183,23 @@ public class ArchivoInscripciones extends Archivos {
             }
             salida.println("\n\n");
             salida.println("REPORTE DE INSCRIPCIONES");
-            salida.println("__________________________________________________________________________");
-            salida.println(String.format("%11s \t| %-28s", "No. Control","Clave de la Materia"));
-            salida.println("__________________________________________________________________________");
+            salida.println("__________________________________________________________________________________________________________________________________________");
+            salida.println(String.format("%11s \t| %-40s \t|%9s| %-5s| %-28s \t|%5s", "No. Control", "Nombre", "Semestre", "Clave", "Nombre", "Créditos"));
+            salida.println("__________________________________________________________________________________________________________________________________________");
+
             for (int i = 0; i < (int) canal.length() / tr; i++) {
+                Materia ma = new Materia();
+                archMa.leerReg(canal2, i, ma);
+                Alumno al = new Alumno();
+                archAl.leerReg(canal1, i, al);
                 leerReg(canal, i, in);
-                salida.println(String.format("%8s \t| %4s", in.nroCtrl, in.cve));
+                salida.println(String.format("%8s \t| %-40s \t|%9d| %5s| %-28s \t|%5d", in.nroCtrl, al.nom, al.sem, in.cve, ma.nom, ma.cred));
             }
             salida.println("\n\n");
             salida.println("NULL NULL NULL SAHUR");
             salida.close();
-            } catch (IOException e) {
+        } catch (IOException e) {
             System.out.println(" No se abrio bien el fichero \n" + e.toString());
-            }
+        }
     }
 }

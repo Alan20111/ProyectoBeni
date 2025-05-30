@@ -363,6 +363,8 @@ public class Ventana extends javax.swing.JFrame {
 
         jButton4.setText("Generar Reporte");
         jButton4.setAlignmentX(0.5F);
+        jButton4.setAlignmentY(10);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 crearReporte(evt);
