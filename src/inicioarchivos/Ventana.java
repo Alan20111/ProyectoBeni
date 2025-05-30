@@ -689,6 +689,7 @@ public class Ventana extends javax.swing.JFrame {
         LINombreM1.setText("Clave de la Materia:");
         IClave.add(LINombreM1, java.awt.BorderLayout.NORTH);
 
+        txtClave.setEditable(false);
         txtClave.setColumns(20);
         txtClave.setRows(1);
         txtClave.setText(getCve(cbMaterias, TableMaterias));
