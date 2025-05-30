@@ -10,7 +10,7 @@ import javax.swing.*;
 public class BetaTester 
 {
     JFrame ven;
-    ImageIcon Duke1, Duke2, Duke3;
+    ImageIcon Duke1, Duke2, Duke3, DukeG1, DukeG2;
     
     public BetaTester(){
         initComponents();
@@ -22,6 +22,8 @@ public class BetaTester
         ven.setAlwaysOnTop(true);
         ven.setSize(400,200);
         ven.setVisible(true);
+        
+        boolean superEgg;
         
         JPanel panelTODO = new JPanel();
         panelTODO.setLayout(new BorderLayout(10,10));
@@ -53,6 +55,9 @@ public class BetaTester
         Image duke3 = image3.getScaledInstance(90, 100, Image.SCALE_SMOOTH);
         Duke3 = new ImageIcon(duke3);
         
+        DukeG1 = new ImageIcon((getClass().getResource("/inicioarchivos/betatester/java-duke.gif")));
+        DukeG2 = new ImageIcon((getClass().getResource("/inicioarchivos/betatester/Duke High Five.gif")));
+        
         String t="""
                  \"Estaban los tomatitos,
                  Muy Contentitos,
@@ -60,15 +65,24 @@ public class BetaTester
                  a hacerlos jugo\"
                  *ring* *ring* *ring*
                  """;
-        int n=(int)(Math.random()*3)+1;
+        
+        int n=(int)(Math.random()*5)+1;
         switch(n)
         {
             case 1 -> muchoTexto.setText("¿Cómo la veis bol?");
             case 2 -> muchoTexto.setText("Déjame Alan no me hagas daño!");
             case 3 -> muchoTexto.setText("Bailan las Rochas y las Chetas");
+            case 4 -> {
+                int N=(int)(Math.random()*3)+1;
+                switch(N)
+                    {
+                        case 1 -> muchoTexto.setText("¿Cómo la veis bol?");
+                        case 2 -> muchoTexto.setText("Déjame Alan no me hagas daño!");
+                        case 3 -> muchoTexto.setText("Bailan las Rochas y las Chetas"); 
+                    }
+            }
         }
-        
-        int i= (int)(Math.random()*3)+1;
+        int i= (int)(Math.random()*5)+1;
         System.out.println(i);
         switch(i)
         {
@@ -76,12 +90,35 @@ public class BetaTester
             case 2 -> showImage.setIcon(Duke2);
             case 3 -> { showImage.setIcon(Duke3);
                         muchoTexto.setText(t);}
-                
+            case 4 -> {
+                int I = (int)(Math.random()*3)+1;
+                switch(I)
+                    {
+                        case 1 -> muchoTexto.setText("¿Cómo la veis bol?");
+                        case 2 -> muchoTexto.setText("Déjame Alan no me hagas daño!");
+                        case 3 -> muchoTexto.setText("Bailan las Rochas y las Chetas"); 
+                    }
+            }
         }
+        
+        if(i==4&n==4){
+            showImage.setIcon(DukeG1);
+            muchoTexto.setText(null);
+            ven.setSize(500, 350);
+            ven.setTitle("Java is here, Java is Everywhere");
+        }
+        if(i==5&n==5){
+            showImage.setIcon(DukeG2);
+            muchoTexto.setText(null);
+            ven.setSize(500, 350);
+            ven.setTitle("Java is here, Java is Everywhere");
+        }
+        
         panelTODO.add(showImage,  BorderLayout.WEST);
         panelTODO.add(muchoTexto,  BorderLayout.CENTER);
         ven.add(panelTODO);
     }
+    
     public static void main(String[] args)
     {
         BetaTester bt = new BetaTester();
