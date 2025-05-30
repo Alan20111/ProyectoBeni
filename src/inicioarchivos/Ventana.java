@@ -79,7 +79,7 @@ public class Ventana extends javax.swing.JFrame {
     ArchivoInscripciones obInscripcionesHijo = (ArchivoInscripciones) obInscripciones;
 
     DefaultTableModel TablaModelo;
-    
+    DefaultComboBoxModel cb;
 
     public Ventana() {
 
@@ -100,14 +100,14 @@ public class Ventana extends javax.swing.JFrame {
         TablaModelo(TableInscripciones, "No.Control", "No.Clave", "", 'I');
     }
     
-    public void InscriComboModel(JTable Tabla)
+    public DefaultComboBoxModel InscriComboModel(JTable Tabla)
     {
-        DefaultComboBoxModel cb = new DefaultComboBoxModel();
+        cb = new DefaultComboBoxModel();
         for(int i=0; i<Tabla.getRowCount(); i++)
         {
             cb.addElement(Tabla.getValueAt(i, 1).toString());
         }
-        
+        return cb;
     }
     
     

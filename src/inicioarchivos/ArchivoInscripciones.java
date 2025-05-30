@@ -2,6 +2,11 @@ package inicioarchivos;
 import java.util.Scanner;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.io.FileWriter;
+import java.util.Scanner;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.RandomAccessFile;
 
 public class ArchivoInscripciones extends Archivos {
     Alumno al;
@@ -119,17 +124,51 @@ public class ArchivoInscripciones extends Archivos {
     public int busqueda(RandomAccessFile canal, String s) {
         return 0;
     }
-    public void reporte(RandomAccessFile canal) {
-        try {
-            int n = (int) canal.length() / tr;
-            for (int i = 0; i < n; i++) {
-                leerReg(canal, i, in);
-                System.out.println(in.mostrar());
-
+    public void reporte(RandomAccessFile canal)
+    {
+            String fichero,aux;
+            PrintWriter salida=null;
+            try
+            {
+               archAl=new ArchivoAlumnos();
+               archMa=new ArchivoMaterias();
+               fichero="C:\\Users\\monro\\Desktop\\ITCelaya\\Semestre 2\\Programacion Orientada a Objetos\\reporte.rep.txt";
+               salida=new PrintWriter(new FileWriter(fichero,true));
+               String res="";
+               salida.println("\t\tReporte alumnos");
+               salida.println("");
+               salida.println("Número de control\t\t\tNombre\t\t\tSemestre");         
+               for (int i=0; i<(int)canal1.length()/archAl.tr;i++)
+               {
+                   Alumno al=new Alumno();
+                   archAl.leerReg(canal1, i, al);
+                   salida.println(String.format("%8s   %-40s   %5d",al.nroCtrl,al.nom,al.sem));
+               }
+               salida.println("\n\n");
+               salida.println("\t\tReporte alumnos");
+               salida.println("");
+               salida.println("Clave de la materia\t\t\tNombre\t\t\tCréditos");            
+               for (int i=0; i<(int)canal2.length()/archMa.tr;i++)
+               {
+                   Materia ma=new Materia();
+                   archMa.leerReg(canal2, i, ma);
+                   salida.println(String.format("%4s   %-28s   %5d",ma.cve,ma.nom,ma.cred));
+               } 
+               salida.println("\n\n");
+               salida.println("\t\tReporte inscripciones");
+               salida.println("");
+               salida.println("Número de control\t\t\tMAteria");            
+               for (int i=0; i<(int)canal.length()/tr;i++)
+               {
+                   leerReg(canal, i, in);
+                   salida.println(String.format("%8s   %4s",in.nroCtrl,in.cve));
+               }            
+                salida.close();
             }
-        } catch (IOException e) {
-            System.out.println("Error en el archivo");
-        }
+            catch (IOException e)
+            {
+                System.out.println(" No se abrio bien el fichero \n"+e.toString());
+            }
     }
 
     public int modificaciones(RandomAccessFile canal,int ID, String A, String B, byte C) {
