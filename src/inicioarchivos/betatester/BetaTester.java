@@ -16,6 +16,7 @@ public class BetaTester
         initComponents();
     }
     
+    @SuppressWarnings("empty-statement")
     public void initComponents()
     {
         ven = new JFrame("Easter Egg");
@@ -76,10 +77,20 @@ public class BetaTester
                 int N=(int)(Math.random()*3)+1;
                 switch(N)
                     {
-                        case 1 -> muchoTexto.setText("¿Cómo la veis bol?");
-                        case 2 -> muchoTexto.setText("Déjame Alan no me hagas daño!");
-                        case 3 -> muchoTexto.setText("Bailan las Rochas y las Chetas"); 
+                        case 1 -> muchoTexto.setText("Basquetbol!");
+                        case 2 -> muchoTexto.setText("Me gusta el café Java");
+                        case 3 -> muchoTexto.setText("Te quiero mucho Duke"); 
                     }
+            }
+            case 5 -> {
+                int N = (int)(Math.random()*3)+1;
+                switch(N)
+                    {
+                        case 1 -> muchoTexto.setText("System.out.printl(\"texto\");");
+                        case 2 -> muchoTexto.setText("Intente registrar a un alumno con No. Control Sahur y nombre null");
+                        case 3 -> muchoTexto.setText("Tiro por suerte! "+(int)(Math.random()*100)+1); 
+                    }
+                }
             }
         }
         int i= (int)(Math.random()*5)+1;
@@ -94,13 +105,23 @@ public class BetaTester
                 int I = (int)(Math.random()*3)+1;
                 switch(I)
                     {
-                        case 1 -> muchoTexto.setText("¿Cómo la veis bol?");
-                        case 2 -> muchoTexto.setText("Déjame Alan no me hagas daño!");
-                        case 3 -> muchoTexto.setText("Bailan las Rochas y las Chetas"); 
+                        case 1 -> showImage.setIcon(Duke1);
+                        case 2 -> showImage.setIcon(Duke2);
+                        case 3 -> { showImage.setIcon(Duke3);
+                                    muchoTexto.setText(t);}
                     }
+                }
+            case 5 -> {
+                int I = (int)(Math.random()*3)+1;
+                switch(I)
+                    {
+                        case 1 -> showImage.setIcon(Duke1);
+                        case 2 -> showImage.setIcon(Duke2);
+                        case 3 -> { showImage.setIcon(Duke3);
+                                    muchoTexto.setText(t);}
+                    }
+                }
             }
-        }
-        
         if(i==4&n==4){
             showImage.setIcon(DukeG1);
             muchoTexto.setText(null);
