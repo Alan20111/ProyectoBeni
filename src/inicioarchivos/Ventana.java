@@ -92,12 +92,6 @@ public class Ventana extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void loadTablas() {
-        TablaModelo(TableAlumnos, "No. Control", "Nombre", "Semestre", 'A');
-        TablaModelo(TableMaterias, "Clave", "Nombre", "Creditos", 'M');
-        TablaModelo(TableInscripciones, "No.Control", "No.Clave", "", 'I');
-    }
-
     public DefaultComboBoxModel InscriComboModel(JTable Tabla) {
         DefaultComboBoxModel cb = new DefaultComboBoxModel();
         for (int i = 0; i < Tabla.getRowCount(); i++) {

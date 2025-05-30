@@ -4,23 +4,26 @@ package inicioarchivos;
  *
  * @author markb
  */
-
 import java.awt.*;
 import javax.swing.*;
 import static inicioarchivos.InicioArchivos.obAlumnos;
 import static inicioarchivos.InicioArchivos.obInscripciones;
 import static inicioarchivos.InicioArchivos.obMaterias;
+import javax.swing.table.DefaultTableModel;
 
 public class ModificarVen extends JFrame {
 
-    Ventana ven = new Ventana();
+    Ventana VentanaImport = new Ventana();
+    JTable TablaLocal;
+
     String lA, lB, lC;
     String dA, dB, dC;
     int row;
 
-    public ModificarVen(JTable Tabla,int id) {
+    public ModificarVen(JTable Tabla, int id) {
         System.out.println("row:" + id);
         row = id;
+        TablaLocal =  Tabla;
         lA = Tabla.getColumnName(0);
         lB = Tabla.getColumnName(1);
         lC = Tabla.getColumnName(2);
@@ -137,11 +140,15 @@ public class ModificarVen extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void modificarAl() {
+        
         obAlumnos.modificaciones(obAlumnos.canal, row, txtDatoA.getText(), txtDatoB.getText(), Byte.parseByte(txtDatoC.getText()));
+        VentanaImport.TablaModelo(TablaLocal, "No. Control", "Nombre", "Semestre", 'A');
+
     }
 
     private void modificarMat() {
         obMaterias.modificaciones(obMaterias.canal, row, txtDatoA.getText(), txtDatoB.getText(), Byte.parseByte(txtDatoC.getText()));
+        VentanaImport.TablaModelo(TablaLocal, "Clave", "Nombre", "Creditos", 'M');
     }
 
     private void cancelar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelar
@@ -149,7 +156,6 @@ public class ModificarVen extends JFrame {
     }//GEN-LAST:event_cancelar
 
     private void modificar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificar
-        String text;
         boolean a = txtDatoA.getText().isEmpty(),
                 b = txtDatoB.getText().isEmpty(),
                 c = txtDatoC.getText().isEmpty();
@@ -162,7 +168,6 @@ public class ModificarVen extends JFrame {
                 if (lblA.getText().equals("Clave")) {
                     modificarMat();
                 }
-                ven.loadTablas();
                 JOptionPane.showMessageDialog(rootPane, "Modificación Realizada", "Modificación", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
             }
@@ -177,7 +182,7 @@ public class ModificarVen extends JFrame {
     }//GEN-LAST:event_txtDatoAActionPerformed
 
     public static void main(String args[]) {
-        ModificarVen mv = new ModificarVen(null,0);
+        ModificarVen mv = new ModificarVen(null, 0);
         mv.setVisible(true);
     }
 
