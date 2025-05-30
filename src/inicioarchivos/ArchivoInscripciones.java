@@ -93,52 +93,6 @@ public class ArchivoInscripciones extends Archivos {
         }
     }
 
-    public int busquedaMat(RandomAccessFile canal, String bus) {
-        ordenarMat(canal);
-        int li = 0;
-        int pm;
-        try {
-            int ls = (int) (canal.length() / tr) - 1;
-            do {
-                pm = (li + ls) / 2;
-                archMa.leerReg(canal, pm, ma);
-                if (ma.nom.compareTo(bus) < 0) {
-                    li = pm + 1;
-                } else {
-                    ls = pm - 1;
-                }
-            } while (!bus.equals(ma.nom) && li <= ls);
-            if (bus.equals(ma.nom)) {
-                System.out.println("Si encontrado" + ma.mostrar());
-                return pm;
-            } else {
-                System.out.println(bus + " no existe");
-                return -1;
-            }
-        } catch (IOException e) {
-            System.out.println("Error en el archivo");
-            return 0;
-        }
-    }
-
-    public void ordenarMat(RandomAccessFile canal) {
-        try {
-            Materia ma2 = new Materia();
-            for (int pas = 1; pas < (int) (canal.length()) / tr; pas++) {
-                for (int co = 1; co <= ((int) (canal.length() / tr) - pas); co++) {
-                    archMa.leerReg(canal, co - 1, ma);
-                    archMa.leerReg(canal, co, ma2);
-                    if (ma.nom.compareTo(ma2.nom) > 0) {
-                        archMa.grabarReg(canal, co - 1, ma2);
-                        archMa.grabarReg(canal, co, ma);
-                    }
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Error en el archivoORDENMAT");
-        }
-    }
-
     public void leerReg(RandomAccessFile canal, int nReg, Inscripcion x) {
         try {
             System.out.println(nReg);
