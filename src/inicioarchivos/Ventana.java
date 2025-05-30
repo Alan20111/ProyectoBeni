@@ -122,7 +122,6 @@ public class Ventana extends javax.swing.JFrame {
                 try {
                     int i = 0;
                     while ((obAlumnos.canal.length() / 53) > i) {
-                        System.out.println(i);
                         obAlumnosHijo.leerReg(obAlumnos.canal, i, obAlumno);
                         TablaModelo.addRow(new Object[]{obAlumno.nroCtrl, obAlumno.nom, obAlumno.sem, "Editar"});
                         i++;
@@ -140,7 +139,6 @@ public class Ventana extends javax.swing.JFrame {
                 try {
                     int i = 0;
                     while ((obMaterias.canal.length() / 37) > i) {
-                        System.out.println(i);
                         obMateriasHijo.leerReg(obMaterias.canal, i, obMateria);
                         TablaModelo.addRow(new Object[]{obMateria.cve, obMateria.nom, obMateria.cred, ""});
                         i++;
@@ -221,9 +219,6 @@ public class Ventana extends javax.swing.JFrame {
         pnlATabla = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TableAlumnos = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        AActualizar = new javax.swing.JButton();
-        AOrdenarN = new javax.swing.JButton();
         pnlAOpciones = new javax.swing.JPanel();
         pnlCrearA = new javax.swing.JPanel();
         pnlCrearAData = new javax.swing.JPanel();
@@ -408,21 +403,6 @@ public class Ventana extends javax.swing.JFrame {
         TableAlumnos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         pnlATabla.add(jScrollPane2, java.awt.BorderLayout.CENTER);
-
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        AActualizar.setText("Actualizar Tabla");
-        AActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AActualizarT(evt);
-            }
-        });
-        jPanel1.add(AActualizar);
-
-        AOrdenarN.setText("Ordenar por No. de Control");
-        jPanel1.add(AOrdenarN);
-
-        pnlATabla.add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         pnlAMain.add(pnlATabla, java.awt.BorderLayout.CENTER);
 
@@ -819,8 +799,8 @@ public class Ventana extends javax.swing.JFrame {
                     txtCClave.getText(),
                     txtCNombreM.getText(),
                     Byte.parseByte(txtCCreditos.getText()))) {
+                obAlumnos.ordenar(obAlumnos.canal);
                 TablaModelo(TableMaterias, "Clave", "Nombre", "Creditos", 'M');
-                cbMaterias.setModel(InscriComboModel(TableMaterias));
             }
 
             txtCClave.setText(null);
@@ -845,6 +825,7 @@ public class Ventana extends javax.swing.JFrame {
                     txtCNoCtrl.getText(),
                     txtCNombre.getText(),
                     Byte.parseByte(txtCSemestre.getText()))) {
+                obAlumnos.ordenar(obAlumnos.canal);
                 TablaModelo(TableAlumnos, "No. Control", "Nombre", "Semestre", 'A');
             }
             txtCNoCtrl.setText(null);
@@ -872,9 +853,13 @@ public class Ventana extends javax.swing.JFrame {
         boolean a = txtBNoCtrl.getText().isEmpty();
         if (!a) {
             int n = obAlumnos.busqueda(obAlumnos.canal, txtBNoCtrl.getText());
-            ArchivoAlumnos obAlumnosHijo = (ArchivoAlumnos) obAlumnos;
-            obAlumnosHijo.leerReg(obAlumnos.canal, n, obAlumno);
-            System.out.println(obAlumno.nom + " " + obAlumno.nroCtrl);//Alumno
+            try {
+                ModificarVen v_modVen = new ModificarVen(TableAlumnos, n);
+                v_modVen.setVisible(true);
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(TableAlumnos, "Error al obtener el ID de la fila seleccionada.");
+            }
             txtBNoCtrl.setText(null);
             btnCAgregar.setEnabled(true);
         } else {
@@ -886,11 +871,6 @@ public class Ventana extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, "Funciona");
         BetaTester bt = new BetaTester();
     }//GEN-LAST:event_EasterEgg
-
-    private void AActualizarT(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AActualizarT
-        TablaModelo(TableAlumnos, "No. Control", "Nombre", "Semestre", 'A');
-        TableAlumnos.setModel(TablaModelo);
-    }//GEN-LAST:event_AActualizarT
 
     private void MActualizarT(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MActualizarT
         TablaModelo(TableMaterias, "Clave", "Nombre", "Creditos", 'M');
@@ -936,8 +916,6 @@ public class Ventana extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AActualizar;
-    private javax.swing.JButton AOrdenarN;
     private javax.swing.JPanel BNoCtrl;
     private javax.swing.JPanel CNoCrtl;
     private javax.swing.JPanel CNoCrtl1;
@@ -983,7 +961,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

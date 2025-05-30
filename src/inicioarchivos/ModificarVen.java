@@ -4,7 +4,6 @@ package inicioarchivos;
  *
  * @author markb
  */
-import java.awt.*;
 import javax.swing.*;
 import static inicioarchivos.InicioArchivos.obAlumnos;
 import static inicioarchivos.InicioArchivos.obInscripciones;
@@ -21,9 +20,8 @@ public class ModificarVen extends JFrame {
     int row;
 
     public ModificarVen(JTable Tabla, int id) {
-        System.out.println("row:" + id);
         row = id;
-        TablaLocal =  Tabla;
+        TablaLocal = Tabla;
         lA = Tabla.getColumnName(0);
         lB = Tabla.getColumnName(1);
         lC = Tabla.getColumnName(2);
@@ -140,14 +138,14 @@ public class ModificarVen extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void modificarAl() {
-        
         obAlumnos.modificaciones(obAlumnos.canal, row, txtDatoA.getText(), txtDatoB.getText(), Byte.parseByte(txtDatoC.getText()));
+        obAlumnos.ordenar(obAlumnos.canal);
         VentanaImport.TablaModelo(TablaLocal, "No. Control", "Nombre", "Semestre", 'A');
-
     }
 
     private void modificarMat() {
         obMaterias.modificaciones(obMaterias.canal, row, txtDatoA.getText(), txtDatoB.getText(), Byte.parseByte(txtDatoC.getText()));
+        obAlumnos.ordenar(obAlumnos.canal);
         VentanaImport.TablaModelo(TablaLocal, "Clave", "Nombre", "Creditos", 'M');
     }
 

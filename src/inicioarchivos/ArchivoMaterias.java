@@ -1,8 +1,11 @@
 package inicioarchivos;
+
 import java.util.Scanner;
 import java.io.*;
 import javax.swing.JOptionPane;
+
 public class ArchivoMaterias extends Archivos {
+
     Materia ma = new Materia();
     Scanner sc = new Scanner(System.in);
     final int tr = 37;
@@ -20,7 +23,7 @@ public class ArchivoMaterias extends Archivos {
     @Override
     public boolean altas(RandomAccessFile canal, String a, String b, byte c) {
         try {
-            ma.capturar(a,b,c);
+            ma.capturar(a, b, c);
             int reg = (int) canal.length() / tr;
             grabarReg(canal, reg, ma);
             JOptionPane.showMessageDialog(null, "Materia Agregada", "Notificación", JOptionPane.INFORMATION_MESSAGE);
@@ -46,9 +49,7 @@ public class ArchivoMaterias extends Archivos {
     }
 
     @Override
-    public int busqueda(RandomAccessFile canal, String bus)
-    {
-        System.out.println(bus);
+    public int busqueda(RandomAccessFile canal, String bus) {
         ordenar(canal);
         if (bus.isEmpty()) {
             System.out.println("Ingresa busqueda");
@@ -62,10 +63,11 @@ public class ArchivoMaterias extends Archivos {
             do {
                 pm = (li + ls) / 2;
                 leerReg(canal, pm, ma);
-                if (ma.cve.compareTo(bus) < 0)
+                if (ma.cve.compareTo(bus) < 0) {
                     li = pm + 1;
-                else
+                } else {
                     ls = pm - 1;
+                }
             } while (!bus.equals(ma.cve) && li <= ls);
             if (bus.equals(ma.cve)) {
                 System.out.println("Si encontrado" + ma.mostrar());
@@ -82,6 +84,7 @@ public class ArchivoMaterias extends Archivos {
 
     @Override
     public int modificaciones(RandomAccessFile canal, int ID, String Clave, String Nombre, byte Cred) {
+        ordenar(canal);
         ma.capturar(Clave, Nombre, Cred);
         grabarReg(canal, ID, ma);
         return 0;
@@ -105,6 +108,7 @@ public class ArchivoMaterias extends Archivos {
             System.out.println("Error en el archivo");
         }
     }
+
     public void leerReg(RandomAccessFile canal, int nReg, Materia x) {
         try {
             canal.seek(nReg * tr);
@@ -119,8 +123,8 @@ public class ArchivoMaterias extends Archivos {
     public void grabarReg(RandomAccessFile canal, int nReg, Materia x) {
         try {
             canal.seek(nReg * tr);
-            canal.writeUTF(String.format("%4s", x.cve));
-            canal.writeUTF(String.format("%28s", x.nom));
+            canal.writeUTF(String.format("%4s", x.cve.length() > 4 ? x.cve.substring(0, 4) : x.cve));
+            canal.writeUTF(String.format("%28s", x.nom.length() > 28 ? x.nom.substring(0, 28) : x.nom));
             canal.writeByte(x.cred);
         } catch (IOException e) {
             System.out.println("Error en el archivo");

@@ -52,7 +52,6 @@ public class ArchivoAlumnos extends Archivos {
     public int busqueda(RandomAccessFile canal, String bus) {
         ordenar(canal);
         if (bus.isEmpty()) {
-            System.out.println("Ingresa busqueda");
             bus = sc.nextLine();
         }
         int li = 0;
@@ -83,6 +82,8 @@ public class ArchivoAlumnos extends Archivos {
 
     @Override
     public int modificaciones(RandomAccessFile canal, int ID, String noCtrl, String nom, byte sem) {
+        ordenar(canal);
+        System.out.println("Id recibido:" + ID);
         al.capturar(noCtrl, nom, sem);
         grabarReg(canal, ID, al);
         return 0;
@@ -121,8 +122,8 @@ public class ArchivoAlumnos extends Archivos {
     public void grabarReg(RandomAccessFile canal, int nReg, Alumno x) {
         try {
             canal.seek(nReg * tr);
-            canal.writeUTF(String.format("%8s", x.nroCtrl));
-            canal.writeUTF(String.format("%-40s", x.nom));
+            canal.writeUTF(String.format("%8s", x.nroCtrl.length() > 8 ? x.nroCtrl.substring(0, 8) : x.nroCtrl));
+            canal.writeUTF(String.format("%-40s", x.nom.length() > 40 ? x.nom.substring(0, 40) : x.nom));
             canal.write(x.sem);
         } catch (IOException e) {
             System.out.println("|Error en el archivo");
