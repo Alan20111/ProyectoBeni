@@ -248,9 +248,6 @@ public class Ventana extends javax.swing.JFrame {
         pnlMTabla = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         TableMaterias = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
-        MActualizar = new javax.swing.JButton();
-        MOrdenarC = new javax.swing.JButton();
         pnlMOpciones = new javax.swing.JPanel();
         pnlCrearM = new javax.swing.JPanel();
         pnlCrearMData = new javax.swing.JPanel();
@@ -550,21 +547,6 @@ public class Ventana extends javax.swing.JFrame {
 
         pnlMTabla.add(jScrollPane3, java.awt.BorderLayout.CENTER);
 
-        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        MActualizar.setText("Actualizar Tabla");
-        MActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MActualizarT(evt);
-            }
-        });
-        jPanel2.add(MActualizar);
-
-        MOrdenarC.setText("Ordenar por No. de Control");
-        jPanel2.add(MOrdenarC);
-
-        pnlMTabla.add(jPanel2, java.awt.BorderLayout.PAGE_START);
-
         pnlMMain.add(pnlMTabla, java.awt.BorderLayout.CENTER);
 
         pnlMOpciones.setLayout(new java.awt.CardLayout());
@@ -861,7 +843,7 @@ public class Ventana extends javax.swing.JFrame {
                     txtCClave.getText(),
                     txtCNombreM.getText(),
                     Byte.parseByte(txtCCreditos.getText()))) {
-                obAlumnos.ordenar(obAlumnos.canal);
+                obMaterias.ordenar(obMaterias.canal);
                 TablaModelo(TableMaterias, "Clave", "Nombre", "Creditos", 'M');
             }
 
@@ -902,7 +884,26 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_AgregarAlumno
 
     private void Inscribir(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inscribir
-        // TODO add your handling code here:
+        boolean a = txtINoCtrl.getText().isEmpty(),
+                b = (boolean) cbMaterias.getSelectedItem();
+        if (!b & !a) {
+            if (obAlumnos.altas(obAlumnos.canal,
+                    txtCNoCtrl.getText(),
+                    txtCNombre.getText(),
+                    Byte.parseByte(txtCSemestre.getText()))) {
+                obAlumnos.ordenar(obAlumnos.canal);
+                TablaModelo(TableAlumnos, "No. Control", "Nombre", "Semestre", 'A');
+            }
+            txtCNoCtrl.setText(null);
+            txtCNombre.setText(null);
+            txtCSemestre.setText(null);
+        } else {
+            if (a & b) {
+                JOptionPane.showMessageDialog(null, "Ingrese un alumno", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Faltan datos por agregar", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_Inscribir
 
     private void crearReporte(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearReporte
@@ -930,11 +931,6 @@ public class Ventana extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, "Funciona");
         BetaTester bt = new BetaTester();
     }//GEN-LAST:event_EasterEgg
-
-    private void MActualizarT(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MActualizarT
-        TablaModelo(TableMaterias, "Clave", "Nombre", "Creditos", 'M');
-        TableMaterias.setModel(TablaModelo);
-    }//GEN-LAST:event_MActualizarT
 
     private void mostrarMCrear(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarMCrear
         pnlCrearM.setVisible(rbtMCrear.isSelected());
@@ -1021,8 +1017,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel LCSemestre;
     private javax.swing.JLabel LINoCtrl;
     private javax.swing.JLabel LINombreM;
-    private javax.swing.JButton MActualizar;
-    private javax.swing.JButton MOrdenarC;
     private javax.swing.JPanel Opciones;
     javax.swing.JTable TableAlumnos;
     javax.swing.JTable TableInscripciones;
@@ -1050,7 +1044,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
