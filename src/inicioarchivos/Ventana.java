@@ -78,6 +78,7 @@ public class Ventana extends javax.swing.JFrame {
     ArchivoInscripciones obInscripcionesHijo = (ArchivoInscripciones) obInscripciones;
 
     DefaultTableModel TablaModelo;
+    String cveInscripcion;
 
     public Ventana() {
 
@@ -96,6 +97,7 @@ public class Ventana extends javax.swing.JFrame {
         DefaultComboBoxModel cb = new DefaultComboBoxModel();
         for (int i = 0; i < Tabla.getRowCount(); i++) {
             cb.addElement(Tabla.getValueAt(i, 1).toString());
+            cveInscripcion=Tabla.getValueAt(i, 1).toString();
         }
         return cb;
     }
@@ -769,7 +771,16 @@ public class Ventana extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private String getCve(JComboBox cb, JTable Table){
+        int i = cb.getSelectedIndex();
+        System.out.println("Elemento Seleccionado: "+i);
+        String cve = Table.getValueAt(i, 0).toString();
+        System.out.println("Clave de la materia: "+cve);
+        return cve;
+    }
+    
+    
     private void moreComponents() {
         DukeInicio = new ImageIcon(Objects.requireNonNull(getClass().getResource("/inicioarchivos/Duke.png")));
         Image image = DukeInicio.getImage();
@@ -886,7 +897,7 @@ public class Ventana extends javax.swing.JFrame {
     private void Inscribir(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inscribir
         boolean a = txtINoCtrl.getText().isEmpty();
         if (!a) {
-            if (obInscripciones.altas(obInscripciones.canal, txtINoCtrl.getText(),cbMaterias.getSelectedItem().toString(),(byte)0)) {
+            if (obInscripciones.altas(obInscripciones.canal, txtINoCtrl.getText(),getCve(cbMaterias,TableMaterias),(byte)0)) {
                 obInscripciones.ordenar(obInscripciones.canal);
                 TablaModelo(TableInscripciones, "No. Control", "Clave de materias", "", 'I');
             }

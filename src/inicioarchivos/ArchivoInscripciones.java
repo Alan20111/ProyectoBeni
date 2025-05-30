@@ -62,6 +62,7 @@ public class ArchivoInscripciones extends Archivos {
         try {
             int n;
             char opc = 0, sel = 0;
+
             archAl = new ArchivoAlumnos();
             do {
                 n = archAl.busqueda(canal1, a);
@@ -73,6 +74,7 @@ public class ArchivoInscripciones extends Archivos {
             if (opc == 'n') {
                 return false;
             }
+
             al = new Alumno();
             archAl.leerReg(canal1, n, al);
             System.out.println(canal1.getFilePointer());
