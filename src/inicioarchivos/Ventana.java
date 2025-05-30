@@ -109,7 +109,6 @@ public class Ventana extends javax.swing.JFrame {
         return cb;
     }
     
-    
     public DefaultTableModel TablaModelo(JTable Tabla, String a, String b, String c, char op) {
         TablaModelo = new DefaultTableModel() {
             @Override
@@ -287,7 +286,7 @@ public class Ventana extends javax.swing.JFrame {
         txtINoCtrl = new javax.swing.JTextField();
         IMateria = new javax.swing.JPanel();
         LINombreM = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbMaterias = new javax.swing.JComboBox<>();
         btnInscribir = new javax.swing.JButton();
         pnlNMain1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -656,8 +655,8 @@ public class Ventana extends javax.swing.JFrame {
         LINombreM.setText("Nombre de la Materia:");
         IMateria.add(LINombreM, java.awt.BorderLayout.NORTH);
 
-        jComboBox1.setModel(InscriComboModel(TableMaterias));
-        IMateria.add(jComboBox1, java.awt.BorderLayout.PAGE_END);
+        cbMaterias.setModel(InscriComboModel(TableMaterias));
+        IMateria.add(cbMaterias, java.awt.BorderLayout.PAGE_END);
 
         pnlCrearIData.add(IMateria);
 
@@ -830,6 +829,7 @@ public class Ventana extends javax.swing.JFrame {
                     txtCNombreM.getText(),
                     Byte.parseByte(txtCCreditos.getText()))) {
                 TablaModelo(TableMaterias, "Clave", "Nombre", "Creditos", 'M');
+                cbMaterias.setModel(InscriComboModel(TableMaterias));
             }
 
             txtCClave.setText(null);
@@ -977,13 +977,13 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton btnCAgregar3;
     private javax.swing.JButton btnInscribir;
     private javax.swing.JButton btnNReporte;
+    private javax.swing.JComboBox<String> cbMaterias;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler8;
     private javax.swing.Box.Filler filler9;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

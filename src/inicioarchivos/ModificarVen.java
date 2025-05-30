@@ -11,6 +11,7 @@ import static inicioarchivos.InicioArchivos.obInscripciones;
 import static inicioarchivos.InicioArchivos.obMaterias;
 public class ModificarVen extends JFrame
 {
+    Ventana ven = new Ventana();
     String lA, lB, lC;
     String dA, dB, dC;
     int row;
@@ -50,6 +51,7 @@ public class ModificarVen extends JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Modificar");
+        setLocation(new java.awt.Point(200, 20));
         setResizable(false);
         getContentPane().add(filler1, java.awt.BorderLayout.WEST);
         getContentPane().add(filler3, java.awt.BorderLayout.SOUTH);
