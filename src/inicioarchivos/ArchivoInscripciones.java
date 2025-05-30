@@ -15,7 +15,7 @@ import javax.swing.JRadioButton;
 
 public class ArchivoInscripciones extends Archivos {
 
-    Alumno al;
+    Alumno al = new Alumno();
     Materia ma;
     Inscripcion in = new Inscripcion();
     ArchivoAlumnos archAl = new ArchivoAlumnos();
@@ -37,6 +37,7 @@ public class ArchivoInscripciones extends Archivos {
             System.out.println("Error en el archivo");
         }
     }
+
     @Override
     public boolean altas(RandomAccessFile canal, String a, String b, byte c) {
         ordenar(canal);
@@ -45,6 +46,8 @@ public class ArchivoInscripciones extends Archivos {
             char opc = 0;
             al = new Alumno();
             ma = new Materia();
+            in = new Inscripcion();
+
             int reg = (int) canal.length() / tr;
             do {
                 n = archAl.busqueda(canal1, a);
@@ -58,11 +61,12 @@ public class ArchivoInscripciones extends Archivos {
             }
             archAl.leerReg(canal1, n, al);
             n = archMa.busqueda(canal2, b);
+            System.out.println(a + "   " + b);
             archMa.leerReg(canal2, n, ma);
             System.out.println("ma: " + ma.cve + " y n es: " + n);
-            in = new Inscripcion();
-            in.nroCtrl = al.nroCtrl;
-            in.cve = ma.cve;
+            in.nroCtrl = a;
+            in.cve = b;
+            System.out.println("reg: " + reg);
             grabarReg(canal, reg, in);
             return true;
         } catch (IOException e) {
@@ -161,20 +165,23 @@ public class ArchivoInscripciones extends Archivos {
 
         // Procesar la selección
         try {
-            Inscripcion in2 = new Inscripcion();
             if (resultado == JOptionPane.OK_OPTION) {
                 if (opcion1.isSelected()) {
+                    Inscripcion in2 = new Inscripcion();
+
                     for (int pas = 1; pas < (int) (canal.length()) / tr; pas++) {
                         for (int co = 1; co <= ((int) (canal.length() / tr) - pas); co++) {
                             leerReg(canal, co - 1, in);
                             leerReg(canal, co, in2);
                             if (in.nroCtrl.compareTo(in2.nroCtrl) > 0) {
                                 grabarReg(canal, co - 1, in2);
-                                grabarReg(canal, co, in2);
+                                grabarReg(canal, co, in);
                             }
                         }
                     }
                 } else if (opcion2.isSelected()) {
+                    Inscripcion in2 = new Inscripcion();
+
                     for (int pas = 1; pas < (int) (canal.length()) / tr; pas++) {
                         for (int co = 1; co <= ((int) (canal.length() / tr) - pas); co++) {
                             leerReg(canal, co - 1, in);
