@@ -385,7 +385,7 @@ public class Ventana extends javax.swing.JFrame {
         rbtACrear.setText("Crear");
         rbtACrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbtACrearActionPerformed(evt);
+                mostrarACrear(evt);
             }
         });
         pnlATitulo.add(rbtACrear);
@@ -395,7 +395,7 @@ public class Ventana extends javax.swing.JFrame {
         rbtABuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         rbtABuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbtABuscarActionPerformed(evt);
+                mostrarABuscar(evt);
             }
         });
         pnlATitulo.add(rbtABuscar);
@@ -522,7 +522,7 @@ public class Ventana extends javax.swing.JFrame {
         rbtMCrear.setText("Crear");
         rbtMCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbtMCrearActionPerformed(evt);
+                mostrarMCrear(evt);
             }
         });
         pnlMTitulo.add(rbtMCrear);
@@ -531,7 +531,7 @@ public class Ventana extends javax.swing.JFrame {
         rbtMBuscar.setText("Buscar");
         rbtMBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbtMBuscarActionPerformed(evt);
+                mostrarMBuscar(evt);
             }
         });
         pnlMTitulo.add(rbtMBuscar);
@@ -795,15 +795,15 @@ public class Ventana extends javax.swing.JFrame {
         DukeInicio = new ImageIcon(duke);
     }
 
-    private void rbtABuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtABuscarActionPerformed
+    private void mostrarABuscar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarABuscar
         pnlCrearA.setVisible(rbtACrear.isSelected());
         pnlBuscar.setVisible(rbtABuscar.isSelected());
-    }//GEN-LAST:event_rbtABuscarActionPerformed
+    }//GEN-LAST:event_mostrarABuscar
 
-    private void rbtACrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtACrearActionPerformed
+    private void mostrarACrear(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarACrear
         pnlCrearA.setVisible(rbtACrear.isSelected());
         pnlBuscar.setVisible(rbtABuscar.isSelected());
-    }//GEN-LAST:event_rbtACrearActionPerformed
+    }//GEN-LAST:event_mostrarACrear
 
     //MOSTRAR PANELES
     // {
@@ -936,13 +936,15 @@ public class Ventana extends javax.swing.JFrame {
         TableMaterias.setModel(TablaModelo);
     }//GEN-LAST:event_MActualizarT
 
-    private void rbtMCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtMCrearActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbtMCrearActionPerformed
+    private void mostrarMCrear(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarMCrear
+        pnlCrearM.setVisible(rbtMCrear.isSelected());
+        pnlBuscarM.setVisible(rbtMBuscar.isEnabled());
+    }//GEN-LAST:event_mostrarMCrear
 
-    private void rbtMBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtMBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbtMBuscarActionPerformed
+    private void mostrarMBuscar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarMBuscar
+        pnlCrearM.setVisible(rbtMCrear.isSelected());
+        pnlBuscarM.setVisible(rbtMBuscar.isEnabled());
+    }//GEN-LAST:event_mostrarMBuscar
 
     private void buscarMateria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarMateria
         boolean a = txtBClave.getText().isEmpty();
