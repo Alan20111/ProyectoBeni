@@ -114,8 +114,8 @@ public class ArchivoInscripciones extends Archivos {
     public void grabarReg(RandomAccessFile canal, int nReg, Inscripcion x) {
         try {
             canal.seek(nReg * tr);
-            canal.writeUTF(String.format("%8s", x.nroCtrl));
-            canal.writeUTF(String.format("%4s", x.cve));
+            canal.writeUTF(String.format("%8s", x.nroCtrl.length() > 8 ? x.nroCtrl.substring(0, 8) : x.nroCtrl));
+            canal.writeUTF(String.format("%4s", x.cve.length() > 4 ? x.cve.substring(0, 4) : x.cve));
         } catch (IOException e) {
             System.out.println("|Error en el archivo");
         }
