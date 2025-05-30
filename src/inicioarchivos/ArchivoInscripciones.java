@@ -81,6 +81,8 @@ public class ArchivoInscripciones extends Archivos {
             x.nroCtrl = canal.readUTF();
             x.cve = canal.readUTF();
         } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
+
         }
     }
 
@@ -90,6 +92,7 @@ public class ArchivoInscripciones extends Archivos {
             canal.writeUTF(String.format("%8s", x.nroCtrl.length() > 8 ? x.nroCtrl.substring(0, 8) : x.nroCtrl));
             canal.writeUTF(String.format("%4s", x.cve.length() > 4 ? x.cve.substring(0, 4) : x.cve));
         } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
 
         }
     }
