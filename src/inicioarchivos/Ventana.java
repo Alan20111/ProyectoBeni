@@ -280,10 +280,10 @@ public class Ventana extends javax.swing.JFrame {
         IMateria = new javax.swing.JPanel();
         LINombreM = new javax.swing.JLabel();
         cbMaterias = new javax.swing.JComboBox<>();
-        IMateria1 = new javax.swing.JPanel();
+        IClave = new javax.swing.JPanel();
         LINombreM1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtClave = new javax.swing.JTextArea();
         btnInscribir = new javax.swing.JButton();
         pnlNMain1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -675,23 +675,28 @@ public class Ventana extends javax.swing.JFrame {
         IMateria.add(LINombreM, java.awt.BorderLayout.NORTH);
 
         cbMaterias.setModel(InscriComboModel(TableMaterias));
+        cbMaterias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cambiarTxtArea(evt);
+            }
+        });
         IMateria.add(cbMaterias, java.awt.BorderLayout.PAGE_END);
 
         pnlCrearIData.add(IMateria);
 
-        IMateria1.setLayout(new java.awt.BorderLayout());
+        IClave.setLayout(new java.awt.BorderLayout());
 
         LINombreM1.setText("Clave de la Materia:");
-        IMateria1.add(LINombreM1, java.awt.BorderLayout.NORTH);
+        IClave.add(LINombreM1, java.awt.BorderLayout.NORTH);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(1);
-        jTextArea1.setText(getCve(cbMaterias, TableMaterias));
-        jScrollPane1.setViewportView(jTextArea1);
+        txtClave.setColumns(20);
+        txtClave.setRows(1);
+        txtClave.setText(getCve(cbMaterias, TableMaterias));
+        jScrollPane1.setViewportView(txtClave);
 
-        IMateria1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        IClave.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        pnlCrearIData.add(IMateria1);
+        pnlCrearIData.add(IClave);
 
         pnlCrearM1.add(pnlCrearIData);
 
@@ -981,6 +986,10 @@ public class Ventana extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buscarMateria
 
+    private void cambiarTxtArea(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarTxtArea
+        txtClave.setText(getCve(cbMaterias, TableMaterias));
+    }//GEN-LAST:event_cambiarTxtArea
+
     /**
      * @param args the command line arguments
      */
@@ -1029,8 +1038,8 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel CSemestre;
     private javax.swing.JPanel CSemestre1;
     private javax.swing.JLabel Duke;
+    private javax.swing.JPanel IClave;
     private javax.swing.JPanel IMateria;
-    private javax.swing.JPanel IMateria1;
     private javax.swing.JPanel INoCrtl;
     private javax.swing.JLabel LCClave;
     private javax.swing.JLabel LCCreditos;
@@ -1072,7 +1081,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblBClave;
     private javax.swing.JLabel lblBNoCtrl;
     private javax.swing.JMenu menAlumno;
@@ -1122,6 +1130,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTextField txtCNombre;
     private javax.swing.JTextField txtCNombreM;
     private javax.swing.JTextField txtCSemestre;
+    private javax.swing.JTextArea txtClave;
     private javax.swing.JTextField txtINoCtrl;
     // End of variables declaration//GEN-END:variables
     // Extra variables @m
