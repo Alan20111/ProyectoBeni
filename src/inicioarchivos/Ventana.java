@@ -210,6 +210,7 @@ public class Ventana extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         Duke = new javax.swing.JLabel();
         pnlAlumno = new javax.swing.JPanel();
@@ -334,6 +335,8 @@ public class Ventana extends javax.swing.JFrame {
         jLabel4.setAlignmentX(0.5F);
         Opciones.add(jLabel4);
 
+        pnlIOpciones.setLayout(new java.awt.BorderLayout());
+
         jButton1.setText("Alumno");
         jButton1.setAlignmentX(0.5F);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -361,6 +364,8 @@ public class Ventana extends javax.swing.JFrame {
         });
         jPanel1.add(jButton3);
 
+        pnlIOpciones.add(jPanel1, java.awt.BorderLayout.PAGE_START);
+
         jButton4.setText("Generar Reporte");
         jButton4.setAlignmentX(0.5F);
         jButton4.setAlignmentY(10);
@@ -370,9 +375,9 @@ public class Ventana extends javax.swing.JFrame {
                 crearReporte(evt);
             }
         });
-        jPanel1.add(jButton4);
+        jPanel2.add(jButton4);
 
-        pnlIOpciones.add(jPanel1);
+        pnlIOpciones.add(jPanel2, java.awt.BorderLayout.CENTER);
 
         Opciones.add(pnlIOpciones);
 
@@ -996,7 +1001,6 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_buscarAlumno
 
     private void EasterEgg(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EasterEgg
-        JOptionPane.showMessageDialog(rootPane, "Funciona");
         BetaTester bt = new BetaTester();
     }//GEN-LAST:event_EasterEgg
 
@@ -1137,6 +1141,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
