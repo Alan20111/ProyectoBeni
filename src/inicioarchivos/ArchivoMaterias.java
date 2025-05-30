@@ -48,9 +48,9 @@ public class ArchivoMaterias extends Archivos {
                 salida.println("__________________________________________________________________________");
                 salida.println(String.format("%5s \t| %-28s \t|%5s", "Clave","Nombre","Créditos"));
                 salida.println("__________________________________________________________________________");            
-                for (int i = 0; i < (int) canal2.length() / tr; i++) {
+                for (int i = 0; i < (int) canal.length() / tr; i++) {
                     Materia ma = new Materia();
-                    leerReg(canal2, i, ma);
+                    leerReg(canal, i, ma);
                     salida.println(String.format("%5s \t| %-28s \t|%5d", ma.cve, ma.nom, ma.cred));
                 }
                 salida.println("\n\n");

@@ -47,9 +47,9 @@ public class ArchivoAlumnos extends Archivos {
                 salida.println("__________________________________________________________________________");
                 salida.println(String.format("%11s \t| %-40s \t|%9s", "No. Control", "Nombre", "Semestre"));
                 salida.println("__________________________________________________________________________");
-                for (int i = 0; i < (int) canal1.length() / tr; i++) {
+                for (int i = 0; i < (int) canal.length() / tr; i++) {
                     Alumno al = new Alumno();
-                    leerReg(canal1, i, al);
+                    leerReg(canal, i, al);
                     salida.println(String.format("%8s \t| %-40s \t|%9d", al.nroCtrl, al.nom, al.sem));
                 }
                 salida.println("\n\n");
