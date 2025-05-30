@@ -8,6 +8,10 @@ import java.util.Scanner;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.RandomAccessFile;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 public class ArchivoInscripciones extends Archivos {
 
@@ -71,14 +75,16 @@ public class ArchivoInscripciones extends Archivos {
             }
             al = new Alumno();
             archAl.leerReg(canal1, n, al);
+            System.out.println(canal1.getFilePointer());
             archMa = new ArchivoMaterias();
             int reg = (int) canal.length() / tr;
             ma = new Materia();
             archMa.leerReg(canal2, n, ma);
+            System.out.println("ma" + ma.cve + " y n es:" + n);
             in = new Inscripcion();
             in.nroCtrl = al.nroCtrl;
             in.cve = ma.cve;
-            System.out.println("ma"+in.cve);
+            System.out.println("in" + in.cve);
             grabarReg(canal, reg, in);
             return true;
         } catch (IOException e) {
@@ -215,32 +221,54 @@ public class ArchivoInscripciones extends Archivos {
     }
 
     public void ordenar(RandomAccessFile canal) {
+        // Crear los botones de opción
+        JRadioButton opcion1 = new JRadioButton("No. Control");
+        JRadioButton opcion2 = new JRadioButton("Clave Materia");
+
+        // Agrupar los botones para que solo se pueda seleccionar uno
+        ButtonGroup grupo = new ButtonGroup();
+        grupo.add(opcion1);
+        grupo.add(opcion2);
+
+        // Crear un panel y agregar los botones
+        JPanel panel = new JPanel();
+        panel.add(opcion1);
+        panel.add(opcion2);
+
+        // Mostrar el panel en un cuadro de diálogo
+        int resultado = JOptionPane.showConfirmDialog(null, panel, "Seleccione una opción", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        // Procesar la selección
         try {
             Inscripcion in2 = new Inscripcion();
-            System.out.println("Seleccione tipo de ordenamiento\n1) Numero de control\n2) Clave de materia");
-            byte opc = sc.nextByte();
-            if (opc == 1) {
-                for (int pas = 1; pas < (int) (canal.length()) / tr; pas++) {
-                    for (int co = 1; co <= ((int) (canal.length() / tr) - pas); co++) {
-                        leerReg(canal, co - 1, in);
-                        leerReg(canal, co, in2);
-                        if (in.nroCtrl.compareTo(in2.nroCtrl) > 0) {
-                            grabarReg(canal, co - 1, in2);
-                            grabarReg(canal, co, in2);
+            if (resultado == JOptionPane.OK_OPTION) {
+                if (opcion1.isSelected()) {
+                    for (int pas = 1; pas < (int) (canal.length()) / tr; pas++) {
+                        for (int co = 1; co <= ((int) (canal.length() / tr) - pas); co++) {
+                            leerReg(canal, co - 1, in);
+                            leerReg(canal, co, in2);
+                            if (in.nroCtrl.compareTo(in2.nroCtrl) > 0) {
+                                grabarReg(canal, co - 1, in2);
+                                grabarReg(canal, co, in2);
+                            }
                         }
                     }
+                } else if (opcion2.isSelected()) {
+                    for (int pas = 1; pas < (int) (canal.length()) / tr; pas++) {
+                        for (int co = 1; co <= ((int) (canal.length() / tr) - pas); co++) {
+                            leerReg(canal, co - 1, in);
+                            leerReg(canal, co, in2);
+                            if (in.cve.compareTo(in2.cve) > 0) {
+                                grabarReg(canal, co - 1, in2);
+                                grabarReg(canal, co, in2);
+                            }
+                        }
+                    }
+                } else {
+                    System.out.println("No seleccionaste ninguna opción.");
                 }
             } else {
-                for (int pas = 1; pas < (int) (canal.length()) / tr; pas++) {
-                    for (int co = 1; co <= ((int) (canal.length() / tr) - pas); co++) {
-                        leerReg(canal, co - 1, in);
-                        leerReg(canal, co, in2);
-                        if (in.cve.compareTo(in2.cve) > 0) {
-                            grabarReg(canal, co - 1, in2);
-                            grabarReg(canal, co, in2);
-                        }
-                    }
-                }
+                System.out.println("Cancelaste la selección.");
             }
         } catch (IOException e) {
             System.out.println("Error en el archivo");
