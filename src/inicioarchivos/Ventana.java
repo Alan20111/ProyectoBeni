@@ -49,30 +49,22 @@ class BotonTabla extends AbstractCellEditor implements TableCellRenderer, TableC
     }
     @Override
     public void actionPerformed(ActionEvent p_evt) {
-        int v_fila = a_tabla.getSelectedRow();
+        /*        int v_fila = a_tabla.getSelectedRow();
         String v_info = "";
-
-        switch (a_tipoTabla) {
-            case "A":
-                //obAlumnosHijo.modificaciones(obAlumnos.canal, v_fila, , ,);
-                break;
-            case "M":
-                v_info = "Materia con clave: " + a_tabla.getValueAt(v_fila, 0);
-                break;
-            default:
-                v_info = "Tabla desconocida ";
-                break;
-        }
-        ModificarVen mod = new ModificarVen(
-        a_tabla.getColumnName(0),
-        a_tabla.getColumnName(1),
-        a_tabla.getColumnName(2),
-        a_tabla.getValueAt(v_fila, 0).toString(),
-        a_tabla.getValueAt(v_fila, 1).toString(),
-        a_tabla.getValueAt(v_fila, 2).toString(),
-        a_tabla.getSelectedRow());
-        mod.setVisible(true);
         
+        switch (a_tipoTabla) {
+        case "A":
+        //obAlumnosHijo.modificaciones(obAlumnos.canal, v_fila, , ,);
+        break;
+        case "M":
+        v_info = "Materia con clave: " + a_tabla.getValueAt(v_fila, 0);
+        break;
+        default:
+        v_info = "Tabla desconocida ";
+        break;
+        }*/
+        ModificarVen mod = new ModificarVen(a_tabla);
+        mod.setVisible(true);
         fireEditingStopped();
     }
 }
@@ -86,7 +78,8 @@ public class Ventana extends javax.swing.JFrame {
     ArchivoMaterias obMateriasHijo = (ArchivoMaterias) obMaterias;
     ArchivoInscripciones obInscripcionesHijo = (ArchivoInscripciones) obInscripciones;
 
-    DefaultTableModel TablaModelo = new DefaultTableModel();
+    DefaultTableModel TablaModelo;
+    
 
     public Ventana() {
 
@@ -99,13 +92,32 @@ public class Ventana extends javax.swing.JFrame {
         );
         moreComponents();
         initComponents();
+    }
+
+    public void loadTablas(){
         TablaModelo(TableAlumnos, "No. Control", "Nombre", "Semestre", 'A');
         TablaModelo(TableMaterias, "Clave", "Nombre", "Creditos", 'M');
         TablaModelo(TableInscripciones, "No.Control", "No.Clave", "", 'I');
     }
-
-    public void TablaModelo(JTable Tabla, String a, String b, String c, char op) {
-        DefaultTableModel TablaModelo = new DefaultTableModel();
+    
+    public void InscriComboModel(JTable Tabla)
+    {
+        DefaultComboBoxModel cb = new DefaultComboBoxModel();
+        for(int i=0; i<Tabla.getRowCount(); i++)
+        {
+            cb.addElement(Tabla.getValueAt(i, 1).toString());
+        }
+        
+    }
+    
+    
+    public DefaultTableModel TablaModelo(JTable Tabla, String a, String b, String c, char op) {
+        TablaModelo = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return column == 3;
+            }
+        };
         TablaModelo.addColumn(a);
         TablaModelo.addColumn(b);
         TablaModelo.addColumn(c);
@@ -166,7 +178,7 @@ public class Ventana extends javax.swing.JFrame {
             default ->
                 throw new AssertionError();
         }
-
+        return TablaModelo;
     }
 
     private void m_preCerrar() {
@@ -220,6 +232,9 @@ public class Ventana extends javax.swing.JFrame {
         pnlATabla = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TableAlumnos = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        AActualizar = new javax.swing.JButton();
+        AOrdenarN = new javax.swing.JButton();
         pnlAOpciones = new javax.swing.JPanel();
         pnlCrearA = new javax.swing.JPanel();
         pnlCrearAData = new javax.swing.JPanel();
@@ -246,6 +261,9 @@ public class Ventana extends javax.swing.JFrame {
         pnlMTabla = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         TableMaterias = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        MActualizar = new javax.swing.JButton();
+        MOrdenarC = new javax.swing.JButton();
         pnlCrearM = new javax.swing.JPanel();
         pnlCrearMData = new javax.swing.JPanel();
         CNoCrtl1 = new javax.swing.JPanel();
@@ -264,14 +282,14 @@ public class Ventana extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         pnlNOpciones = new javax.swing.JPanel();
         pnlCrearM1 = new javax.swing.JPanel();
-        pnlCrearMData1 = new javax.swing.JPanel();
+        pnlCrearIData = new javax.swing.JPanel();
         INoCrtl = new javax.swing.JPanel();
         LINoCtrl = new javax.swing.JLabel();
         txtINoCtrl = new javax.swing.JTextField();
         IMateria = new javax.swing.JPanel();
         LINombreM = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        btnCAgregar2 = new javax.swing.JButton();
+        btnInscribir = new javax.swing.JButton();
         pnlNMain1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         btnNReporte = new javax.swing.JButton();
@@ -395,12 +413,27 @@ public class Ventana extends javax.swing.JFrame {
         pnlATabla.setEnabled(false);
         pnlATabla.setLayout(new java.awt.BorderLayout(10, 10));
 
-        TableAlumnos.setModel(TableAlumnos.getModel());
+        TableAlumnos.setModel(TablaModelo(TableAlumnos, "No. Control", "Nombre", "Semestre", 'A'));
         TableAlumnos.setColumnSelectionAllowed(true);
         jScrollPane2.setViewportView(TableAlumnos);
         TableAlumnos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         pnlATabla.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        AActualizar.setText("Actualizar Tabla");
+        AActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AActualizarT(evt);
+            }
+        });
+        jPanel1.add(AActualizar);
+
+        AOrdenarN.setText("Ordenar por No. de Control");
+        jPanel1.add(AOrdenarN);
+
+        pnlATabla.add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         pnlAMain.add(pnlATabla, java.awt.BorderLayout.CENTER);
 
@@ -512,40 +545,27 @@ public class Ventana extends javax.swing.JFrame {
         pnlMTabla.setEnabled(false);
         pnlMTabla.setLayout(new java.awt.BorderLayout(10, 10));
 
-        TableMaterias.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Clave", "Nombre", "Creditos", "Inscripciones"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Byte.class, java.lang.Long.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, true, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        TableMaterias.setModel(TablaModelo(TableMaterias, "Clave", "Nombre", "Creditos", 'M'));
         TableMaterias.setColumnSelectionAllowed(true);
         jScrollPane3.setViewportView(TableMaterias);
         TableMaterias.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        if (TableMaterias.getColumnModel().getColumnCount() > 0) {
-            TableMaterias.getColumnModel().getColumn(0).setResizable(false);
-            TableMaterias.getColumnModel().getColumn(1).setResizable(false);
-            TableMaterias.getColumnModel().getColumn(2).setResizable(false);
-            TableMaterias.getColumnModel().getColumn(3).setResizable(false);
-        }
 
         pnlMTabla.add(jScrollPane3, java.awt.BorderLayout.CENTER);
+
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        MActualizar.setText("Actualizar Tabla");
+        MActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MActualizarT(evt);
+            }
+        });
+        jPanel2.add(MActualizar);
+
+        MOrdenarC.setText("Ordenar por No. de Control");
+        jPanel2.add(MOrdenarC);
+
+        pnlMTabla.add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
         pnlMMain.add(pnlMTabla, java.awt.BorderLayout.CENTER);
 
@@ -571,11 +591,6 @@ public class Ventana extends javax.swing.JFrame {
         CNombre1.add(LCNombreM, java.awt.BorderLayout.NORTH);
 
         txtCNombreM.setColumns(35);
-        txtCNombreM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCNombreMActionPerformed(evt);
-            }
-        });
         CNombre1.add(txtCNombreM, java.awt.BorderLayout.CENTER);
 
         pnlCrearMData.add(CNombre1);
@@ -623,8 +638,8 @@ public class Ventana extends javax.swing.JFrame {
 
         pnlCrearM1.setLayout(new javax.swing.BoxLayout(pnlCrearM1, javax.swing.BoxLayout.LINE_AXIS));
 
-        pnlCrearMData1.setAlignmentY(1.0F);
-        pnlCrearMData1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        pnlCrearIData.setAlignmentY(1.0F);
+        pnlCrearIData.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         INoCrtl.setLayout(new java.awt.BorderLayout());
 
@@ -635,28 +650,27 @@ public class Ventana extends javax.swing.JFrame {
         txtINoCtrl.setColumns(8);
         INoCrtl.add(txtINoCtrl, java.awt.BorderLayout.CENTER);
 
-        pnlCrearMData1.add(INoCrtl);
+        pnlCrearIData.add(INoCrtl);
 
         IMateria.setLayout(new java.awt.BorderLayout());
 
         LINombreM.setText("Nombre de la Materia:");
         IMateria.add(LINombreM, java.awt.BorderLayout.NORTH);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fundamentos en Programación", "Programación Orientada a Objetos", " " }));
         IMateria.add(jComboBox1, java.awt.BorderLayout.PAGE_END);
 
-        pnlCrearMData1.add(IMateria);
+        pnlCrearIData.add(IMateria);
 
-        pnlCrearM1.add(pnlCrearMData1);
+        pnlCrearM1.add(pnlCrearIData);
 
-        btnCAgregar2.setText("Inscribir");
-        btnCAgregar2.setAlignmentY(1.0F);
-        btnCAgregar2.addActionListener(new java.awt.event.ActionListener() {
+        btnInscribir.setText("Inscribir");
+        btnInscribir.setAlignmentY(1.0F);
+        btnInscribir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCAgregar2AgregarMateria(evt);
+                Inscribir(evt);
             }
         });
-        pnlCrearM1.add(btnCAgregar2);
+        pnlCrearM1.add(btnInscribir);
 
         pnlNOpciones.add(pnlCrearM1, java.awt.BorderLayout.NORTH);
 
@@ -675,21 +689,14 @@ public class Ventana extends javax.swing.JFrame {
         btnNReporte.setAlignmentY(1.0F);
         btnNReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNReporteAgregarMateria(evt);
+                crearReporte(evt);
             }
         });
         pnlNMain1.add(btnNReporte, java.awt.BorderLayout.SOUTH);
 
         pnlNTablaReporte.setLayout(new java.awt.BorderLayout());
 
-        TableInscripciones.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        TableInscripciones.setModel(TablaModelo(TableInscripciones, "No. Control", "Clave", "", 'I'));
         jScrollPane4.setViewportView(TableInscripciones);
 
         pnlNTablaReporte.add(jScrollPane4, java.awt.BorderLayout.CENTER);
@@ -822,7 +829,7 @@ public class Ventana extends javax.swing.JFrame {
                     txtCClave.getText(),
                     txtCNombreM.getText(),
                     Byte.parseByte(txtCCreditos.getText()))) {
-                TablaModelo(TableMaterias, "No.Clave", "Nombre", "Creditos", 'M');
+                TablaModelo(TableMaterias, "Clave", "Nombre", "Creditos", 'M');
             }
 
             txtCClave.setText(null);
@@ -847,7 +854,7 @@ public class Ventana extends javax.swing.JFrame {
                     txtCNoCtrl.getText(),
                     txtCNombre.getText(),
                     Byte.parseByte(txtCSemestre.getText()))) {
-                TablaModelo(TableAlumnos, "No.Control", "Nombre", "Semestre", 'A');
+                TablaModelo(TableAlumnos, "No. Control", "Nombre", "Semestre", 'A');
             }
             txtCNoCtrl.setText(null);
             txtCNombre.setText(null);
@@ -862,13 +869,13 @@ public class Ventana extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_AgregarAlumno
 
-    private void btnCAgregar2AgregarMateria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCAgregar2AgregarMateria
+    private void Inscribir(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inscribir
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCAgregar2AgregarMateria
+    }//GEN-LAST:event_Inscribir
 
-    private void btnNReporteAgregarMateria(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNReporteAgregarMateria
+    private void crearReporte(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearReporte
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnNReporteAgregarMateria
+    }//GEN-LAST:event_crearReporte
 
     private void BuscarAlumno(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarAlumno
         boolean a = txtBNoCtrl.getText().isEmpty();
@@ -884,14 +891,20 @@ public class Ventana extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BuscarAlumno
 
-    private void txtCNombreMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCNombreMActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCNombreMActionPerformed
-
     private void EasterEgg(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EasterEgg
         JOptionPane.showMessageDialog(rootPane, "Funciona");
         BetaTester bt=new BetaTester();
     }//GEN-LAST:event_EasterEgg
+
+    private void AActualizarT(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AActualizarT
+        TablaModelo(TableAlumnos, "No. Control", "Nombre", "Semestre", 'A');
+        TableAlumnos.setModel(TablaModelo);
+    }//GEN-LAST:event_AActualizarT
+
+    private void MActualizarT(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MActualizarT
+        TablaModelo(TableMaterias, "Clave", "Nombre", "Creditos", 'M');
+        TableMaterias.setModel(TablaModelo);
+    }//GEN-LAST:event_MActualizarT
 
     /**
      * @param args the command line arguments
@@ -932,6 +945,8 @@ public class Ventana extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AActualizar;
+    private javax.swing.JButton AOrdenarN;
     private javax.swing.JPanel BNoCtrl;
     private javax.swing.JPanel CNoCrtl;
     private javax.swing.JPanel CNoCrtl1;
@@ -950,6 +965,8 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel LCSemestre;
     private javax.swing.JLabel LINoCtrl;
     private javax.swing.JLabel LINombreM;
+    private javax.swing.JButton MActualizar;
+    private javax.swing.JButton MOrdenarC;
     private javax.swing.JPanel Opciones;
     javax.swing.JTable TableAlumnos;
     javax.swing.JTable TableInscripciones;
@@ -957,8 +974,8 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.ButtonGroup btgOpciones;
     private javax.swing.JButton btnCAgregar;
     private javax.swing.JButton btnCAgregar1;
-    private javax.swing.JButton btnCAgregar2;
     private javax.swing.JButton btnCAgregar3;
+    private javax.swing.JButton btnInscribir;
     private javax.swing.JButton btnNReporte;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler8;
@@ -975,6 +992,8 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -992,10 +1011,10 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel pnlBuscarAData;
     javax.swing.JPanel pnlCrearA;
     private javax.swing.JPanel pnlCrearAData;
+    private javax.swing.JPanel pnlCrearIData;
     javax.swing.JPanel pnlCrearM;
     javax.swing.JPanel pnlCrearM1;
     private javax.swing.JPanel pnlCrearMData;
-    private javax.swing.JPanel pnlCrearMData1;
     private javax.swing.JPanel pnlCreditos;
     private javax.swing.JPanel pnlIOpciones;
     private javax.swing.JPanel pnlITitulo;

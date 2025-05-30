@@ -14,12 +14,16 @@ public class ModificarVen extends JFrame
     String lA, lB, lC;
     String dA, dB, dC;
     int row;
-    Ventana ven=new Ventana();
     
-    public ModificarVen(String lA, String lB, String lC, String dA, String dB, String dC, int row) 
+    public ModificarVen(JTable Tabla) 
     {
-        setValues(lA, lB, lC, dA, dB, dC);
-        this.row=row;
+        lA = Tabla.getColumnName(0);
+        lB = Tabla.getColumnName(1);
+        lC = Tabla.getColumnName(2);
+        dA = Tabla.getValueAt(row, 0).toString();
+        dB = Tabla.getValueAt(row, 1).toString();
+        dC = Tabla.getValueAt(row, 2).toString();
+        row = Tabla.getSelectedRow();
         initComponents();
     }
     
@@ -122,16 +126,6 @@ public class ModificarVen extends JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private void setValues(String lA, String lB, String lC, String dA, String dB, String dC){
-        this.lA=lA;
-        this.lB = lB;
-        this.lC = lC;
-        this.dA = dA;
-        this.dB = dB;
-        this.dC = dC;
-        
-    }
-    
     private void modificarAl(){
         obAlumnos.modificaciones(obAlumnos.canal, row, txtDatoA.getText(), txtDatoB.getText(), Byte.parseByte(txtDatoC.getText()));
     }
@@ -169,7 +163,7 @@ public class ModificarVen extends JFrame
     }//GEN-LAST:event_modificar
 
     public static void main(String args[]) {
-        ModificarVen mv = new ModificarVen("a", "b", "c", "d","e","f", 0);
+        ModificarVen mv = new ModificarVen(null);
         mv.setVisible(true);
     }
 
