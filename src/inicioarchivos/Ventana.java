@@ -876,6 +876,7 @@ public class Ventana extends javax.swing.JFrame {
         // MOSTRAR Menu Alumno
         CardLayout = (CardLayout) pnlTODO.getLayout();
         CardLayout.show(pnlTODO, "card4");
+        cbMaterias.setModel(InscriComboModel(TableMaterias));
     }//GEN-LAST:event_mostrarMMateria
 
     private void mostrarMInscribir(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarMInscribir
