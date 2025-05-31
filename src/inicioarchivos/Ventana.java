@@ -836,9 +836,7 @@ public class Ventana extends javax.swing.JFrame {
     
     private String getCve(JComboBox cb, JTable Table){
         int i = cb.getSelectedIndex();
-        System.out.println("Elemento Seleccionado: "+i);
         String cve = Table.getValueAt(i, 0).toString();
-        System.out.println("Clave de la materia: "+cve);
         return cve;
     }
     
