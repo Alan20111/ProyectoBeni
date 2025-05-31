@@ -16,7 +16,6 @@ public class InicioArchivos {
 
         Ventana ven = new Ventana();
         ven.setVisible(true);
-        System.out.println("x: "+ven.getLocation().x+"y: "+ven.getLocation().y);
         /*
         Scanner sc=new Scanner(System.in);
         

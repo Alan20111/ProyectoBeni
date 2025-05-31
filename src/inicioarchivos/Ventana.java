@@ -836,9 +836,7 @@ public class Ventana extends javax.swing.JFrame {
     
     private String getCve(JComboBox cb, JTable Table){
         int i = cb.getSelectedIndex();
-        System.out.println("Elemento Seleccionado: "+i);
         String cve = Table.getValueAt(i, 0).toString();
-        System.out.println("Clave de la materia: "+cve);
         return cve;
     }
     
@@ -878,6 +876,7 @@ public class Ventana extends javax.swing.JFrame {
         // MOSTRAR Menu Alumno
         CardLayout = (CardLayout) pnlTODO.getLayout();
         CardLayout.show(pnlTODO, "card4");
+        cbMaterias.setModel(InscriComboModel(TableMaterias));
     }//GEN-LAST:event_mostrarMMateria
 
     private void mostrarMInscribir(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarMInscribir

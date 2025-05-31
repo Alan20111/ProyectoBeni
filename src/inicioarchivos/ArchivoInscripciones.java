@@ -156,44 +156,44 @@ public class ArchivoInscripciones extends Archivos {
         try {
             archAl = new ArchivoAlumnos();
             archMa = new ArchivoMaterias();
-            fichero = "reporte.rep.txt";
+            Alumno al = new Alumno();
+            Materia ma = new Materia();
+            Inscripcion ins = new Inscripcion();
+            
+            fichero = "reporte.rep";
             salida = new PrintWriter(new FileWriter(fichero, true));
             String res = "";
-            salida.println("REPORTE DE ALUMNOS");
-            salida.println("__________________________________________________________________________");
-            salida.println(String.format("%11s \t| %-40s \t|%9s", "No. Control", "Nombre", "Semestre"));
-            salida.println("__________________________________________________________________________");
             for (int i = 0; i < (int) canal1.length() / archAl.tr; i++) {
-                Alumno al = new Alumno();
                 archAl.leerReg(canal1, i, al);
-                salida.println(String.format("%8s \t| %-40s \t|%9d", al.nroCtrl, al.nom, al.sem));
+                boolean hasMat = false;
+            
+                for (int j = 0; j < (int) canal.length() / tr; j++) {
+                    leerReg(canal, i, ins);
+                    //salida.println(String.format("%5s \t| %-28s \t|%5d", ma.cve, ma.nom, ma.cred));
+                    
+                    if(ins.nroCtrl.equals(al.nroCtrl)){
+                        if(!hasMat){
+                            salida.println("\nNúmero de Control: " + al.nroCtrl);
+                            salida.println("Nombre: " + al.nom.trim());
+                            salida.println("");
+                            salida.println(String.format("%8s \t| %-40s \t|%9s| %5s| %-28s \t|%9s", "No. Control", "Nombre", "Semestre", "Clave", "Materia", "Créditos"));
+                            salida.print("__________________________________________________________________________");
+                            salida.println("________________________________________________________________________");
+                            hasMat = true;
+                        }
+                        for (int k= 0; k < (int) canal2.length() / archMa.tr; k++) {
+                            archMa.leerReg(canal2, k, ma);
+                            if(ma.cve.equals(ins.cve)){
+                                salida.println(String.format("%8s \t| %-40s \t|%9d| %5s| %-28s \t|%5d", al.nroCtrl, al.nom, al.sem, ma.cve, ma.nom, ma.cred));
+                            }}}}
             }
-            salida.println("\n\n");
-            salida.println("REPORTE DE MATERIAS");
-            salida.println("__________________________________________________________________________");
-            salida.println(String.format("%5s \t| %-28s \t|%5s", "Clave", "Nombre", "Créditos"));
-            salida.println("__________________________________________________________________________");
-            for (int i = 0; i < (int) canal2.length() / archMa.tr; i++) {
-                Materia ma = new Materia();
-                archMa.leerReg(canal2, i, ma);
-                salida.println(String.format("%5s \t| %-28s \t|%5d", ma.cve, ma.nom, ma.cred));
-            }
-            salida.println("\n\n");
-            salida.println("REPORTE DE INSCRIPCIONES");
-            salida.println("__________________________________________________________________________________________________________________________________________");
-            salida.println(String.format("%11s \t| %-40s \t|%9s| %-5s| %-28s \t|%5s", "No. Control", "Nombre", "Semestre", "Clave", "Nombre", "Créditos"));
-            salida.println("__________________________________________________________________________________________________________________________________________");
-
-            for (int i = 0; i < (int) canal.length() / tr; i++) {
-                Materia ma = new Materia();
-                archMa.leerReg(canal2, i, ma);
-                Alumno al = new Alumno();
-                archAl.leerReg(canal1, i, al);
-                leerReg(canal, i, in);
-                salida.println(String.format("%8s \t| %-40s \t|%9d| %5s| %-28s \t|%5d", in.nroCtrl, al.nom, al.sem, in.cve, ma.nom, ma.cred));
-            }
+            salida.print("__________________________________________________________________________");
+            salida.println("________________________________________________________________________");
             salida.println("\n\n");
             salida.println("NULL NULL NULL SAHUR");
+            canal.close();
+            canal1.close();
+            canal2.close();
             salida.close();
         } catch (IOException e) {
             System.out.println(" No se abrio bien el fichero \n" + e.toString());
