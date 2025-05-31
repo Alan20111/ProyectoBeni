@@ -57,14 +57,21 @@ public class BetaTester
         DukeG1 = new ImageIcon((getClass().getResource("/inicioarchivos/betatester/java-duke.gif")));
         DukeG2 = new ImageIcon((getClass().getResource("/inicioarchivos/betatester/Duke High Five.gif")));
         
-        String t="""
-                 \"Estaban los tomatitos,
-                 Muy Contentitos,
-                 Cuando llegó el verdugo
-                 a hacerlos jugo\"
-                 *ring* *ring* *ring*
-                 """;
-        
+        JLabel case31 = new JLabel("\"Estaban los tomatitos");
+        JLabel case32 = new JLabel("Muy Contentitos,");
+        JLabel case33 = new JLabel("Cuando llegó el verdugo");
+        JLabel case34 = new JLabel(" a hacerlos jugo\"");
+        JLabel case35 = new JLabel("*ring* *ring* *ring*");
+        JPanel case3 = new JPanel();
+        case3.add(case31);
+        case3.add(case32);
+        case3.add(case33);
+        case3.add(case34);
+        case3.add(case35);
+        case3.setLayout(new BoxLayout(case3,BoxLayout.Y_AXIS));
+        case3.setAlignmentY(Box.LEFT_ALIGNMENT);
+        case3.setVisible(false);
+
         int n=(int)(Math.random()*5)+1;
         switch(n)
         {
@@ -97,29 +104,17 @@ public class BetaTester
         {
             case 1 -> showImage.setIcon(Duke1);
             case 2 -> showImage.setIcon(Duke2);
-            case 3 -> { showImage.setIcon(Duke3);
-                        muchoTexto.setText(t);}
-            case 4 -> {
+            case 3 -> showImage.setIcon(Duke3);
+            case 4, 5 -> {
                 int I = (int)(Math.random()*3)+1;
                 switch(I)
                     {
                         case 1 -> showImage.setIcon(Duke1);
                         case 2 -> showImage.setIcon(Duke2);
-                        case 3 -> { showImage.setIcon(Duke3);
-                                    muchoTexto.setText(t);}
+                        case 3 -> showImage.setIcon(Duke3);
                     }
                 }
-            case 5 -> {
-                int I = (int)(Math.random()*3)+1;
-                switch(I)
-                    {
-                        case 1 -> showImage.setIcon(Duke1);
-                        case 2 -> showImage.setIcon(Duke2);
-                        case 3 -> { showImage.setIcon(Duke3);
-                                    muchoTexto.setText(t);}
-                    }
-                }
-            }
+        }
         if(i==4&n==4){
             showImage.setIcon(DukeG1);
             muchoTexto.setText(null);
@@ -130,11 +125,12 @@ public class BetaTester
             showImage.setIcon(DukeG2);
             muchoTexto.setText(null);
             ven.setSize(500, 350);
-            ven.setTitle("Java is here, Java is Everywhere");
+            ven.setTitle("Duke quiere chocar los cinco");
         }
         
         panelTODO.add(showImage,  BorderLayout.WEST);
-        panelTODO.add(muchoTexto,  BorderLayout.CENTER);
+        if(n!=3){panelTODO.add(muchoTexto,  BorderLayout.CENTER);}
+        if(n==3){panelTODO.add(case3, BorderLayout.CENTER);}
         ven.add(panelTODO);
     }
     
