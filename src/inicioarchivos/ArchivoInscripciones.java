@@ -154,13 +154,14 @@ public class ArchivoInscripciones extends Archivos {
         String fichero, aux;
         PrintWriter salida = null;
         try {
+            System.out.println("xdd");
             archAl = new ArchivoAlumnos();
             archMa = new ArchivoMaterias();
             Alumno al = new Alumno();
             Materia ma = new Materia();
             Inscripcion ins = new Inscripcion();
             
-            fichero = "reporte.rep";
+            fichero = "reporte.rep.txt";
             salida = new PrintWriter(new FileWriter(fichero, true));
             String res = "";
             for (int i = 0; i < (int) canal1.length() / archAl.tr; i++) {
