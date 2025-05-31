@@ -184,7 +184,7 @@ public class ArchivoInscripciones extends Archivos {
                         for (int k= 0; k < (int) canal2.length() / archMa.tr; k++) {
                             archMa.leerReg(canal2, k, ma);
                             if(ma.cve.equals(ins.cve)){
-                                salida.println(String.format("%8s \t| %-40s \t|%9d| %5s| %-28s \t|%5d", in.nroCtrl, al.nom, al.sem, in.cve, ma.nom, ma.cred));
+                                salida.println(String.format("%8s \t| %-40s \t|%9d| %5s| %-28s \t|%5d", al.nroCtrl, al.nom, al.sem, ma.cve, ma.nom, ma.cred));
                             }}}}
             }
             salida.print("__________________________________________________________________________");
